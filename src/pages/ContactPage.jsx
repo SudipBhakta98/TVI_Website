@@ -24,11 +24,11 @@ export default function ContactPage() {
 
     try {
       // 2. Sent POST request using Axios
-      const response = await axios.post('/api/contact', formData, {
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      });
+     const response = await axios.post("/api/contact", formData, {
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
       // Axios automatically parses the response body into response.data
       if (response.data && response.data.success) {
