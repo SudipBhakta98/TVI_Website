@@ -1,57 +1,46 @@
 import { useEffect, useState } from "react";
-import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
-  { name: "HOME", to: "hero" },
-  { name: "INDUSTRIES", to: "industries" },
-  { name: "CAPABILITIES", to: "capabilities" },
-  { name: "PRODUCTS", to: "products" },
-  { name: "OUR FACILITY", to: "facility" },
-  { name: "QUALITY", to: "quality" },
-  { name: "ABOUT US", to: "about" },
+  { name: "HOME", to: "hero", type: "scroll" },
+  { name: "INDUSTRIES", to: "industries", type: "scroll" },
+  { name: "CAPABILITIES", to: "capabilities", type: "scroll" },
+  { name: "PRODUCTS", to: "products", type: "scroll" },
+  { name: "OUR FACILITY", to: "facility", type: "scroll" },
+  { name: "QUALITY", to: "quality", type: "scroll" },
+  { name: "ABOUT", to: "/about", type: "route" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState(false);
   const [activeItem, setActiveItem] = useState("HOME");
   
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === "/";
 
-  // 1. Sync Active Nav Item with Route Location & Clean Up Hash Issues
+  // Sync Active highlights dynamically when the URL location transitions across sub-routes
   useEffect(() => {
     if (location.pathname === "/contact") {
-      // Clear active highlights when on the contact page
       setActiveItem("");
+    } else if (location.pathname === "/about") {
+      setActiveItem("ABOUT");
     } else if (isHomePage && !location.hash) {
-      // Default to Home if on root homepage without a hash
       setActiveItem("HOME");
     }
   }, [location, isHomePage]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScroll(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const handleNavClick = (targetId, itemName) => {
+  // Clean navigation workflow avoiding history stack alteration hacks
+  const handleNavClick = (item) => {
     setOpen(false);
-    setActiveItem(itemName);
+    setActiveItem(item.name);
     
-    if (!isHomePage) {
-      navigate(`/#${targetId}`);
-    } else {
-      // Clean up the URL: replace hash state smoothly without forcing page reload
-      window.history.pushState(null, "", `/#${targetId}`);
+    if (item.type === "route") {
+      navigate(item.to);
+    } else if (!isHomePage) {
+      // Direct sub-page visitors back to home route with target section hash appended cleanly
+      navigate(`/#${item.to}`);
     }
   };
 
@@ -62,6 +51,16 @@ export default function Navbar() {
       ? `text-sm font-semibold tracking-wide cursor-pointer py-2 border-b border-gray-900 block transition-colors ${activeClass}`
       : `cursor-pointer text-xs font-semibold tracking-wider transition-colors duration-200 ${activeClass}`;
 
+    // Condition 1: Direct route matching link
+    if (item.type === "route") {
+      return (
+        <RouterLink to={item.to} onClick={() => handleNavClick(item)} className={baseClass}>
+          {item.name}
+        </RouterLink>
+      );
+    }
+
+    // Condition 2: High-speed local viewport scroll if user is browsing homepage bounds
     if (isHomePage) {
       return (
         <ScrollLink
@@ -70,15 +69,8 @@ export default function Navbar() {
           duration={700}
           offset={-80}
           spy={true}
-          // Dynamically sync hash to URL as you scroll
-          onSetActive={() => {
-            setActiveItem(item.name);
-            window.history.replaceState(null, "", `/#${item.to}`);
-          }}
-          onClick={() => {
-            setOpen(false);
-            window.history.pushState(null, "", `/#${item.to}`);
-          }}
+          onSetActive={() => setActiveItem(item.name)}
+          onClick={() => setOpen(false)}
           className={baseClass}
         >
           {item.name}
@@ -86,35 +78,27 @@ export default function Navbar() {
       );
     }
 
+    // Condition 3: Unified button router to home anchor sections from deep routes
     return (
-      <RouterLink
-        to={`/#${item.to}`}
-        onClick={() => handleNavClick(item.to, item.name)}
-        className={baseClass}
+      <button
+        onClick={() => handleNavClick(item)}
+        className={`${baseClass} bg-transparent border-none text-left p-0 w-full focus:outline-none`}
       >
         {item.name}
-      </RouterLink>
+      </button>
     );
   };
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scroll
-            ? "bg-[#031424]/95 backdrop-blur-md shadow-lg py-3 border-b border-gray-800"
-            : "bg-gradient-to-b from-[#031424]/90 to-transparent py-5"
-        }`}
-      >
+      {/* Solid, stable wrapper layer layout */}
+      <nav className="fixed top-0 left-0 w-full z-50 bg-[#031424] shadow-lg py-4 border-b border-gray-800 transition-all duration-300">
         <div className="max-w-[90rem] mx-auto px-4 lg:px-8 flex justify-between items-center">
 
           {/* Logo Area */}
           <RouterLink 
             to="/" 
-            onClick={() => handleNavClick("hero", "HOME")} 
+            onClick={() => handleNavClick({ name: "HOME", to: "hero", type: "scroll" })} 
             className="flex items-center gap-3 select-none cursor-pointer"
           >
             <img 
@@ -139,21 +123,17 @@ export default function Navbar() {
                 <div key={item.name} className="relative py-2">
                   <NavItemLink item={item} />
 
-                  {/* Active bottom border indicator */}
+                  {/* Clean native dynamic active horizontal anchor bar */}
                   {activeItem === item.name && (
-                    <motion.div 
-                      layoutId="activeIndicator"
-                      className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0082FB]"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
+                    <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0082FB]" />
                   )}
                 </div>
               ))}
             </div>
 
-            {/* Contact Button */}
+            {/* Contact Route Trigger */}
             <RouterLink to="/contact" onClick={() => setActiveItem("")}>
-              <button className={`transition-colors px-5 py-2.5 rounded text-white font-bold text-xs tracking-wider uppercase cursor-pointer shadow-md ${
+              <button className={`transition-all px-5 py-2.5 rounded text-white font-bold text-xs tracking-wider uppercase cursor-pointer shadow-md ${
                 location.pathname === "/contact" 
                   ? "bg-[#0072de] ring-2 ring-[#0082FB]" 
                   : "bg-[#0082FB] hover:bg-[#0072de]"
@@ -163,41 +143,33 @@ export default function Navbar() {
             </RouterLink>
           </div>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Menu Action Toggle Button (Using lightweight text string characters) */}
           <button
-            className="xl:hidden text-white text-3xl cursor-pointer focus:outline-none z-50"
+            className="xl:hidden text-white text-2xl font-bold cursor-pointer focus:outline-none z-50 px-2 select-none"
             onClick={() => setOpen(!open)}
           >
-            {open ? <HiX /> : <HiMenuAlt3 />}
+            {open ? "✕" : "☰"}
           </button>
 
         </div>
-      </motion.nav>
+      </nav>
 
-      {/* Mobile Drawer Navigation */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="fixed top-0 right-0 w-72 h-screen bg-[#031424] z-40 shadow-2xl xl:hidden border-l border-gray-800"
-          >
-            <div className="pt-24 px-6 flex flex-col gap-4 overflow-y-auto h-full pb-10">
-              {navItems.map((item) => (
-                <NavItemLink key={item.name} item={item} mobile={true} />
-              ))}
+      {/* Mobile Drawer Navigation (Pure standard CSS translate properties) */}
+      <div
+        className={`fixed top-0 right-0 w-72 h-screen bg-[#031424] z-40 shadow-2xl xl:hidden border-l border-gray-800 pt-24 px-6 flex flex-col gap-4 overflow-y-auto pb-10 transition-transform duration-300 ease-out ${
+          open ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {navItems.map((item) => (
+          <NavItemLink key={item.name} item={item} mobile={true} />
+        ))}
 
-              <RouterLink to="/contact" onClick={() => { setOpen(false); setActiveItem(""); }}>
-                <button className="w-full mt-4 bg-[#0082FB] py-3 rounded text-white font-bold text-xs tracking-wider uppercase cursor-pointer shadow-md">
-                  CONTACT US
-                </button>
-              </RouterLink>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        <RouterLink to="/contact" onClick={() => { setOpen(false); setActiveItem(""); }}>
+          <button className="w-full mt-4 bg-[#0082FB] py-3 rounded text-white font-bold text-xs tracking-wider uppercase cursor-pointer shadow-md">
+            CONTACT US
+          </button>
+        </RouterLink>
+      </div>
     </>
   );
 }

@@ -1,22 +1,97 @@
 import React from 'react';
 
+const unitsData = [
+  {
+    name: "Unit 1 & 3",
+    path: "/image/units/unit1&3.png",
+    address: "Plot No. 12 & 14, Industrial Area Phase 1, Jigani, Bangalore - 560105",
+    details: [
+      "Competency: Product Assemblies.",
+      "Card Frame Assemblies for Data centers.",
+      "Mfg of sheet metal Component & assemblies.",
+      "Wall mount's"
+    ]
+  },
+  {
+    name: "Unit 2",
+    path: "/image/units/unit2.png",
+    address: "Sy No. 44/2, Main Hardware Park, KIADB Industrial Area, Bangalore - 562149",
+    details: [
+      "Competency: Design & Mfg. of Press tools, Jigs & Fixtures",
+      "Design and Mfg of progressive tools up to 2.5 mtrs",
+      "Tooling supplier to OEM'S in India and exporter",
+      "M/c: Wire cut, CNC, Surface grinding etc",
+      "Expertise in the area of automobile, electrical and defence products",
+      "Strong NPD team"
+    ]
+  },
+  {
+    name: "Unit 5",
+    path: "/image/units/unit5.png",
+    address: "Plot No. 89-B, Electronics City Phase II, Hosur Road, Bangalore - 560100",
+    details: [
+      "Competency: Soft & Hard tooling",
+      "Automated Powder coating with Scada controls (m/c 0.8 X 1.5 X 2.4 Mtr.)",
+      "M/c: Presses, Laser / Bending / Welding",
+      "Capacity 25 enclosures per day, 1000 panels per day",
+      "Electrical Panel with integration, Mechanical assembly, Consoles, Panels"
+    ]
+  }
+];
+
 const facilitiesData = [
-  { name: "PLANT OVERVIEW", tagline: "State-of-the-art infrastructure for superior manufacturing.", path: "/image/facility/office-room.png" },
-  { name: "LASER CUTTING SHOP", tagline: "High-precision TRUMPF fiber lasers for flawless metal profiling.", path: "/image/facility/npd-room.png" },
-  { name: "PRESS SHOP", tagline: "Heavy-duty CNC press brakes ranging from 40T to 200T configurations.", path: "/image/facility/shop-flor.png" },
-  { name: "TOOL ROOM", tagline: "Advanced in-house tool design, EDM wire-cutting, and machining.", path: "/image/facility/tool-room.png" },
-  { name: "FABRICATION SHOP", tagline: "Certified MIG, TIG, and spot welding stations for rugged assembly.", path: "/image/facility/shop-flor2.png" },
-  { name: "POWDER COATING PLANT", tagline: "Fully automated SCADA-controlled conveyorized coating systems.", path: "/image/facility/product-demo-room.png" },
-  { name: "ASSEMBLY SHOP", tagline: "Streamlined electro-mechanical and structural integration lines.", path: "/image/facility/obeya-room.png" },
-  { name: "QUALITY LAB", tagline: "Rigid verification setup featuring CMM and 3D scanning equipment.", path: "/image/facility/training-room.png" },
-  { name: "QUALITY CONTROL ROOM", tagline: "Centralized inspection analytics, micro-precision calibration, and final documentation control.", path: "/image/facility/quality-room.png" }
+  {
+    name: "OFFICE OVERVIEW",
+    tagline: "Modern administrative workspace designed for efficient operations, collaboration, and customer engagement.",
+    path: "/image/facility/office-room.png"
+  },
+  {
+    name: "NPD ROOM",
+    tagline: "Dedicated New Product Development center for innovative design, prototyping, and engineering excellence.",
+    path: "/image/facility/npd-room.png"
+  },
+  {
+    name: "SHOP FLOOR OVERVIEW",
+    tagline: "Well-organized production floor equipped with advanced manufacturing systems for high-quality fabrication.",
+    path: "/image/facility/shop-flor.png"
+  },
+  {
+    name: "TOOL ROOM",
+    tagline: "Fully equipped tool room supporting precision tooling, maintenance, and custom manufacturing solutions.",
+    path: "/image/facility/tool-room.png"
+  },
+  {
+    name: "INTEGRATED SHOP FLOOR",
+    tagline: "Integrated manufacturing facility enabling seamless fabrication, assembly, and production workflow.",
+    path: "/image/facility/shop-flor2.png"
+  },
+  {
+    name: "PRODUCT DEMO ROOM",
+    tagline: "Interactive demonstration area showcasing finished products, innovations, and customer solutions.",
+    path: "/image/facility/product-demo-room.png"
+  },
+  {
+    name: "OBEYA ACCELERATED QUALITY AREA",
+    tagline: "Collaborative quality management hub where real-time data drives continuous improvement and operational excellence.",
+    path: "/image/facility/obeya-room.png"
+  },
+  {
+    name: "TRAINING ROOM",
+    tagline: "Dedicated learning environment for employee skill development, technical training, and knowledge sharing.",
+    path: "/image/facility/training-room.png"
+  },
+  {
+    name: "ASSEMBLY ROOM",
+    tagline: "Specialized assembly area ensuring precise integration, functional testing, and final product readiness.",
+    path: "/image/facility/quality-room.png"
+  }
 ];
 
 export default function FacilitiesSection() {
   return (
-    <section id='facility' className="w-full bg-[#070F19] text-white antialiased font-sans">
+    <section id='facility' className="w-full bg-[#070F19] text-white antialiased font-sans overflow-hidden">
       
-      {/* 1. Header Block Component (Matches your global section text alignments) */}
+      {/* 1. Header Block Component */}
       <div className="max-w-[85rem] mx-auto px-6 md:px-12 pt-16 pb-10">
         <h2 className="text-xl md:text-2xl font-black tracking-wider uppercase text-white">
           OUR FACILITIES
@@ -27,16 +102,14 @@ export default function FacilitiesSection() {
         </p>
       </div>
 
-      {/* 2. Grid Mesh System (3 Columns, Crisp White Image Cards) */}
-      <div className="max-w-[85rem] mx-auto px-6 md:px-12 pb-20">
+      {/* 2. Grid Mesh System */}
+      <div className="max-w-[85rem] mx-auto px-6 md:px-12 pb-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {facilitiesData.map((fac) => (
             <article 
               key={fac.name} 
               className="group flex flex-col bg-white border border-slate-200/80 rounded-sm overflow-hidden hover:border-slate-300 transition-all duration-200"
             >
-              
-              {/* Card Image Wrapper Panel */}
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 border-b border-slate-200/80">
                 <img 
                   src={fac.path} 
@@ -45,8 +118,6 @@ export default function FacilitiesSection() {
                   loading="lazy"
                 />
               </div>
-
-              {/* Card Information Body (Switched to crisp dark text on the white card background) */}
               <div className="p-5 flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="text-xs font-bold text-[#0A1118] tracking-wide uppercase transition-colors group-hover:text-[#0252D6]">
@@ -57,10 +128,95 @@ export default function FacilitiesSection() {
                   </p>
                 </div>
               </div>
-
             </article>
           ))}
         </div>
+      </div>
+
+      {/* Modern Horizontal Divider Section Break */}
+      <div className="max-w-[85rem] mx-auto px-6 md:px-12 my-4">
+        <div className="w-full h-[1px] bg-slate-800/60" />
+      </div>
+
+      {/* 3. SECTION: Manufacturing Units Block */}
+      <div className="max-w-[85rem] mx-auto px-6 md:px-12 pt-16 pb-12">
+        <h2 className="text-xl md:text-2xl font-black tracking-wider uppercase text-white">
+          MANUFACTURING UNITS
+        </h2>
+        <div className="w-12 h-[2px] bg-[#0252D6] mt-2 mb-3" />
+        <p className="text-slate-400 text-xs md:text-sm max-w-2xl leading-relaxed font-normal normal-case">
+          Distributed manufacturing ecosystems built to manage scaling demands and multi-tier structural engineering projects.
+        </p>
+      </div>
+
+      {/* 4. Units Dashboard System (Alternating Full Width CSS-Animated Rows) */}
+      <div className="max-w-[85rem] mx-auto px-6 md:px-12 pb-28 space-y-16">
+        {unitsData.map((unit, index) => {
+          const isEven = index % 2 === 0;
+
+          return (
+            <article 
+              key={unit.name} 
+              className={`group flex flex-col lg:flex-row items-stretch bg-white border border-slate-200/60 rounded-sm overflow-hidden hover:border-[#0252D6]/40 hover:shadow-2xl hover:shadow-black/40 transition-all duration-500 ease-in-out ${
+                isEven ? '' : 'lg:flex-row-reverse'
+              }`}
+            >
+              
+              {/* Image Block with Zoom & Deep Shadow Overlay */}
+              <div className="relative w-full lg:w-1/2 min-h-[280px] sm:min-h-[340px] overflow-hidden bg-slate-900">
+                <img 
+                  src={unit.path} 
+                  alt={unit.name} 
+                  className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 group-hover:brightness-50"
+                  loading="lazy"
+                />
+                
+                {/* Micro-Animation: Address shifts up into clean view on Hover */}
+                <div className="absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-t from-black/9ded via-black/40 to-transparent transition-all duration-300 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0">
+                  <span className="text-[9px] font-bold text-[#0082FB] tracking-widest uppercase mb-1">
+                    PLANT SITE ADDRESS
+                  </span>
+                  <p className="text-white text-[11px] font-medium leading-relaxed max-w-md">
+                    {unit.address}
+                  </p>
+                </div>
+              </div>
+
+              {/* Text Spec Box: Responsive Micro-Interactions on Card Hover */}
+              <div className="w-full lg:w-1/2 p-6 sm:p-10 flex flex-col justify-center bg-slate-50/30 transition-colors duration-500 group-hover:bg-white">
+                
+                {/* Underline expanding system */}
+                <div className="relative mb-6 pb-3 border-b border-slate-200/60">
+                  <h3 className="text-lg font-black text-[#0A1118] tracking-wide uppercase transition-colors duration-300 group-hover:text-[#0252D6]">
+                    {unit.name}
+                  </h3>
+                  <div className="absolute bottom-0 left-0 w-8 h-[2px] bg-[#0252D6] transition-all duration-300 group-hover:w-24" />
+                </div>
+                
+                {/* Bullet Spec Sheet List */}
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4">
+                  {unit.details.map((detail, idx) => (
+                    <li 
+                      key={idx}
+                      className="flex items-start gap-2.5 text-slate-600 font-medium text-[11px] sm:text-xs leading-relaxed col-span-1 sm:first-of-type:col-span-2 transition-all duration-300 ease-in-out group-hover:translate-x-1"
+                      style={{ transitionDelay: `${idx * 40}ms` }}
+                    >
+                      {/* Interactive chevron: morphs shape/color when card glows */}
+                      <span className="text-[#0252D6] font-extrabold text-sm select-none leading-none mt-[-1px] transition-transform duration-300 group-hover:scale-125">
+                        &rsaquo;
+                      </span>
+                      <span className="transition-colors duration-300 group-hover:text-slate-900">
+                        {detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+              </div>
+
+            </article>
+          );
+        })}
       </div>
 
     </section>

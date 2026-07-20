@@ -14,7 +14,7 @@ const statsData = [
     ),
   },
   {
-    value: "6",
+    value: "5",
     label: "Manufacturing Units",
     icon: (
       <svg className="w-5 h-5 md:w-6 md:h-6 text-[#0082FB]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -23,7 +23,7 @@ const statsData = [
     ),
   },
   {
-    value: "11,000+",
+    value: "15,000+",
     label: "Sq. Meters Built-up Area",
     icon: (
       <svg className="w-5 h-5 md:w-6 md:h-6 text-[#0082FB]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@ const statsData = [
     ),
   },
   {
-    value: "180+",
+    value: "250+",
     label: "Employees",
     icon: (
       <svg className="w-5 h-5 md:w-6 md:h-6 text-[#0082FB]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

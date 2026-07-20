@@ -386,10 +386,10 @@ export default function Quality() {
           />
 
           {/* Dark Smooth Gradient Hover Mask */}
-          <div className="absolute inset-0 bg-[#031424]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4" />
+          {/* <div className="absolute inset-0 bg-[#031424]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4" /> */}
 
           {/* Floating Center Action Button Trigger */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300 z-10">
+          {/* <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300 z-10">
             <a 
               href={cert.pdfPath}
               target="_blank"
@@ -401,7 +401,7 @@ export default function Quality() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
               </svg>
             </a>
-          </div>
+          </div> */}
         </div>
 
         {/* Identification Data Label */}

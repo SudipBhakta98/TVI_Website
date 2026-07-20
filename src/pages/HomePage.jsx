@@ -1,10 +1,10 @@
 import Hero from "../components/Hero";
 import Services from "../components/Services";
 import Capabilities from "../components/Capabilities";
-import Process from "../components/Process";
 import Quality from "../components/Quality";
-import About from "../components/About";
 import Facility from "../components/Facility";
+import CustomerLogos from "../components/Customer";
+import Product from "../components/Product";
 
 const HomePage = () => {
   return (
@@ -12,10 +12,10 @@ const HomePage = () => {
       <Hero />
       <Services />
       <Capabilities />
-      <Process />
       <Facility />
+      <Product/>
       <Quality />
-      <About />
+      <CustomerLogos/>
     </>
   );
 };

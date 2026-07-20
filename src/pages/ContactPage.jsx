@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import axios from 'axios'; // 1. Imported Axios
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -22,23 +23,35 @@ export default function ContactPage() {
     setStatus({ loading: true, success: null, error: null });
 
     try {
-      // Replace with your actual backend API endpoint URL
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
+      // 2. Sent POST request using Axios
+      const response = await axios.post('/api/contact', formData, {
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        }
       });
 
-      if (response.ok) {
-        setStatus({ loading: false, success: 'Your message has been sent successfully!', error: null });
+      // Axios automatically parses the response body into response.data
+      if (response.data && response.data.success) {
+        setStatus({ 
+          loading: false, 
+          success: 'Your message has been sent successfully! A confirmation email has been dispatched to your inbox.', 
+          error: null 
+        });
+        // Clear out form fields upon successful transmission
         setFormData({ name: '', email: '', company: '', phone: '', subject: '', message: '' });
       } else {
-        throw new Error('Failed to send message. Please try again.');
+        throw new Error(response.data?.message || 'Failed to send message. Please try again.');
       }
     } catch (err) {
-      setStatus({ loading: false, success: null, error: err.message || 'Something went wrong.' });
+      // 3. Robust Axios Error Handling
+      // If the backend returned an error JSON, Axios captures it in err.response.data
+      const errorMessage = err.response?.data?.message || err.message || 'Something went wrong while dispatching your request.';
+      
+      setStatus({ 
+        loading: false, 
+        success: null, 
+        error: errorMessage 
+      });
     }
   };
 
@@ -201,7 +214,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Email Communication</h4>
-                    <p className="text-xs font-bold text-slate-800">info@technovisionindustries.com</p>
+                    <p className="text-xs font-bold text-slate-800">narpvvl@technovisionindustries.in</p>
                   </div>
                 </div>
 
@@ -213,7 +226,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Commercial Desk</h4>
-                    <p className="text-xs font-bold text-slate-800">+91 80 4162 9XXX</p>
+                    <p className="text-xs font-bold text-slate-800">+91 9342163575</p>
                   </div>
                 </div>
               </div>
@@ -232,7 +245,6 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3 px-4 rounded-md font-bold text-[11px] uppercase tracking-wide transition-colors shadow-xs"
                 >
-                  {/* Custom Minimal WhatsApp Vector */}
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                     <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.993L2 22l5.233-1.371a9.936 9.936 0 004.777 1.217h.004c5.505 0 9.99-4.478 9.99-9.986 0-2.67-1.037-5.178-2.922-7.062A9.925 9.925 0 0012.012 2zm5.835 14.165c-.24.674-1.398 1.284-1.922 1.347-.465.056-.933.088-1.545-.119-3.602-1.222-5.926-4.9-6.105-5.141-.178-.241-1.443-1.922-1.443-3.666 0-1.744.892-2.597 1.21-2.943.268-.291.67-.424 1.097-.424.138 0 .26.007.369.012.32.015.48.034.69.539.262.633.896 2.19.973 2.346.077.157.129.339.024.549-.105.21-.157.339-.314.524-.157.185-.329.412-.47.553-.153.153-.314.32-.133.629.18.31.8 1.309 1.71 2.122 1.173 1.047 2.16 1.37 2.48 1.528.32.157.507.13.693-.085.186-.215.797-.927 1.01-1.244.214-.316.427-.264.719-.157.292.106 1.854.874 2.174 1.034.32.16.533.238.613.376.08.137.08.797-.16 1.471z"/>
                   </svg>
@@ -246,7 +258,6 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 bg-[#0077B5] hover:bg-[#006297] text-white py-3 px-4 rounded-md font-bold text-[11px] uppercase tracking-wide transition-colors shadow-xs"
                 >
-                  {/* Custom Minimal LinkedIn Vector */}
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
                   </svg>
@@ -267,8 +278,8 @@ export default function ContactPage() {
           className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden mt-12"
         >
           <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/60">
-            <span className="text-[10px] font-bold text-[#0A1118] uppercase tracking-wider">
-              Satellite Navigation Coordinates: 12.7680596, 77.6467457
+            <span className="text-[10px] font-bold  text-[#0A1118] uppercase">
+              OUR CORPORATE OFFICE LOCATION
             </span>
             <a 
               href="https://maps.google.com/?q=12.768059655900453,77.64674574174775"
