@@ -4,7 +4,7 @@ const unitsData = [
   {
     name: "Unit 1 & 3",
     path: "/image/units/unit1&3.png",
-    address: "Plot No. 12 & 14, Industrial Area Phase 1, Jigani, Bangalore - 560105",
+    address: "Plot Q13 & Q14,Kssidc Industrial Area, 2nd phase Jigani, Banglore - 560105 ",
     details: [
       "Competency: Product Assemblies.",
       "Card Frame Assemblies for Data centers.",
@@ -15,7 +15,7 @@ const unitsData = [
   {
     name: "Unit 2",
     path: "/image/units/unit2.png",
-    address: "Sy No. 44/2, Main Hardware Park, KIADB Industrial Area, Bangalore - 562149",
+    address: "Plot no 67,563 Kiadb, Building no 4, Road no 4, 1st Phase Jigani Industrial Area, Anekal Taluk, Banglore - 562105 ",
     details: [
       "Competency: Design & Mfg. of Press tools, Jigs & Fixtures",
       "Design and Mfg of progressive tools up to 2.5 mtrs",
@@ -28,7 +28,7 @@ const unitsData = [
   {
     name: "Unit 5",
     path: "/image/units/unit5.png",
-    address: "Plot No. 89-B, Electronics City Phase II, Hosur Road, Bangalore - 560100",
+    address: "SY.NO 261/3 & SY 261/4 Haragadde Village,Jigani Hobli Taluk, Bengaluru,Karnataka 560105",
     details: [
       "Competency: Soft & Hard tooling",
       "Automated Powder coating with Scada controls (m/c 0.8 X 1.5 X 2.4 Mtr.)",

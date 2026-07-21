@@ -100,7 +100,7 @@ const stages = [
     icon: FiScissors,
     tagline: "Turret punching for holes & cutouts",
     specs: [
-      { label: "Speed", value: "Up to 1,000 hits/min" },
+      { label: "Speed", value: "Up to 80 hits/min" },
       { label: "Tonnage", value: "Up to 20T" },
       { label: "Tooling", value: "200+ stations" },
     ],
@@ -111,9 +111,9 @@ const stages = [
     icon: GiAnvil,
     tagline: "Press-brake forming to spec",
     specs: [
-      { label: "Press force", value: "0 Ton To 200 Ton" },
+      { label: "Press force", value: "40 Ton To 200 Ton" },
       { label: "Angle accuracy", value: "± 0.5°" },
-      { label: "Max length", value: "4,000 mm" },
+      { label: "Max length", value: "3,000 mm" },
     ],
   },
   {
@@ -122,7 +122,7 @@ const stages = [
     icon: GiSpanner,
     tagline: "Welding & structural assembly",
     specs: [
-      { label: "Processes", value: "MIG / TIG / Spot" },
+      { label: "Processes", value: "MIG / TIG / Spot / Laser" },
       { label: "Standard", value: "AWS D1.1 certified" },
       { label: "Materials", value: "MS / SS / Aluminium" },
     ],
@@ -134,8 +134,8 @@ const stages = [
     tagline: "Electrostatic finish application",
     specs: [
       { label: "Line", value: "SCADA-controlled booth" },
-      { label: "Finish", value: "Full RAL colour range" },
-      { label: "Cure temp", value: "180 – 200°C" },
+      { label: "Finish", value: "As RAL colour range" },
+      { label: "Cure temp", value: "110 – 200°C" },
     ],
   },
   {
@@ -155,7 +155,7 @@ const stages = [
     icon: FiCheckCircle,
     tagline: "Dimensional & functional inspection",
     specs: [
-      { label: "Equipment", value: "CMM · 3D scanner · height gauge" },
+      { label: "Equipment", value: "VMS · 3D scanner · height master" },
       { label: "Standard", value: "Zero Defect Zero Effect" },
       { label: "Certification", value: "ISO 9001:2015" },
     ],
