@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
+import { root_image } from '../../image/image';
 
 const metrics = [
   {
@@ -167,7 +168,7 @@ export default function About() {
       {/* 1. Hero Cover Section */}
       <div 
         className="relative w-full bg-[#041629] pt-28 pb-32 md:pt-40 md:pb-44 px-6 md:px-16 overflow-hidden bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/image/about-bg.png')" }}
+        style={{ backgroundImage: `url(${root_image.about_bg})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-[#031120] via-[#031120]/80 to-transparent z-0" />
         
@@ -404,7 +405,7 @@ export default function About() {
             {/* MD Photo Frame Container */}
             <div className="lg:col-span-4 bg-slate-100 min-h-[360px] lg:min-h-full relative group overflow-hidden">
               <img 
-                src="/image/Rao-Sir.jpeg" 
+                src={root_image.rao_sir} 
                 alt="Managing Director - Lakshmi Narasimha Rao PVV" 
                 className="w-full h-full object-cover object-top absolute inset-0 transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {

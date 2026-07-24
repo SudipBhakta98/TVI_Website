@@ -30,13 +30,13 @@ export default function Layout() {
   }, [pathname, hash]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      
-      <main className="flex-grow">
+
+      <main className="flex-grow pt-15">
         <Outlet />
       </main>
-      
+
       <Footer />
     </div>
   );

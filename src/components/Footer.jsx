@@ -2,6 +2,7 @@ import React from "react";
 import { Link as ScrollLink } from "react-scroll";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
+import { root_image } from "../../image/image";
 
 const footerNavItems = [
   { name: "HOME", to: "hero", type: "scroll" },
@@ -70,7 +71,7 @@ export default function Footer() {
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-3 select-none">
               <img
-                src="/image/logo.png"
+                src={root_image.logo}
                 alt="Technovision Logo"
                 className="h-9 w-auto object-contain brightness-110"
               />
