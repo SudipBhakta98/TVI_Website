@@ -17,11 +17,11 @@ const highlights = [
 
 export default function AboutPreview() {
   return (
-    <section id="about-preview" className="bg-[#F8FAFC] px-4 lg:px-8 w-full">
+    <section id="about-preview" className="bg-[#F8FAFC] mt-4 px-4 lg:px-8 w-full">
       <div className="max-w-[85rem] mx-auto flex flex-col items-center">
         
         {/* Outer Card Container with Tailwind Fade-In Animation */}
-        <div className="w-full bg-white rounded-xl shadow-sm border border-slate-200/80 p-6 sm:p-10 flex flex-col gap-8 animate-fade-in">
+        <div className="w-full bg-white  p-6 sm:p-10 flex flex-col gap-8 animate-fade-in">
           
           {/* TOP SECTION: 2-Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 w-full items-center">
