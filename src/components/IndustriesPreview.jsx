@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { service_field } from "../../image/image";
 
@@ -45,70 +44,76 @@ export default function IndustriesPreview() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slideImages.length);
-    }, 3000);
+    }, 3500);
 
     return () => clearInterval(timer);
   }, []);
 
   return (
-    <section id="industries-preview" className="bg-[#F8FAFC] py-6 px-4 lg:px-8 w-full">
+    <section id="industries-preview" className="bg-[#F8FAFC]   px-4 lg:px-8 w-full select-none">
       <div className="max-w-[85rem] mx-auto flex flex-col items-center">
         
         {/* Main Section Header */}
-        <div className="flex flex-col items-center mb-10 text-center">
-          <h2 className="text-2xl md:text-3xl font-black text-[#031424] tracking-wider uppercase">
+        <div className="flex flex-col items-center mb-8 md:mb-12 text-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#12161A] tracking-wider uppercase">
             INDUSTRIES WE SERVE
           </h2>
-          <div className="w-16 h-[3px] bg-[#0082FB] mt-3" />
+          <div className="w-16 md:w-20 h-[4px] bg-[#4F9B28] mt-3 rounded-full" />
         </div>
 
-        {/* 2-Column Split Layout matching wireframe */}
+        {/* 2-Column Split Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full items-stretch">
           
-          {/* LEFT: Image Sliding Container (Linked to /industries) */}
+          {/* LEFT: Pure CSS Image Sliding Container */}
           <Link 
             to="/industries" 
-            className="group relative h-[320px] sm:h-[400px] w-full rounded-lg overflow-hidden bg-[#031424] shadow-lg border border-slate-200 cursor-pointer block"
+            className="group relative h-[340px] sm:h-[420px] w-full rounded-xl overflow-hidden bg-[#12161A] shadow-md border border-slate-200/90 cursor-pointer block"
           >
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={currentIndex}
-                src={slideImages[currentIndex].image}
-                alt={slideImages[currentIndex].name}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 0.85, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.7 }}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            {/* Render all slide images and crossfade with pure CSS opacity transitions */}
+            {slideImages.map((slide, idx) => (
+              <img
+                key={idx}
+                src={slide.image}
+                alt={slide.name}
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out group-hover:scale-105 ${
+                  idx === currentIndex ? "opacity-90 scale-100" : "opacity-0 scale-105 pointer-events-none"
+                }`}
+                loading={idx === 0 ? "eager" : "lazy"}
               />
-            </AnimatePresence>
+            ))}
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent z-10" />
+            {/* High-Contrast Gradient Overlay for Text Readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#12161A] via-black/40 to-black/20 z-10" />
 
             {/* Active Slide Badge & Title */}
-            <div className="absolute bottom-6 left-6 right-6 z-20 flex flex-col items-start gap-1">
-              <span className="text-[10px] font-bold text-[#0082FB] tracking-widest uppercase bg-[#0082FB]/10 border border-[#0082FB]/30 px-2.5 py-1 rounded">
+            <div className="absolute bottom-8 left-6 right-6 z-20 flex flex-col items-start gap-1.5">
+              <span className="text-[10px] font-black text-[#4F9B28] tracking-widest uppercase bg-[#12161A]/90 border border-[#4F9B28]/40 px-2.5 py-1 rounded shadow-sm">
                 Featured Industry
               </span>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-wide uppercase drop-shadow-md">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-wide uppercase drop-shadow-md">
                 {slideImages[currentIndex].name}
               </h3>
             </div>
 
             {/* Hover Prompt Badge */}
-            <div className="absolute top-4 right-4 z-20 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded text-[11px] font-semibold text-white tracking-wider flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-[#0082FB] transition-all duration-300">
-              View All Industries
-              <span>→</span>
+            <div className="absolute top-4 right-4 z-20 bg-[#12161A]/80 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/10 text-[11px] font-black text-white tracking-wider flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-[#E31B23] transition-all duration-300 shadow">
+              <span>View All Industries</span>
+              <span className="text-sm font-bold">&rarr;</span>
             </div>
 
             {/* Slide Progress Indicators */}
             <div className="absolute bottom-3 left-6 z-20 flex gap-1.5">
               {slideImages.map((_, idx) => (
-                <div 
+                <button
                   key={idx}
-                  className={`h-1 rounded-full transition-all duration-300 ${
-                    idx === currentIndex ? "w-6 bg-[#0082FB]" : "w-1.5 bg-white/40"
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentIndex(idx);
+                  }}
+                  aria-label={`Go to slide ${idx + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                    idx === currentIndex ? "w-7 bg-[#4F9B28]" : "w-2 bg-white/50 hover:bg-white/80"
                   }`}
                 />
               ))}
@@ -116,16 +121,16 @@ export default function IndustriesPreview() {
           </Link>
 
           {/* RIGHT: Text Content - How We Support Industries */}
-          <div className="flex flex-col justify-between bg-white p-6 sm:p-8 rounded-lg shadow-sm border border-slate-200/80">
+          <div className="flex flex-col justify-between bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-sm border border-slate-200/90">
             <div>
-              <span className="text-xs font-bold text-[#0082FB] tracking-widest uppercase mb-2 block">
+              <span className="text-xs font-black text-[#3b781d] tracking-widest uppercase mb-2 block">
                 Engineering Excellence
               </span>
-              <h3 className="text-xl sm:text-2xl font-black text-[#031424] uppercase tracking-wide mb-4">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-[#12161A] uppercase tracking-wide mb-4">
                 How We Support Industries
               </h3>
               
-              <p className="text-slate-600 text-sm leading-relaxed mb-6 font-normal">
+              <p className="text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
                 We deliver high-precision sheet metal fabrication, tooling, and fully integrated assembly solutions engineered specifically to meet stringent OEM standards across mission-critical sectors.
               </p>
 
@@ -133,12 +138,14 @@ export default function IndustriesPreview() {
               <ul className="space-y-3.5 mb-8">
                 {[
                   "Custom tooling & prototype development for specialized applications",
-                  "High-volume precision sheet metal manufacturing and pressing",
+                  "High-volume precision sheet metal manufacturing pressing and assembly",
                   "Automated powder coating compliant with industrial durability norms",
                   "End-to-end electro-mechanical integration and testing"
                 ].map((point, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-700 font-medium">
-                    <span className="text-[#0082FB] font-bold text-base leading-none mt-0.5">✓</span>
+                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-800 font-bold">
+                    <span className="p-0.5 bg-[#4F9B28]/15 text-[#3b781d] rounded text-xs font-black shrink-0 mt-0.5">
+                      ✓
+                    </span>
                     <span>{point}</span>
                   </li>
                 ))}
@@ -147,9 +154,9 @@ export default function IndustriesPreview() {
 
             {/* Action CTA Link */}
             <Link to="/industries" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto bg-[#031424] hover:bg-[#0082FB] transition-colors duration-300 text-white font-bold text-xs tracking-wider uppercase px-6 py-3.5 rounded flex items-center justify-center gap-2 cursor-pointer shadow-sm">
-                Explore More
-                <span className="text-sm font-bold">→</span>
+              <button className="w-full sm:w-auto bg-[#E31B23] hover:bg-[#C8141B] transition-colors duration-300 text-white font-extrabold text-xs tracking-wider uppercase px-7 py-3.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:scale-95">
+                <span>Explore More</span>
+                <span className="text-sm font-bold">&rarr;</span>
               </button>
             </Link>
           </div>

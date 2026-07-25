@@ -2,80 +2,80 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { product_image } from '../../image/image';
 
-const categoriesData = [
-  {
-    id: "charging-station",
-    name: "EV Charging Enclosure Solutions",
-    description: "Custom structural enclosures and weatherproof cabinets engineered to OEM specifications.",
-    images: [
-      product_image.charging_station.charging_station_01,
-      product_image.charging_station.charging_station_02,
-    ],
-  },
-  {
-    id: "console",
-    name: "Control Desk & Console Solutions",
-    description: "Precision-fabricated ergonomic desks and custom operator control console assemblies.",
-    images: [
-      product_image.console.console_01,
-      product_image.console.console_02,
-      product_image.console.console_03,
-    ],
-  },
-  {
-    id: "data-center-racks",
-    name: "Data Infrastructure Solutions",
-    description: "Heavy-duty server rack frames, perforated doors, and modular enclosure assemblies.",
-    images: [
-      product_image.data_center_rack.data_center_rack_01,
-      product_image.data_center_rack.data_center_rack_02,
-      product_image.data_center_rack.data_center_rack_03,
-      product_image.data_center_rack.data_center_rack_04,
-    ],
-  },
-  {
-    id: "integrated-cabinets",
-    name: "Integrated Electrical Housing Solutions",
-    description: "Contract-manufactured power distribution cabinets and electrical panel housing units.",
-    images: [
-      product_image.integrated_electrical_cabinat.electrical_cabinat_01,
-      product_image.integrated_electrical_cabinat.electrical_cabinat_02,
-      product_image.integrated_electrical_cabinat.electrical_cabinat_03,
-    ],
-  },
-  {
-    id: "lab-equipment",
-    name: "Precision Equipment Frame Solutions",
-    description: "High-precision stainless steel and sheet metal housing for medical & lab instruments.",
-    images: [
-      product_image.lab_equipment.lab_equipment_01,
-      product_image.lab_equipment.lab_equipment_02,
-      product_image.lab_equipment.lab_equipment_03,
-    ],
-  },
-  {
-    id: "battery-casing",
-    name: "Energy Storage Enclosure Solutions",
-    description: "Custom lithium-ion battery pack enclosures, module trays, and structural protective housings.",
-    images: [
-      product_image.lithium_ion_casing.lithium_ion_casing_01,
-      product_image.lithium_ion_casing.lithium_ion_casing_02,
-      product_image.lithium_ion_casing.lithium_ion_casing_03,
-      product_image.lithium_ion_casing.lithium_ion_casing_04,
-    ],
-  },
-  {
-    id: "sheet-metal",
-    name: "Custom Sheet Metal Solutions",
-    description: "Build-to-print punched, laser-cut, bent, and stamped precision sub-assemblies.",
-    images: [
-      product_image.sheet_metal_part.sheet_metal_part_01,
-      product_image.sheet_metal_part.sheet_metal_part_02,
-      product_image.sheet_metal_part.sheet_metal_part_03,
-      product_image.sheet_metal_part.sheet_metal_part_04,
-    ],
-  },
-];
+  const categoriesData = [
+    {
+      id: "charging-station",
+      name: "EV Charging Enclosure Solutions",
+      description: "Custom structural enclosures and weatherproof cabinets engineered to OEM specifications.",
+      images: [
+        product_image.charging_station.charging_station_01,
+        product_image.charging_station.charging_station_02,
+      ],
+    },
+    {
+      id: "console",
+      name: "Control Desk & Console Solutions",
+      description: "Precision-fabricated ergonomic desks and custom operator control console assemblies.",
+      images: [
+        product_image.console.console_01,
+        product_image.console.console_02,
+        product_image.console.console_03,
+      ],
+    },
+    {
+      id: "data-center-racks",
+      name: "Data Infrastructure Solutions",
+      description: "Heavy-duty server rack frames, perforated doors, and modular enclosure assemblies.",
+      images: [
+        product_image.data_center_rack.data_center_rack_01,
+        product_image.data_center_rack.data_center_rack_02,
+        product_image.data_center_rack.data_center_rack_03,
+        product_image.data_center_rack.data_center_rack_04,
+      ],
+    },
+    {
+      id: "integrated-cabinets",
+      name: "Integrated Electrical Housing Solutions",
+      description: "Contract-manufactured power distribution cabinets and electrical panel housing units.",
+      images: [
+        product_image.integrated_electrical_cabinat.electrical_cabinat_01,
+        product_image.integrated_electrical_cabinat.electrical_cabinat_02,
+        product_image.integrated_electrical_cabinat.electrical_cabinat_03,
+      ],
+    },
+    {
+      id: "lab-equipment",
+      name: "Precision Equipment Frame Solutions",
+      description: "High-precision stainless steel and sheet metal housing for medical & lab instruments.",
+      images: [
+        product_image.lab_equipment.lab_equipment_01,
+        product_image.lab_equipment.lab_equipment_02,
+        product_image.lab_equipment.lab_equipment_03,
+      ],
+    },
+    {
+      id: "battery-casing",
+      name: "Energy Storage Enclosure Solutions",
+      description: "Custom lithium-ion battery pack enclosures, module trays, and structural protective housings.",
+      images: [
+        product_image.lithium_ion_casing.lithium_ion_casing_01,
+        product_image.lithium_ion_casing.lithium_ion_casing_02,
+        product_image.lithium_ion_casing.lithium_ion_casing_03,
+        product_image.lithium_ion_casing.lithium_ion_casing_04,
+      ],
+    },
+    {
+      id: "sheet-metal",
+      name: "Custom Sheet Metal Solutions",
+      description: "Build-to-print punched, laser-cut, bent, and stamped precision sub-assemblies.",
+      images: [
+        product_image.sheet_metal_part.sheet_metal_part_01,
+        product_image.sheet_metal_part.sheet_metal_part_02,
+        product_image.sheet_metal_part.sheet_metal_part_03,
+        product_image.sheet_metal_part.sheet_metal_part_04,
+      ],
+    },
+  ];
 
 export default function Products() {
   const [activeTab, setActiveTab] = useState(categoriesData[0].id);

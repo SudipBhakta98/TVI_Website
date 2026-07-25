@@ -1,104 +1,64 @@
 import React from "react";
-import { Link as ScrollLink } from "react-scroll";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 import { root_image } from "../../image/image";
 
 const footerNavItems = [
-  { name: "HOME", to: "hero", type: "scroll" },
-  { name: "INDUSTRIES", to: "industries", type: "scroll" },
-  { name: "CAPABILITIES", to: "capabilities", type: "scroll" },
-  { name: "PRODUCTS", to: "products", type: "scroll" },
-  { name: "OUR FACILITY", to: "facility", type: "scroll" },
-  { name: "QUALITY", to: "quality", type: "scroll" },
+  { name: "HOME", to: "/" },
+  { name: "INDUSTRIES", to: "/industries" },
+  { name: "CAPABILITIES", to: "/capabilities" },
+  { name: "OUR SOLUTIONS", to: "/products" },
+  { name: "OUR FACILITY", to: "/facilities" },
+  { name: "QUALITY", to: "/quality" },
 ];
 
 export default function Footer() {
   const location = useLocation();
-  const navigate = useNavigate();
-  const isHomePage = location.pathname === "/";
 
-  // Handles navigation from other pages to specific home sections
-  const handleNavClick = (targetId) => {
-    if (!isHomePage) {
-      navigate(`/#${targetId}`);
-    }
-  };
-
-  // Helper component to keep links robust across pages
-  const FooterLink = ({ item }) => {
-    const baseClass =
-      "text-gray-400 hover:text-[#0082FB] transition-colors duration-200 text-xs font-semibold tracking-wider block py-1 cursor-pointer";
-
-    // Route links (About, Contact)
-    if (item.type === "route") {
-      return (
-        <RouterLink to={item.to} className={baseClass}>
-          {item.name}
-        </RouterLink>
-      );
-    }
-
-    // Scroll links on homepage
-    if (isHomePage) {
-      return (
-        <ScrollLink
-          to={item.to}
-          smooth={true}
-          duration={700}
-          offset={-80}
-          className={baseClass}
-        >
-          {item.name}
-        </ScrollLink>
-      );
-    }
-
-    // Scroll links from other pages
-    return (
-      <RouterLink to={`/#${item.to}`} className={baseClass}>
-        {item.name}
-      </RouterLink>
-    );
+  // Scrolls to the top of the page when a footer link is clicked
+  const handleNavClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="bg-[#031120] text-gray-300 border-t border-gray-900 pt-16 pb-8">
+    <footer className="bg-[#12161A] text-slate-300 border-t border-slate-800/80 pt-16 pb-8 select-none">
       <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-16">
+        
         {/* Main Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-gray-900">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800/80">
+          
           {/* Column 1: Brand Directory Profile */}
           <div className="md:col-span-5 space-y-4">
-            <div className="flex items-center gap-3 select-none">
+            <div className="flex items-center gap-3">
               <img
                 src={root_image.logo}
                 alt="Technovision Logo"
                 className="h-9 w-auto object-contain brightness-110"
               />
-              <div className="text-white border-l border-gray-800 pl-3">
-                <h2 className="font-bold text-base tracking-wider leading-none">
+              <div className="text-white border-l border-slate-700 pl-3">
+                <h2 className="font-black text-base tracking-wider leading-none uppercase">
                   TECHNOVISION
                 </h2>
-                <p className="text-[11px] text-[#0082FB] tracking-[2.5px] mt-1 uppercase font-semibold">
+                <p className="text-[11px] text-[#4F9B28] tracking-[2.5px] mt-1 uppercase font-bold">
                   INDUSTRIES
                 </p>
               </div>
             </div>
 
-            <p className="text-gray-400 text-xs leading-relaxed max-w-sm pt-2">
+            <p className="text-slate-400 text-xs leading-relaxed max-w-sm pt-2 font-medium">
               High-precision engineering and contract manufacturing partner
               specialized in industrial solutions, tooling, and critical
               component infrastructure.
             </p>
 
-            {/* Micro Social Networks */}
-            <div className="flex items-center gap-4 pt-2">
+            {/* Social Networks & Action */}
+            <div className="flex items-center gap-3 pt-2">
               {/* LinkedIn */}
               <a
                 href="https://in.linkedin.com/company/technovision-industries-bengaluru?trk=public_post_follow-view-profile"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-gray-900 hover:bg-[#0077B5] hover:text-white text-gray-400 rounded transition-all"
+                className="p-2.5 bg-slate-800/70 hover:bg-[#0077B5] hover:text-white text-slate-300 rounded transition-all shadow-xs"
                 aria-label="LinkedIn Profile"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -111,7 +71,7 @@ export default function Footer() {
                 href="https://wa.me/9342163575"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 bg-gray-900 hover:bg-[#25D366] hover:text-white text-gray-400 rounded transition-all"
+                className="p-2.5 bg-slate-800/70 hover:bg-[#25D366] hover:text-white text-slate-300 rounded transition-all shadow-xs"
                 aria-label="WhatsApp Communication Chat"
               >
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -119,42 +79,57 @@ export default function Footer() {
                 </svg>
               </a>
 
-              <RouterLink to="/contact" onClick={() => setActiveItem("")}>
+              {/* Connect Button */}
+              <Link to="/contact" onClick={handleNavClick}>
                 <button
-                  className={`transition-all px-5 py-1.25 rounded text-white font-bold text-xs tracking-wider uppercase cursor-pointer shadow-md ${
+                  className={`transition-all px-5 py-2 rounded-lg text-white font-extrabold text-xs tracking-wider uppercase cursor-pointer shadow-md active:scale-95 ${
                     location.pathname === "/contact"
-                      ? "bg-[#0072de] ring-2 ring-[#0082FB]"
-                      : "bg-[#0082FB] hover:bg-[#0072de]"
+                      ? "bg-[#C8141B] ring-2 ring-[#E31B23]"
+                      : "bg-[#E31B23] hover:bg-[#C8141B]"
                   }`}
                 >
                   CONNECT WITH US
                 </button>
-              </RouterLink>
+              </Link>
             </div>
           </div>
 
           {/* Column 2: Navigation Links */}
           <div className="md:col-span-3 space-y-4">
-            <h4 className="text-white text-xs font-black tracking-wider uppercase">
+            <h4 className="text-white text-xs font-black tracking-widest uppercase">
               SITEMAP DIRECTORY
             </h4>
-            <div className="w-6 h-[1.5px] bg-[#0082FB]" />
-            <nav className="space-y-2 pt-1">
-              {footerNavItems.map((item) => (
-                <FooterLink key={item.name} item={item} />
-              ))}
+            <div className="w-8 h-[2.5px] bg-[#4F9B28] rounded-full" />
+            <nav className="space-y-1.5 pt-1">
+              {footerNavItems.map((item) => {
+                const isActive = location.pathname === item.to;
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.to}
+                    onClick={handleNavClick}
+                    className={`block py-1 text-xs font-semibold tracking-wider cursor-pointer transition-colors duration-200 ${
+                      isActive 
+                        ? "text-[#4F9B28]" 
+                        : "text-slate-400 hover:text-[#4F9B28]"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </nav>
           </div>
 
           {/* Column 3: Contact & Location */}
           <div className="md:col-span-4 space-y-4">
-            <h4 className="text-white text-xs font-black tracking-wider uppercase">
+            <h4 className="text-white text-xs font-black tracking-widest uppercase">
               COMMERCIAL INQUIRIES
             </h4>
-            <div className="w-6 h-[1.5px] bg-[#0082FB]" />
-            <div className="space-y-3 pt-1 text-xs text-gray-400">
+            <div className="w-8 h-[2.5px] bg-[#4F9B28] rounded-full" />
+            <div className="space-y-3 pt-1 text-xs text-slate-400 font-medium">
               <p className="leading-relaxed">
-                <strong className="text-white">Headquarters:</strong>
+                <strong className="text-white font-bold">Headquarters:</strong>
                 <br />
                 SY.NO 261/3 &amp; SY 261/4 Haragadde Village,
                 <br />
@@ -163,35 +138,38 @@ export default function Footer() {
                 Karnataka 560105
               </p>
               <p>
-                <strong className="text-white">Email:</strong>{" "}
+                <strong className="text-white font-bold">Email:</strong>{" "}
                 narpvvl@technovisionindustries.in
               </p>
               <p>
-                <strong className="text-white">Phone:</strong> +91 9342163575
+                <strong className="text-white font-bold">Phone:</strong> +91 9342163575
               </p>
-              <RouterLink to="/about" onClick={() => setActiveItem("")}>
-  <button className="flex items-center gap-2 text-white font-bold text-xs cursor-pointer underline underline-offset-4 hover:text-[#0082FB]">
-    Know more about us
-    <FiExternalLink />
-  </button>
-</RouterLink>
+              <div className="pt-1">
+                <Link to="/about" onClick={handleNavClick}>
+                  <button className="flex items-center gap-2 text-[#4F9B28] hover:text-white font-extrabold text-xs cursor-pointer underline underline-offset-4 transition-colors">
+                    Know more about us
+                    <FiExternalLink />
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Legal Disclaimer & Copyright Panel */}
-        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-gray-500">
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-slate-500 font-medium">
           <p>
             © {new Date().getFullYear()} Technovision Industries. All Rights
             Reserved.
           </p>
           <div className="flex items-center gap-6">
-            <RouterLink
+            <Link
               to="/contact"
+              onClick={handleNavClick}
               className="hover:text-white transition-colors"
             >
               Support
-            </RouterLink>
+            </Link>
             <a href="#" className="hover:text-white transition-colors">
               Privacy Policy
             </a>
@@ -200,6 +178,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
+
       </div>
     </footer>
   );
