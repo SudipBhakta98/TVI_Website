@@ -21,7 +21,7 @@ export default function QualityPreview() {
       <div className="max-w-[85rem] mx-auto">
         
         {/* Main Card Container */}
-        <div className="w-full bg-white rounded-xl shadow-sm border border-slate-200/90 p-5 sm:p-8 flex flex-col gap-6 overflow-hidden">
+        <div className="w-full bg-white   sm:p-8 flex flex-col gap-6 overflow-hidden">
           
           {/* TOP ROW: Image (Left) & Aligned Content (Right) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 w-full items-stretch">
@@ -30,7 +30,7 @@ export default function QualityPreview() {
             <div className="lg:col-span-5 w-full flex">
               <Link 
                 to="/quality" 
-                className="group relative rounded-xl overflow-hidden border border-slate-200 bg-[#12161A] p-3 shadow-xs w-full flex-1 flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[#4F9B28]/50 hover:shadow-md"
+                className="group relative rounded-xl overflow-hidden border border-slate-200 bg-[#12161A]  shadow-xs w-full flex-1 flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[#4F9B28]/50 hover:shadow-md"
               >
                 <img 
                   src="https://res.cloudinary.com/eaubwmsx/image/upload/v1784970543/quality_l21fxh.png" 
@@ -48,7 +48,7 @@ export default function QualityPreview() {
             </div>
 
             {/* TOP RIGHT: Text Content Matched to Image Height */}
-            <div className="lg:col-span-7 flex flex-col justify-between h-full py-1">
+            <div className="lg:col-span-7 flex flex-col justify-between h-full p-5 py-1">
               
               <div>
                 {/* Header Line */}

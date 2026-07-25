@@ -60,51 +60,8 @@ export default function FacilitiesPreview() {
         {/* 2-Column Split Layout: Equal Height Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full">
           
-          {/* LEFT: Text Content - Infrastructure & Capabilities */}
-          <div className="flex flex-col justify-between bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-sm border border-slate-200/90 h-full">
-            <div>
-              <span className="text-xs font-black text-[#3b781d] tracking-widest uppercase mb-2 block">
-                Infrastructure & Capabilities
-              </span>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-[#12161A] uppercase tracking-wide mb-4">
-                State-of-the-Art Manufacturing
-              </h3>
-              
-              <p className="text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
-                Distributed manufacturing ecosystems engineered to manage scaling demands, complex toolroom engineering, and multi-tier electro-mechanical structural projects.
-              </p>
-
-              {/* Feature Points */}
-              <ul className="space-y-3.5 mb-8">
-                {[
-                  "Dedicated New Product Development (NPD) & rapid prototyping units",
-                  "Advanced Tool Room with CNC, Wire Cut, and Surface Grinding equipment",
-                  "Automated Powder Coating line integrated with SCADA controls",
-                  "Specialized assembly & Obeya quality management centers"
-                ].map((point, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-800 font-bold">
-                    <span className="p-0.5 bg-[#4F9B28]/15 text-[#3b781d] rounded text-xs font-black shrink-0 mt-0.5">
-                      ✓
-                    </span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Action CTA Link */}
-            <div className="pt-2">
-              <Link to="/facilities" className="inline-block w-full sm:w-auto">
-                <button className="w-full sm:w-auto bg-[#E31B23] hover:bg-[#C8141B] transition-colors duration-300 text-white font-extrabold text-xs tracking-wider uppercase px-7 py-3.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:scale-95">
-                  <span>Explore Facilities</span>
-                  <span className="text-sm font-bold">&rarr;</span>
-                </button>
-              </Link>
-            </div>
-          </div>
-
-          {/* RIGHT: Pure CSS Image Sliding Container */}
-          <div className="flex h-full min-h-[360px] sm:min-h-[420px] lg:min-h-0">
+          {/* RIGHT: Pure CSS Image Sliding Container (Forced to order-1 on mobile, order-2 on desktop) */}
+          <div className="flex h-full min-h-[360px] sm:min-h-[420px] lg:min-h-0 order-1 lg:order-2">
             <Link 
               to="/facilities" 
               className="group relative w-full h-full rounded-xl overflow-hidden bg-[#12161A] shadow-md border border-slate-200/90 cursor-pointer block flex-1"
@@ -159,6 +116,49 @@ export default function FacilitiesPreview() {
                 ))}
               </div>
             </Link>
+          </div>
+
+          {/* LEFT: Text Content - Infrastructure & Capabilities (Forced to order-2 on mobile, order-1 on desktop) */}
+          <div className="flex flex-col justify-between bg-white p-6 sm:p-8 md:p-10  h-full order-2 lg:order-1">
+            <div>
+              <span className="text-xs font-black text-[#3b781d] tracking-widest uppercase mb-2 block">
+                Infrastructure & Capabilities
+              </span>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-[#12161A] uppercase tracking-wide mb-4">
+                State-of-the-Art Manufacturing
+              </h3>
+              
+              <p className="text-slate-700 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
+                Distributed manufacturing ecosystems engineered to manage scaling demands, complex toolroom engineering, and multi-tier electro-mechanical structural projects.
+              </p>
+
+              {/* Feature Points */}
+              <ul className="space-y-3.5 mb-8">
+                {[
+                  "Dedicated New Product Development (NPD) & rapid prototyping units",
+                  "Advanced Tool Room with CNC, Wire Cut, and Surface Grinding equipment",
+                  "Automated Powder Coating line integrated with SCADA controls",
+                  "Specialized assembly & Obeya quality management centers"
+                ].map((point, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm text-slate-800 font-bold">
+                    <span className="p-0.5 bg-[#4F9B28]/15 text-[#3b781d] rounded text-xs font-black shrink-0 mt-0.5">
+                      ✓
+                    </span>
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Action CTA Link */}
+            <div className="pt-2">
+              <Link to="/facilities" className="inline-block w-full sm:w-auto">
+                <button className="w-full sm:w-auto bg-[#E31B23] hover:bg-[#C8141B] transition-colors duration-300 text-white font-extrabold text-xs tracking-wider uppercase px-7 py-3.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:scale-95">
+                  <span>Explore Facilities</span>
+                  <span className="text-sm font-bold">&rarr;</span>
+                </button>
+              </Link>
+            </div>
           </div>
 
         </div>

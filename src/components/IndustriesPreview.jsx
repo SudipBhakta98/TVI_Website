@@ -121,7 +121,7 @@ export default function IndustriesPreview() {
           </Link>
 
           {/* RIGHT: Text Content - How We Support Industries */}
-          <div className="flex flex-col justify-between bg-white p-6 sm:p-8 md:p-10 rounded-xl shadow-sm border border-slate-200/90">
+          <div className="flex flex-col justify-between bg-white p-6 sm:p-8 md:p-10 ">
             <div>
               <span className="text-xs font-black text-[#3b781d] tracking-widest uppercase mb-2 block">
                 Engineering Excellence
