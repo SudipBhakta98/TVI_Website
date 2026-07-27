@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { root_image } from "../../image/image";
+import { root_image } from "../../../image/image.js";
 
 const metrics = [
   { value: "2003", label: "Year Founded" },

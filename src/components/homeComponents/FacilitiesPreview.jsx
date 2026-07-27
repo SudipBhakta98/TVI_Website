@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { facility_image } from "../../image/image";
+import { facility_image } from "../../../image/image.js";
 
 const slideImages = [
   {

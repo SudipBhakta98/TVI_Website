@@ -4,7 +4,7 @@ import { root_image } from "../../image/image";
 
 const navItems = [
   { name: "HOME", to: "/" },
-  { name: "INDUSTRIES", to: "/industries" },
+  { name: "INDUSTRIES WE SERVE", to: "/serviceIndustries" },
   { name: "CAPABILITIES", to: "/capabilities" },
   { name: "OUR SOLUTIONS", to: "/products" },
   { name: "OUR FACILITY", to: "/facilities" },

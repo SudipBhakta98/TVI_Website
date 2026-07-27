@@ -1,43 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { service_field } from "../../image/image";
+import industriesAssets from "../../assets/industriesAssets.js"
 
-const slideImages = [
-  {
-    name: "DATA CENTERS",
-    image: service_field.data_center,
-  },
-  {
-    name: "TELECOMMUNICATIONS",
-    image: service_field.telicommunication,
-  },
-  {
-    name: "AUTOMOTIVE",
-    image: service_field.automotive,
-  },
-  {
-    name: "DEFENCE",
-    image: service_field.defence,
-  },
-  {
-    name: "ELECTRICAL",
-    image: service_field.electrical,
-  },
-  {
-    name: "INDUSTRIAL AUTOMATION",
-    image: service_field.industrial_automation,
-  },
-  {
-    name: "AVIATION & AEROSPACE",
-    image: service_field.aviation,
-  },
-  {
-    name: "MEDICAL",
-    image: service_field.medical,
-  },
-];
+const slideImages = Object.values(industriesAssets).map((industry) => ({
+  name: industry.name,
+  image: industry.image,
+}));
 
-export default function IndustriesPreview() {
+export default function ServiceIndustriesPreview() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-slide images every 3.5 seconds
@@ -50,7 +20,7 @@ export default function IndustriesPreview() {
   }, []);
 
   return (
-    <section id="industries-preview" className="bg-[#F8FAFC]   px-4 lg:px-8 w-full select-none">
+    <section id="industries-preview" className="bg-[#F8FAFC] px-4 lg:px-8 w-full select-none">
       <div className="max-w-[85rem] mx-auto flex flex-col items-center">
         
         {/* Main Section Header */}
@@ -66,7 +36,7 @@ export default function IndustriesPreview() {
           
           {/* LEFT: Pure CSS Image Sliding Container */}
           <Link 
-            to="/industries" 
+            to="/serviceIndustries" 
             className="group relative h-[340px] sm:h-[420px] w-full rounded-xl overflow-hidden bg-[#12161A] shadow-md border border-slate-200/90 cursor-pointer block"
           >
             {/* Render all slide images and crossfade with pure CSS opacity transitions */}
@@ -153,7 +123,7 @@ export default function IndustriesPreview() {
             </div>
 
             {/* Action CTA Link */}
-            <Link to="/industries" className="w-full sm:w-auto">
+            <Link to="/serviceIndustries" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto bg-[#E31B23] hover:bg-[#C8141B] transition-colors duration-300 text-white font-extrabold text-xs tracking-wider uppercase px-7 py-3.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:scale-95">
                 <span>Explore More</span>
                 <span className="text-sm font-bold">&rarr;</span>

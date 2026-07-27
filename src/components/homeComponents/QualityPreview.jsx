@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { root_image } from "../../../image/image";
+
 
 const highlights = [
   "100% Incoming raw material & chemical mill test certificate validation",
@@ -30,10 +32,10 @@ export default function QualityPreview() {
             <div className="lg:col-span-5 w-full flex">
               <Link 
                 to="/quality" 
-                className="group relative rounded-xl overflow-hidden border border-slate-200 bg-[#12161A]  shadow-xs w-full flex-1 flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[#4F9B28]/50 hover:shadow-md"
+                className="group relative rounded-xl overflow-hidden border border-slate-200 bg-[#12161A] shadow-xs w-full flex-1 flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[#4F9B28]/50 hover:shadow-md"
               >
                 <img 
-                  src="https://res.cloudinary.com/eaubwmsx/image/upload/v1784970543/quality_l21fxh.png" 
+                  src={root_image.quality_inspection}
                   alt="Quality Inspection - Technovision Industries" 
                   className="w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
