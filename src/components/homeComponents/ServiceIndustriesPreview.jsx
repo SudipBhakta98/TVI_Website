@@ -14,10 +14,10 @@ export default function ServiceIndustriesPreview() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slideImages.length);
-    }, 3500);
+    }, 2000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, []); 
 
   return (
     <section id="industries-preview" className="bg-[#F8FAFC] px-4 lg:px-8 w-full select-none">
@@ -66,7 +66,7 @@ export default function ServiceIndustriesPreview() {
             </div>
 
             {/* Hover Prompt Badge */}
-            <div className="absolute top-4 right-4 z-20 bg-[#12161A]/80 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/10 text-[11px] font-black text-white tracking-wider flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-[#E31B23] transition-all duration-300 shadow">
+            <div className="absolute top-4 right-4 z-20 bg-red-600 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/10 text-[11px] font-black text-white tracking-wider flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-lime-600 transition-all duration-300 shadow">
               <span>View All Industries</span>
               <span className="text-sm font-bold">&rarr;</span>
             </div>
@@ -124,7 +124,7 @@ export default function ServiceIndustriesPreview() {
 
             {/* Action CTA Link */}
             <Link to="/serviceIndustries" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto bg-[#E31B23] hover:bg-[#C8141B] transition-colors duration-300 text-white font-extrabold text-xs tracking-wider uppercase px-7 py-3.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:scale-95">
+              <button className="w-full sm:w-auto bg-red-600 hover:bg-lime-600 transition-colors duration-300 text-white font-extrabold text-xs tracking-wider uppercase px-7 py-3.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:scale-95">
                 <span>Explore More</span>
                 <span className="text-sm font-bold">&rarr;</span>
               </button>

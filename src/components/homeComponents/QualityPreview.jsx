@@ -42,7 +42,7 @@ export default function QualityPreview() {
                 />
 
                 {/* Hover Badge */}
-                <div className="absolute top-3 right-3 bg-[#12161A]/80 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/10 text-[11px] font-black text-white tracking-wider flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-[#E31B23] transition-all duration-300 shadow">
+                <div className="absolute top-3 right-3 bg-red-600 backdrop-blur-md px-3 py-1.5 rounded-md border border-white/10 text-[11px] font-black text-white tracking-wider flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-lime-600 transition-all duration-300 shadow">
                   <span>Explore Quality</span>
                   <span className="text-sm font-bold">&rarr;</span>
                 </div>
@@ -124,7 +124,7 @@ export default function QualityPreview() {
             <div className="w-full sm:w-auto flex justify-center sm:justify-end shrink-0">
               <Link to="/quality" className="w-full sm:w-auto">
                 <button 
-                  className="w-full sm:w-auto bg-[#E31B23] hover:bg-[#C8141B] transition-all duration-300 text-white font-extrabold text-xs tracking-wider uppercase px-6 py-3.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:scale-95 group whitespace-nowrap"
+                  className="w-full sm:w-auto bg-red-600 hover:bg-lime-600 transition-all duration-300 text-white font-extrabold text-xs tracking-wider uppercase px-6 py-3.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg active:scale-95 group whitespace-nowrap"
                 >
                   <span>View Full Quality Process</span>
                   <span className="text-sm font-bold group-hover:translate-x-1 transition-transform duration-200">&rarr;</span>

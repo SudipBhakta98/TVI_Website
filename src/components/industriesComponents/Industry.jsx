@@ -19,7 +19,7 @@ export default function Industry() {
     <div className="bg-[#F8FAFC] min-h-screen  px-4 lg:px-8 w-full">
       
 
-      <article className="max-w-4xl mx-auto px-4  bg-white rounded-xl shadow-sm border border-slate-200/80 my-8">
+      <article className="max-w-4xl mx-auto px-4 py-4  bg-white rounded-xl shadow-sm border border-slate-200/80 my-8">
         
         {/* Industry Header */}
         <div className="mb-6 border-b border-slate-200 pb-6">

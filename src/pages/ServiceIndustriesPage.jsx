@@ -6,7 +6,7 @@ const industryKeys = Object.keys(industriesAssets);
 
 export default function ServiceIndustries() {
   return (
-    <section id="industries" className="bg-[#F8FAFC] py-12 px-4 lg:px-8 w-full relative">
+    <section id="industries" className="bg-[#F8FAFC] py-8 px-4 lg:px-8 w-full relative">
       <div className="max-w-[95rem] mx-auto flex flex-col items-center">
         
         {/* Section Header */}
@@ -46,14 +46,14 @@ export default function ServiceIndustries() {
                   <div className="absolute bottom-0 left-0 h-[3px] bg-[#4F9B28] z-20 w-0 group-hover:w-full transition-all duration-300" />
 
                   {/* Top-Right Badge: Fixed to Top 0 Right 0 corner */}
-                  <div className="absolute top-2 right-2 z-20 bg-[#12161A]/80 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 text-[9px] sm:text-[10px] font-black text-white tracking-wider flex items-center gap-1 opacity-90 group-hover:opacity-100 group-hover:bg-[#E31B23] transition-all duration-300 shadow">
+                  <div className="absolute top-2 right-2 z-20 bg-red-600 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 text-[9px] sm:text-[10px] font-black text-white tracking-wider flex items-center gap-1 opacity-90 group-hover:opacity-100 group-hover:bg-lime-600 transition-all duration-300 shadow">
                     <span>View details</span>
                     <span className="text-xs font-bold">&rarr;</span>
                   </div>
 
                   {/* Bottom Title Container */}
                   <div className="z-10 mt-auto w-full border-t border-white/10 pt-2">
-                    <h3 className="text-white font-bold text-[11px] sm:text-xs tracking-wider uppercase group-hover:text-[#4F9B28] transition-colors duration-300 line-clamp-2 drop-shadow-md">
+                    <h3 className="text-white font-bold text-[11px] sm:text-xs tracking-wider uppercase group-hover:text-lime-600 transition-colors duration-300 line-clamp-2 drop-shadow-md">
                       {industry.name}
                     </h3>
                   </div>

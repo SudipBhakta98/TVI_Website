@@ -7,7 +7,7 @@ const footerNavItems = [
   { name: "HOME", to: "/" },
   { name: "INDUSTRIES WE SERVE", to: "/serviceIndustries" },
   { name: "CAPABILITIES", to: "/capabilities" },
-  { name: "OUR SOLUTIONS", to: "/products" },
+  { name: "PRODUCTS", to: "/products" },
   { name: "OUR FACILITY", to: "/facilities" },
   { name: "QUALITY", to: "/quality" },
 ];
@@ -84,8 +84,8 @@ export default function Footer() {
                 <button
                   className={`transition-all px-5 py-2 rounded-lg text-white font-extrabold text-xs tracking-wider uppercase cursor-pointer shadow-md active:scale-95 ${
                     location.pathname === "/contact"
-                      ? "bg-[#C8141B] ring-2 ring-[#E31B23]"
-                      : "bg-[#E31B23] hover:bg-[#C8141B]"
+                      ? "bg-red-600 ring-2 ring-[#E31B23]"
+                      : "bg-red-600 hover:bg-lime-600"
                   }`}
                 >
                   CONNECT WITH US

@@ -13,7 +13,7 @@ const statsData = [
     label: "Years Excellence",
     icon: (
       <svg
-        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#4F9B28]"
+        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-lime-600"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -32,7 +32,7 @@ const statsData = [
     label: "Mfg. Units",
     icon: (
       <svg
-        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#4F9B28]"
+        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-lime-600"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -51,7 +51,7 @@ const statsData = [
     label: "Sq. M Area",
     icon: (
       <svg
-        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#4F9B28]"
+        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-lime-600"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -70,7 +70,7 @@ const statsData = [
     label: "Employees",
     icon: (
       <svg
-        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#4F9B28]"
+        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-lime-600"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -89,7 +89,7 @@ const statsData = [
     label: "Tools / Year",
     icon: (
       <svg
-        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#4F9B28]"
+        className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-lime-600"
         fill="none"
         stroke="currentColor"
         strokeWidth="2"
@@ -148,7 +148,7 @@ export default function Home() {
                   Precision Sheet Metal
                 </h1>
                 <h1 className="text-white leading-tight">Manufacturing For</h1>
-                <span className="text-[#4F9B28] leading-tight inline-block">
+                <span className="text-lime-600 leading-tight inline-block">
                   Global OEMs
                 </span>
               </div>
@@ -162,7 +162,7 @@ export default function Home() {
                   >
                     <span className="whitespace-nowrap">{item}</span>
                     {index < taglines.length - 1 && (
-                      <span className="text-[#4F9B28] font-black">|</span>
+                      <span className="text-lime-600 font-black">|</span>
                     )}
                   </span>
                 ))}
@@ -172,7 +172,7 @@ export default function Home() {
               <div className="flex flex-row items-center gap-2 sm:gap-4 mt-1 sm:mt-2 w-full sm:w-auto">
                 {/* Primary CTA */}
                 <RouterLink to="/capabilities" className="flex-1 sm:flex-none">
-                  <button className="w-full sm:w-auto bg-[#E31B23] hover:bg-[#C8141B] active:scale-95 transition-all text-white font-bold text-[9px] xs:text-[10px] sm:text-sm tracking-wider uppercase px-2.5 sm:px-5 py-2 sm:py-3 rounded flex items-center justify-center gap-1 cursor-pointer shadow-lg">
+                  <button className="w-full sm:w-auto bg-red-600 hover:bg-lime-600 active:scale-95 transition-all text-white font-bold text-[9px] xs:text-[10px] sm:text-sm tracking-wider uppercase px-2.5 sm:px-5 py-2 sm:py-3 rounded flex items-center justify-center gap-1 cursor-pointer shadow-lg">
                     Explore Capabilities
                     <span className="text-xs sm:text-sm font-bold">→</span>
                   </button>
@@ -180,7 +180,7 @@ export default function Home() {
 
                 {/* Secondary CTA */}
                 <RouterLink to="/contact" className="flex-1 sm:flex-none">
-                  <button className="w-full border border-gray-400/80 hover:border-[#4F9B28] hover:text-[#4F9B28] hover:bg-white/5 active:scale-95 transition-all text-white font-bold text-[9px] xs:text-[10px] sm:text-sm tracking-wider uppercase px-2.5 sm:px-5 py-2 sm:py-3 rounded cursor-pointer text-center bg-[#12161A]/40 backdrop-blur-xs">
+                  <button className="w-full border border-gray-400/80 hover:border-lime-600 hover:text-lime-600 hover:bg-white/5 active:scale-95 transition-all text-white font-bold text-[9px] xs:text-[10px] sm:text-sm tracking-wider uppercase px-2.5 sm:px-5 py-2 sm:py-3 rounded cursor-pointer text-center bg-[#12161A]/40 backdrop-blur-xs">
                     Contact Sales
                   </button>
                 </RouterLink>
@@ -214,7 +214,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-0.5 sm:gap-2 px-0.5">
                 <div className="mt-0.5 flex-shrink-0">
                   <svg
-                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-[#4F9B28]"
+                    className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-lime-600"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
