@@ -9,24 +9,22 @@ export default function Industry() {
   // 2. Check if the caught key exists in your industriesAssets object
   const industry = industriesKey ? industriesAssets[industriesKey] : null;
 
-  // 3. If the key doesn't match any object key, redirect/navigate back to the base url "/industries"
+  // 3. If the key doesn't match any object key, redirect back to "/serviceIndustries"
   if (!industry) {
     return <Navigate to="/serviceIndustries" replace />;
   }
 
-  // 4. If it matches, render the full dedicated page with the details component logic
+  // 4. Render the dynamic industry page with complete data coverage
   return (
-    <div className="bg-[#F8FAFC] min-h-screen  px-4 lg:px-8 w-full">
-      
-
-      <article className="max-w-4xl mx-auto px-4 py-4  bg-white rounded-xl shadow-sm border border-slate-200/80 my-8">
+    <div className="bg-[#F8FAFC] min-h-screen px-4 lg:px-8 w-full">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 py-6 bg-white rounded-xl shadow-sm border border-slate-200/80 mb-8">
         
         {/* Industry Header */}
         <div className="mb-6 border-b border-slate-200 pb-6">
-          <span className="text-xs font-black text-[#4F9B28] tracking-widest uppercase bg-[#4F9B28]/10 px-3 py-1 rounded-md inline-block mb-3">
+          <span className="text-xl font-black text-[#4F9B28] tracking-widest uppercase bg-[#4F9B28]/10 px-3 py-1 rounded-md inline-block mb-3">
             {industry.name}
           </span>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#12161A] tracking-wide uppercase">
+          <h1 className="text-2xl sm:text-3xl md:text-2xl font-black text-[#12161A] tracking-wide uppercase">
             {industry.title}
           </h1>
         </div>
@@ -41,8 +39,8 @@ export default function Industry() {
           />
         </div>
 
-        {/* Blog Content Sections */}
-        <div className="space-y-6 text-slate-800">
+        {/* Dynamic Content Sections */}
+        <div className="space-y-8 text-slate-800">
           
           {/* Overview */}
           <div className="bg-[#F8FAFC] p-6 rounded-lg border-l-4 border-[#4F9B28]">
@@ -65,6 +63,24 @@ export default function Industry() {
             </p>
           </div>
 
+          {/* Products List */}
+          {industry.products && industry.products.length > 0 && (
+            <div>
+              <h2 className="text-lg font-black text-[#12161A] tracking-wide uppercase mb-3 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#E31B23]"></span>
+                Solution Manufactured
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {industry.products.map((product, idx) => (
+                  <div key={idx} className="flex items-center gap-2 bg-[#F8FAFC] p-3 rounded-md border border-slate-200/60">
+                    <span className="text-[#4F9B28] font-bold text-xs">✓</span>
+                    <span className="text-slate-700 text-sm font-semibold">{product}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
           {/* Why OEMs Choose Us */}
           <div>
             <h2 className="text-lg font-black text-[#12161A] tracking-wide uppercase mb-2 flex items-center gap-2">
@@ -76,6 +92,19 @@ export default function Industry() {
             </p>
           </div>
 
+          {/* Production Capabilities */}
+          {industry.production && (
+            <div>
+              <h2 className="text-lg font-black text-[#12161A] tracking-wide uppercase mb-2 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[#E31B23]"></span>
+                Production Capabilities
+              </h2>
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-medium">
+                {industry.production}
+              </p>
+            </div>
+          )}
+
           {/* The Solution Impact */}
           <div className="bg-[#12161A] text-white p-6 rounded-lg shadow-md">
             <h2 className="text-sm font-black text-[#4F9B28] tracking-widest uppercase mb-2">
@@ -86,13 +115,32 @@ export default function Industry() {
             </p>
           </div>
 
-        </div>
+          {/* Call to Action Box */}
+          {industry.cta && (
+            <div className="bg-[#4F9B28]/10 border border-[#4F9B28]/30 p-6 rounded-lg text-center">
+              <h3 className="text-base font-black text-[#12161A] uppercase mb-2">
+                Ready to Start Your Project?
+              </h3>
+              <p className="text-slate-700 text-sm sm:text-base font-medium mb-4">
+                {industry.cta}
+              </p>
+              <Link
+                to="/contact"
+                className="inline-block bg-lime-600 hover:bg-lime-700 text-white text-xs font-black uppercase tracking-wider px-6 py-3 rounded-md transition-colors shadow-sm"
+              >
+                Request a Quote 
+              </Link>
+            </div>
+          )}
 
+        </div>
       </article>
+
+      {/* Back Button */}
       <div className="max-w-4xl mx-auto mb-6">
         <Link
           to="/serviceIndustries"
-          className="inline-flex items-center gap-2  hover:bg-red-700 bg-red-600 text-white text-xs font-black uppercase px-4 py-2 rounded-lg transition-colors duration-200 shadow-sm cursor-pointer"
+          className="inline-flex items-center gap-2 hover:bg-lime-600 bg-red-600 text-white text-xs font-black uppercase px-4 py-2 rounded-lg transition-colors duration-200 shadow-sm cursor-pointer"
         >
           &larr; Back to Previous Page
         </Link>

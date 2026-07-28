@@ -1,20 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import productAssets from "../assets/productAssets.js";
 
-export default function Products() {
-  const [activeTab, setActiveTab] = useState(productAssets[0]?.id);
-  const [selectedImage, setSelectedImage] = useState(null);
-
-  // Lock scrolling behind popup when modal is open
-  useEffect(() => {
-    if (selectedImage) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
-  }, [selectedImage]);
+export default function ProductsPage() {
+  const [activeTab, setActiveTab] = React.useState(productAssets[0]?.id);
 
   const activeCategory = productAssets.find(cat => cat.id === activeTab);
 
@@ -82,13 +71,13 @@ export default function Products() {
               </span>
             </div>
 
-            {/* Product Grid */}
+            {/* Product Grid -> Direct Navigation Links */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {activeCategory?.images && Object.entries(activeCategory.images).map(([imgKey, src], index) => (
-                <div
+                <Link
                   key={imgKey}
-                  onClick={() => setSelectedImage({ src, title: activeCategory.name, key: imgKey, index: index + 1 })}
-                  className="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-200/80 aspect-[4/3] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 cursor-pointer"
+                  to={`/products/${activeCategory.id}`}
+                  className="group relative bg-slate-50 rounded-xl overflow-hidden border border-slate-200/80 aspect-[4/3] shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 block"
                 >
                   {/* Top Accent Border */}
                   <div className="absolute bottom-0 left-0 right-0 h-1 bg-lime-600 opacity-100 z-10" />
@@ -116,21 +105,21 @@ export default function Products() {
                     </span>
                   </div>
 
-                  {/* ALWAYS VISIBLE Gradient Overlay */}
+                  {/* Gradient Overlay & Hover Callout */}
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <div className="w-full flex items-center justify-between">
                       <div>
                         <p className="text-[10px] font-bold tracking-widest text-lime-600 uppercase">Engineered Solution</p>
-                        <h4 className="text-xs font-black uppercase tracking-wide text-white mt-0.5">View Full Spec</h4>
+                        <h4 className="text-xs font-black uppercase tracking-wide text-white mt-0.5">Explore Product Details</h4>
                       </div>
                       <div className="p-1.5 bg-red-600 text-white rounded-full shadow-md transform group-hover:scale-110 transition-transform duration-300">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.604 10.604zM10.5 7.5v6m3-3h-6" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                       </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 
@@ -162,64 +151,6 @@ export default function Products() {
         </div>
 
       </div>
-
-      {/* FULL-SIZE IMAGE POPUP MODAL */}
-      {selectedImage && (
-        <div
-          onClick={() => setSelectedImage(null)}
-          className="fixed inset-0 bg-slate-400/80 backdrop-blur-md z-50 flex flex-col items-center justify-center p-4 sm:p-6 transition-all duration-300"
-        >
-          {/* Close Button */}
-          <button 
-            onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-full transition-all duration-300 group z-50 shadow-md hover:scale-110"
-            aria-label="Close modal window"
-          >
-            <svg className="w-6 h-6 transform group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-
-          {/* Modal Box */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-5xl w-full bg-white rounded-xl overflow-hidden shadow-2xl border border-slate-300 max-h-[85vh] flex flex-col"
-          >
-            <div className="flex-1 bg-slate-50 overflow-hidden flex items-center justify-center relative p-4">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.title}
-                className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-sm"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                  if (e.target.nextSibling) e.target.nextSibling.style.display = 'flex';
-                }}
-              />
-              
-              {/* Fallback Error Display */}
-              <div className="hidden absolute inset-0 flex-col items-center justify-center text-slate-500 p-6">
-                <svg className="w-16 h-16 text-slate-400 mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375 0 11-.75 0 .375 0 01.75 0z" />
-                </svg>
-                <p className="text-sm font-black uppercase tracking-widest text-slate-600">Image Asset Unavailable</p>
-                <p className="text-xs font-mono text-slate-400 mt-1">{selectedImage.src}</p>
-              </div>
-            </div>
-
-            {/* Bottom Metadata Info Banner */}
-            <div className="bg-slate-50 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-t border-slate-200">
-              <div>
-                <h4 className="text-slate-900 text-sm font-black uppercase tracking-wider">
-                  {selectedImage.title}
-                </h4>
-                <p className="text-[10px] text-lime-700 font-bold uppercase tracking-widest mt-0.5">
-                  Engineered & Manufactured to Client Specifications • Technovision Custom Solutions
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

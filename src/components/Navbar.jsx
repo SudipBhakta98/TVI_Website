@@ -1,22 +1,39 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { root_image} from "../../image/image"; 
-import industriesAssets from "../assets/industriesAssets.js"
+import { root_image } from "../../image/image"; 
+import industriesAssets from "../assets/industriesAssets.js";
+import productAssets from "../assets/productAssets.js";
 
+// Updated navItems with dropdowns for both Industries and Products
 const navItems = [
   { name: "HOME", to: "/" },
-  { name: "INDUSTRIES WE SERVE", to: "/serviceIndustries", dropdown: industriesAssets },
+  { 
+    name: "INDUSTRIES WE SERVE", 
+    to: "/serviceIndustries", 
+    dropdown: industriesAssets, 
+    basePath: "/serviceIndustries" 
+  },
   { name: "CAPABILITIES", to: "/capabilities" },
-  { name: "PRODUCTS", to: "/products" },
+  { 
+    name: "PRODUCTS", 
+    to: "/products", 
+    dropdown: productAssets, 
+    basePath: "/products" 
+  },
   { name: "OUR FACILITY", to: "/facilities" },
   { name: "QUALITY", to: "/quality" },
   { name: "ABOUT", to: "/about" },
 ];
 
-// Extracted reusable Dropdown Component (Uses inline SVG icons)
+// Reusable Dropdown Component (Supports both Objects and Arrays for dropdown items)
 function NavDropdown({ item, isMobile, onClose }) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+
+  // Normalize dropdown items into an array of { id, name }
+  const dropdownList = Array.isArray(item.dropdown)
+    ? item.dropdown.map((prod) => ({ id: prod.id, name: prod.name }))
+    : Object.entries(item.dropdown).map(([key, val]) => ({ id: key, name: val.name }));
 
   return (
     <div className={isMobile ? "border-b border-slate-800/80" : "relative group py-5"}>
@@ -25,7 +42,7 @@ function NavDropdown({ item, isMobile, onClose }) {
           to={item.to}
           onClick={onClose}
           className={`text-xs font-bold tracking-wider transition-colors inline-flex items-center gap-1 ${
-            location.pathname.startsWith(item.to) ? "text-[#4F9B28]" : "text-slate-300 group-hover:text-[#4F9B28]"
+            location.pathname.startsWith(item.basePath) ? "text-[#4F9B28]" : "text-slate-300 group-hover:text-[#4F9B28]"
           }`}
         >
           <span>{item.name}</span>
@@ -49,23 +66,28 @@ function NavDropdown({ item, isMobile, onClose }) {
         className={
           isMobile
             ? `${isOpen ? "block" : "hidden"} pl-3 pb-2 flex flex-col gap-2 border-l border-slate-800 my-1`
-            : "absolute top-full left-0 w-64 bg-[#12161A] border border-slate-800 rounded-xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+            : "absolute top-full left-0 w-64 bg-[#12161A] border border-slate-800 rounded-xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 max-h-[70vh] overflow-y-auto"
         }
       >
-        {Object.entries(item.dropdown).map(([key, value]) => (
-          <Link
-            key={key}
-            to={`/serviceIndustries/${key}`}
-            onClick={onClose}
-            className={`block px-4 py-2 text-[11px] font-bold tracking-wider transition-colors ${
-              location.pathname === `/industries/${key}`
-                ? "text-[#4F9B28] bg-slate-800/50"
-                : "text-slate-400 hover:text-[#4F9B28] hover:bg-slate-800/30"
-            }`}
-          >
-            {value.name}
-          </Link>
-        ))}
+        {dropdownList.map((dropItem) => {
+          const targetUrl = `${item.basePath}/${dropItem.id}`;
+          const isActive = location.pathname === targetUrl;
+
+          return (
+            <Link
+              key={dropItem.id}
+              to={targetUrl}
+              onClick={onClose}
+              className={`block px-4 py-2 text-[11px] font-bold tracking-wider transition-colors ${
+                isActive
+                  ? "text-[#4F9B28] bg-slate-800/50"
+                  : "text-slate-400 hover:text-[#4F9B28] hover:bg-slate-800/30"
+              }`}
+            >
+              {dropItem.name}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
