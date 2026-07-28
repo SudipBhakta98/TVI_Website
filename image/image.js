@@ -3,11 +3,6 @@ export const root_image = {
   about_bg: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876887/about-bg_rfh8sb.png",
   logo: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876895/logo_gasqjx.png",
   rao_sir: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876883/Rao-Sir_wsshax.jpg",
-  quality_bg: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876910/quality-bg_kd6nui.png",
-  quality_inspection: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784970543/quality_l21fxh.png",
-  ISO_9001_2015: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876923/ISO_9001_2015_d9tje6.jpg",
-  ISO_14001_2015: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876908/ISO_14001_2015_uqjsus.jpg",
-  ZED_Silver: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876893/ZED_SILVER_oqppvn.jpg",
   twenty_years_of_excellence: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784956676/ChatGPT_Image_Jul_25_2026_10_40_22_AM_mltwzo.png"
 }
 

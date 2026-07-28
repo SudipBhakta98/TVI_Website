@@ -4,7 +4,7 @@ import { root_image } from "../../image/image";
 import industriesAssets from "../assets/industriesAssets.js";
 import productAssets from "../assets/productAssets.js";
 
-// Updated navItems with dropdowns for both Industries and Products
+// Nav items configuration
 const navItems = [
   { name: "HOME", to: "/" },
   { 
@@ -25,7 +25,7 @@ const navItems = [
   { name: "ABOUT", to: "/about" },
 ];
 
-// Reusable Dropdown Component (Supports both Objects and Arrays for dropdown items)
+// Reusable Dropdown Component
 function NavDropdown({ item, isMobile, onClose }) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -35,6 +35,8 @@ function NavDropdown({ item, isMobile, onClose }) {
     ? item.dropdown.map((prod) => ({ id: prod.id, name: prod.name }))
     : Object.entries(item.dropdown).map(([key, val]) => ({ id: key, name: val.name }));
 
+  const isParentActive = location.pathname.startsWith(item.basePath);
+
   return (
     <div className={isMobile ? "border-b border-slate-800/80" : "relative group py-5"}>
       <div className={`flex items-center justify-between ${isMobile ? "py-3" : ""}`}>
@@ -42,31 +44,48 @@ function NavDropdown({ item, isMobile, onClose }) {
           to={item.to}
           onClick={onClose}
           className={`text-xs font-bold tracking-wider transition-colors inline-flex items-center gap-1 ${
-            location.pathname.startsWith(item.basePath) ? "text-[#4F9B28]" : "text-slate-300 group-hover:text-[#4F9B28]"
+            isParentActive ? "text-[#4F9B28]" : isMobile ? "text-slate-200 hover:text-[#4F9B28]" : "text-slate-800 group-hover:text-[#4F9B28]"
           }`}
         >
           <span>{item.name}</span>
           {!isMobile && (
-            <svg className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <svg 
+              className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-slate-500 group-hover:text-[#4F9B28]" 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.5" 
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           )}
         </Link>
+
         {isMobile && (
-          <button onClick={() => setIsOpen(!isOpen)} className="p-1 text-slate-400 hover:text-white" aria-label="Toggle Dropdown">
-            <svg className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+          <button 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="p-1 text-slate-400 hover:text-white transition-colors" 
+            aria-label="Toggle Dropdown"
+          >
+            <svg 
+              className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} 
+              fill="none" 
+              stroke="currentColor" 
+              strokeWidth="2.5" 
+              viewBox="0 0 24 24"
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
             </svg>
           </button>
         )}
       </div>
 
-      {/* Dynamic Dropdown List */}
+      {/* Dynamic Square Dropdown List */}
       <div
         className={
           isMobile
-            ? `${isOpen ? "block" : "hidden"} pl-3 pb-2 flex flex-col gap-2 border-l border-slate-800 my-1`
-            : "absolute top-full left-0 w-64 bg-[#12161A] border border-slate-800 rounded-xl shadow-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 max-h-[70vh] overflow-y-auto"
+            ? `${isOpen ? "block" : "hidden"} pl-3 pb-2 flex flex-col border-l border-slate-700/80 my-1`
+            : "absolute top-full left-0 w-64 bg-white border border-slate-200 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 max-h-[70vh] overflow-y-auto"
         }
       >
         {dropdownList.map((dropItem) => {
@@ -78,11 +97,11 @@ function NavDropdown({ item, isMobile, onClose }) {
               key={dropItem.id}
               to={targetUrl}
               onClick={onClose}
-              className={`block px-4 py-2 text-[11px] font-bold tracking-wider transition-colors ${
-                isActive
-                  ? "text-[#4F9B28] bg-slate-800/50"
-                  : "text-slate-400 hover:text-[#4F9B28] hover:bg-slate-800/30"
-              }`}
+              className={`block px-4 py-2.5 text-[11px] font-bold tracking-wider transition-colors ${
+                isMobile 
+                  ? "border-b border-slate-800/60 last:border-none text-slate-300 hover:text-white hover:bg-slate-800/60" 
+                  : "border-b border-slate-300 last:border-none text-slate-700 hover:text-[#4F9B28] hover:bg-slate-50"
+              } ${isActive ? "text-[#4F9B28] bg-lime-50/80" : ""}`}
             >
               {dropItem.name}
             </Link>
@@ -112,8 +131,10 @@ export default function Navbar() {
           to={item.to}
           onClick={() => setOpen(false)}
           className={`text-xs font-bold tracking-wider transition-colors ${
-            isMobile ? "py-3 border-b border-slate-800/80 flex items-center justify-between" : "relative py-2"
-          } ${location.pathname === item.to ? "text-[#4F9B28]" : "text-slate-300 hover:text-[#4F9B28]"}`}
+            isMobile 
+              ? "py-3 border-b border-slate-800/80 flex items-center justify-between text-slate-200 hover:text-[#4F9B28]" 
+              : "relative py-2 text-slate-800 hover:text-[#4F9B28]"
+          } ${location.pathname === item.to ? "text-[#4F9B28]" : ""}`}
         >
           <span>{item.name}</span>
           {isMobile && location.pathname === item.to && (
@@ -125,14 +146,15 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#12161A]/95 backdrop-blur-md border-b border-slate-800 shadow-md">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
         <div className="max-w-[90rem] mx-auto h-16 px-4 lg:px-8 flex items-center justify-between">
+          
           {/* Logo */}
-          <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
-            <img src={root_image.logo} alt="Logo" className="h-9 w-auto brightness-110" />
-            <div className="text-white border-l border-slate-700/80 pl-3">
-              <h1 className="font-black text-base uppercase leading-none">TECHNOVISION</h1>
-              <p className="text-[10px] text-[#4F9B28] font-bold tracking-widest mt-1">INDUSTRIES</p>
+          <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">  
+            <img src={root_image.logo} alt="Logo" className="h-9 w-auto" />
+            <div className="text-lime-600 border-l border-slate-300 pl-3">
+              <h1 className="font-black text-base uppercase leading-none text-lime-600">TECHNOVISION</h1>
+              <p className="text-[10px] text-slate-900 font-bold tracking-widest mt-0.5">INDUSTRIES</p>
             </div>
           </Link>
 
@@ -140,14 +162,18 @@ export default function Navbar() {
           <div className="hidden xl:flex items-center gap-8">
             <div className="flex items-center gap-6">{renderNavLinks(false)}</div>
             <Link to="/contact">
-              <button className="px-5 py-2.5 rounded-lg text-white font-extrabold text-xs uppercase bg-[#E31B23] hover:bg-lime-600 transition-all cursor-pointer">
+              <button className="px-5 py-2.5 rounded-lg text-white font-extrabold text-xs uppercase bg-[#E31B23] hover:bg-lime-600 transition-all cursor-pointer shadow-sm">
                 CONTACT US
               </button>
             </Link>
           </div>
 
-          {/* Mobile Toggle Button with Inline SVGs */}
-          <button onClick={() => setOpen(!open)} className="xl:hidden text-white p-2 focus:outline-none" aria-label="Toggle Menu">
+          {/* Mobile Toggle Button */}
+          <button 
+            onClick={() => setOpen(!open)} 
+            className="xl:hidden text-slate-800 hover:text-[#4F9B28] p-2 focus:outline-none transition-colors" 
+            aria-label="Toggle Menu"
+          >
             {open ? (
               <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -162,7 +188,12 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Drawer Overlay */}
-      {open && <div className="fixed inset-0 bg-black/60 z-40 xl:hidden" onClick={() => setOpen(false)} />}
+      {open && (
+        <div 
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 xl:hidden transition-opacity" 
+          onClick={() => setOpen(false)} 
+        />
+      )}
       
       {/* Mobile Drawer */}
       <div
@@ -171,9 +202,9 @@ export default function Navbar() {
         }`}
       >
         <div className="flex flex-col gap-1">{renderNavLinks(true)}</div>
-        <div className="pt-6">
+        <div className="pt-6 border-t border-slate-800 mt-4">
           <Link to="/contact" onClick={() => setOpen(false)}>
-            <button className="w-full bg-red-600 hover:bg-lime-600 py-3.5 rounded-lg text-white font-extrabold text-xs uppercase shadow-md transition-all cursor-pointer">
+            <button className="w-full bg-[#E31B23] hover:bg-lime-600 py-3 rounded-lg text-white font-extrabold text-xs uppercase shadow-md transition-all cursor-pointer">
               CONTACT US
             </button>
           </Link>

@@ -1,174 +1,78 @@
 import { useState, useEffect, useRef, Fragment } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { root_image } from "../../image/image";
+import qualityAssets from "../assets/qualityAssets.js";
 
-const qualitySteps = [
-  { 
-    step: "01", 
-    name: "Incoming Inspection", 
-    tagline: "Raw material validation & testing",
-    specs: [
-      { label: "Check Type", value: "Chemical & Physical analysis" },
-      { label: "Material Profile", value: "Thickness & Grade verification" },
-      { label: "Compliance", value: "Mill TC matching verification" }
-    ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
-      </svg>
-    )
-  },
-  { 
-    step: "02", 
-    name: "In Process Inspection", 
-    tagline: "Continuous station routing dimension check",
-    specs: [
-      { label: "Method", value: "First-piece & random batch check" },
-      { label: "Metrics", value: "Dimensional limits & angle profiles" },
-      { label: "Traceability", value: "Operator-level data logging" }
-    ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-      </svg>
-    )
-  },
-  { 
-    step: "03", 
-    name: "Final Inspection", 
-    tagline: "Pre-packaging comprehensive blueprint audit",
-    specs: [
-      { label: "Check System", value: "Full dimensional clearance profile" },
-      { label: "Finishing", value: "Powder coat DFT & verification" },
-      { label: "Standard", value: "Customer drawing matching check" }
-    ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h3.75M9 15h3.75M9 9h3.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
-  },
-  { 
-    step: "04", 
-    name: "Testing & Validation", 
-    tagline: "Stress, load, and performance evaluation",
-    specs: [
-      { label: "Welding", value: "AWS D1.1 certified check" },
-      { label: "Hardware", value: "Torque testing & structural metrics" },
-      { label: "Assembly", value: "Functional & component fit logs" }
-    ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
-  },
-  { 
-    step: "05", 
-    name: "Packaging & Dispatch", 
-    tagline: "Secure outbound logistics assurance",
-    specs: [
-      { label: "Crating", value: "Custom export-grade protection" },
-      { label: "Traceability", value: "Barcode shipping documentation" },
-      { label: "Transit", value: "Anti-moisture shrink wrap shield" }
-    ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
-      </svg>
-    )
-  }
+// Keep SVG icons mapped local to component
+const stepIcons = [
+  (
+    <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
+  ),
+  (
+    <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3.75h16.5M3.75 20.25h16.5M7.5 3.75v3M12 3.75v4.5M16.5 3.75v3M7.5 20.25v-3M12 20.25v-4.5M16.5 20.25v-3M3.75 12h16.5" />
+    </svg>
+  ),
+  (
+    <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25h1.5c.65 0 1.22.28 1.61.723m-5.8 0a2.222 2.222 0 00-.73 1.527v14.25c0 1.243 1.007 2.25 2.25 2.25h9c1.243 0 2.25-1.007 2.25-2.25V4.5c0-.573-.214-1.096-.57-1.49m-8.93 0A2.247 2.247 0 0113.5 2.25m-3.328 12.02l2.25 2.25 4.5-4.5" />
+    </svg>
+  ),
+  (
+    <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a1.534 1.534 0 01-2.169-2.169l3.277-3.276a4.5 4.5 0 00-6.336 4.486c.091.716.023 1.378-.18 1.905" />
+    </svg>
+  ),
+  (
+    <svg className="w-5 h-5 sm:w-8 sm:h-8" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+    </svg>
+  )
 ];
 
-const equipments = [
-  "VMS",
-  "Height Master",
-  "Welding Inspection Equipment",
-  "Digital Measuring Instruments",
-  "Precision Measuring Instruments",
-];
+// Merge qualitySteps from assets with local icon set
+const steps = qualityAssets.qualitySteps.map((step, index) => ({
+  ...step,
+  icon: stepIcons[index]
+}));
 
-const certifications = [
-  {
-    title: "ISO 9001:2015",
-    authority: "BMQR Certification",
-    previewImg: root_image.ISO_9001_2015
-  },
-  {
-    title: "ISO 14001:2015",
-    authority: "STAR ISO Certification",
-    previewImg: root_image.ISO_14001_2015
-  },
-  {
-    title: "ZED SILVER",
-    authority: "Zero Defect Zero Effect (MSME)",
-    previewImg: root_image.ZED_Silver
-  }
-];
-
-const GRID_COLS = "flex flex-col lg:grid lg:grid-cols-[1fr_0.55fr_1fr_0.55fr_1fr_0.55fr_1fr_0.55fr_1fr] w-full";
-
-function HorizontalPathLink({ lit }) {
+function StepArrow() {
   return (
-    <div className="relative flex items-center justify-center w-full min-h-[32px] lg:min-h-0">
-      <div className="h-8 w-[2px] lg:hidden bg-slate-200" />
-      <div
-        className={`absolute h-8 w-[2px] lg:hidden origin-top transition-all duration-700 ease-in-out ${
-          lit
-            ? "scale-y-100 bg-gradient-to-b from-emerald-500 to-green-400 shadow-[0_0_10px_rgba(16,185,129,0.6)]"
-            : "scale-y-0 bg-transparent"
-        }`}
-      />
-      <div className="hidden lg:block h-[2px] w-full bg-slate-200" />
-      <div
-        className={`absolute hidden lg:block h-[2px] w-full origin-left transition-all duration-700 ease-in-out ${
-          lit
-            ? "scale-x-100 bg-gradient-to-r from-emerald-500 to-green-400 shadow-[0_0_10px_rgba(16,185,129,0.6)]"
-            : "scale-x-0 bg-transparent"
-        }`}
-      />
+    <div className="flex items-center justify-center text-lime-600 shrink-0 self-center mb-5 sm:mb-6">
+      <svg className="w-2.5 h-2.5 sm:w-5 sm:h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+      </svg>
     </div>
   );
 }
 
 export default function Quality() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [activeStageIndex, setActiveStageIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const resumeTimer = useRef(null);
-  
-  const activeStage = qualitySteps[active] || qualitySteps[qualitySteps.length - 1];
 
+  const activeStage = steps[activeStageIndex];
+
+  // Auto-sliding interval (Cycles every 2.5 seconds)
   useEffect(() => {
-    if (paused) return;
-    
-    const id = setInterval(() => {
-      setActive((prev) => {
-        if (prev === qualitySteps.length - 1) {
-          setPaused(true);
-          if (resumeTimer.current) clearTimeout(resumeTimer.current);
-          
-          resumeTimer.current = setTimeout(() => {
-            setActive(-1);
-            resumeTimer.current = setTimeout(() => {
-              setActive(0);
-              setPaused(false);
-            }, 1500);
-          }, 1500);
-          
-          return prev;
-        }
-        return prev + 1;
-      });
-    }, 3000);
-    
-    return () => clearInterval(id);
-  }, [paused]);
+    if (isPaused) return;
 
-  const handleSelect = (index) => {
-    setActive(index);
-    setPaused(true);
+    const interval = setInterval(() => {
+      setActiveStageIndex((prev) => (prev + 1) % steps.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  // Pause auto-sliding for 5 seconds on manual click
+  const handleSelectStep = (index) => {
+    setActiveStageIndex(index);
+    setIsPaused(true);
+
     if (resumeTimer.current) clearTimeout(resumeTimer.current);
-    resumeTimer.current = setTimeout(() => setPaused(false), 5000);
+    resumeTimer.current = setTimeout(() => {
+      setIsPaused(false);
+    }, 5000);
   };
 
   useEffect(() => {
@@ -181,247 +85,157 @@ export default function Quality() {
     <section id="quality" className="relative w-full bg-[#F8FAFC]">
       
       {/* 1. Hero Section */}
-      <div className="relative w-full bg-[#031424] pt-24 pb-36 md:pt-32 md:pb-44 px-4 lg:px-16 overflow-hidden">
+      <div className="relative w-full pt-24 pb-36 md:pt-28 md:pb-40 px-6 lg:px-16 overflow-hidden">
         <div 
           className="absolute inset-0 z-0 bg-cover bg-right md:bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${root_image.quality_bg})` }}
+          style={{ backgroundImage: `url(${qualityAssets.quality_bg})` }}
         />
-        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#031424] via-[#031424]/85 to-transparent" />
 
-        <div className="relative z-10 max-w-[90rem] mx-auto">
-          <motion.h1 
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-white text-3xl md:text-4xl font-black tracking-wider uppercase"
-          >
+        {/* Mobile-Only Dark Gradient Mask (Hidden on md and larger) */}
+        <div className="absolute inset-0 z-0 bg-gradient-to-r from-[#031424]/90 via-[#031424]/75 to-[#031424]/40 md:hidden" />
+
+        <div className="relative z-10 max-w-[85rem] mx-auto">
+          <h1 className="text-white text-3xl md:text-4xl font-black tracking-wider uppercase drop-shadow-md">
             QUALITY ASSURANCE
-          </motion.h1>
-          <motion.p 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            viewport={{ once: true }}
-            className="text-gray-400 font-medium text-sm md:text-base tracking-wide mt-3"
-          >
+          </h1>
+          <p className="text-lime-500 font-bold text-sm md:text-base tracking-wide mt-2 drop-shadow-md">
             Zero Defect. Zero Compromise.
-          </motion.p>
+          </p>
         </div>
       </div>
 
-      {/* 2. Content Layout */}
-      <div className="max-w-[90rem] mx-auto px-4 lg:px-16 -mt-20 md:-mt-24 pb-20 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-          
-          {/* Box A: Process Flow */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2 bg-white rounded-lg shadow-md border border-slate-100 p-4 sm:p-6 md:p-8 relative overflow-hidden"
-          >
-            <span className="absolute -left-px -top-px h-6 w-6 border-l-2 border-t-2 border-emerald-500/20" />
-            <span className="absolute -right-px -top-px h-6 w-6 border-r-2 border-t-2 border-emerald-500/20" />
-            <span className="absolute -bottom-px -left-px h-6 w-6 border-b-2 border-l-2 border-emerald-500/20" />
-            <span className="absolute -bottom-px -right-px h-6 w-6 border-b-2 border-r-2 border-emerald-500/20" />
+      {/* 2. Main Content Grid */}
+      <div className="max-w-[85rem] mx-auto px-2 sm:px-6 lg:px-12 -mt-20 md:-mt-24 pb-20 relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
-            <h3 className="text-[#1E293B] font-extrabold text-base tracking-wider uppercase mb-8 lg:mb-12 border-b border-slate-100 pb-3">
-              OUR QUALITY PROCESS
-            </h3>
+          {/* Process Section */}
+          <div className="lg:col-span-8 bg-white rounded-xl shadow-sm border border-slate-200/80 p-3 sm:p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+            <div>
+              <h3 className="text-[#031424] font-extrabold text-xs sm:text-base tracking-wider uppercase mb-3 sm:mb-6 border-b border-slate-100 pb-2 sm:pb-3">
+                OUR QUALITY PROCESS
+              </h3>
 
-            <div className="w-full overflow-visible pb-4 pt-2">
-              <div className={GRID_COLS}>
-                {qualitySteps.map((stage, i) => {
-                  const isActive = active === i;
-                  const isPassedOrActive = active >= i && active !== -1;
-                  
-                  return (
-                    <Fragment key={stage.step}>
-                      <div className="flex justify-center py-2 overflow-visible">
-                        <motion.button
-                          onClick={() => handleSelect(i)}
-                          whileHover={{ scale: 1.03 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                          className="group relative flex flex-col items-center gap-3 sm:gap-4 focus:outline-none cursor-pointer w-full overflow-visible"
+              {/* Step Navigation Bar */}
+              <div className="w-full my-1">
+                <div className="flex flex-row items-start justify-between w-full gap-0.5 sm:gap-2">
+                  {steps.map((stage, i) => {
+                    const isActive = activeStageIndex === i;
+
+                    return (
+                      <Fragment key={stage.step}>
+                        <button
+                          onClick={() => handleSelectStep(i)}
+                          className="flex flex-col items-center flex-1 min-w-0 focus:outline-none group cursor-pointer"
                         >
-                          <div className="relative h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 overflow-visible">
-                            {isActive && (
-                              <motion.div
-                                layoutId="qualityCircleGlow"
-                                className="absolute -inset-2 rounded-full border border-emerald-500/70 bg-emerald-50/5 shadow-[0_0_20px_rgba(16,185,129,0.4)] z-0"
-                                transition={{ type: "spring", stiffness: 200, damping: 24 }}
-                              />
-                            )}
-                            
-                            <div
-                              className={`flex h-full w-full flex-col items-center justify-center rounded-full border transition-all duration-500 relative z-10 ${
-                                isActive
-                                  ? "border-emerald-500 bg-[#031424] text-white shadow-xl"
-                                  : isPassedOrActive
-                                  ? "border-white bg-white text-emerald-500 shadow-sm"
-                                  : "border-slate-200 bg-white text-slate-400 group-hover:border-slate-400 group-hover:bg-slate-50 group-hover:text-slate-600"
-                              }`}
-                            >
-                              <div className={`transition-transform duration-500 ${isActive ? "text-emerald-400 scale-110" : isPassedOrActive ? "text-emerald-500 scale-105" : "group-hover:scale-105 text-slate-400 group-hover:text-emerald-500"}`}>
-                                {stage.icon}
-                              </div>
-                            </div>
+                          <div 
+                            className={`flex items-center justify-center p-0.5 transition-all duration-300 ${
+                              isActive ? "text-lime-600 scale-110" : "text-slate-400 group-hover:text-lime-600"
+                            }`}
+                          >
+                            {stage.icon}
                           </div>
-
-                          <span className={`text-[10px] sm:text-xs font-black uppercase tracking-wider text-center max-w-[130px] sm:max-w-[150px] lg:max-w-[110px] leading-tight transition-colors min-h-[24px] lg:min-h-[32px] ${isActive ? "text-emerald-600 font-black" : isPassedOrActive ? "text-emerald-600 font-bold" : "text-slate-500 group-hover:text-slate-800"}`}>
+                          <span 
+                            className={`text-[8px] sm:text-xs font-bold text-center mt-1 leading-tight w-full tracking-tighter sm:tracking-normal transition-colors duration-300 ${
+                              isActive ? "text-lime-700 font-black" : "text-slate-600 group-hover:text-slate-900"
+                            }`}
+                          >
                             {stage.name}
                           </span>
-                        </motion.button>
-                      </div>
+                        </button>
 
-                      {i < qualitySteps.length - 1 && (
-                        <HorizontalPathLink lit={active > i && active !== -1} />
-                      )}
-                    </Fragment>
-                  );
-                })}
+                        {i < steps.length - 1 && <StepArrow />}
+                      </Fragment>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </motion.div>
 
-          {/* Box B: Equipment */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-lg shadow-md border border-slate-100 p-6 sm:p-8 h-full"
-          >
-            <h3 className="text-[#1E293B] font-extrabold text-base tracking-wider uppercase mb-6 border-b border-slate-100 pb-3">
-              QUALITY EQUIPMENT
-            </h3>
-            <ul className="space-y-4">
-              {equipments.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-3 group text-slate-600 font-semibold text-xs sm:text-sm">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-125 transition-transform" />
-                  <span className="group-hover:text-emerald-600 transition-colors">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+            {/* Step Detail Card */}
+            <div className="mt-4 pt-3.5 border-t border-slate-100 bg-slate-50/70 rounded-xl p-3 sm:p-5 border border-slate-200/60 transition-all duration-500">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-[9px] sm:text-xs font-black bg-lime-100 text-lime-700 px-2 py-0.5 rounded-md">
+                    STAGE {activeStage.step}
+                  </span>
+                  <h4 className="text-xs sm:text-base font-extrabold text-[#031424] tracking-tight uppercase">
+                    {activeStage.name}
+                  </h4>
+                </div>
+                <p className="text-[10px] sm:text-xs text-slate-500 font-medium italic">
+                  {activeStage.tagline}
+                </p>
+              </div>
 
-          {/* Dynamic Specs Panel */}
-          <div className="lg:col-span-3 w-full mt-2">
-            <div className="rounded-xl border border-slate-200 bg-white p-4 sm:p-6 lg:p-10 shadow-lg relative overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={active === -1 ? "neutral" : active}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"
-                >
-                  <div className="max-w-xl">
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-md">
-                        STAGE {activeStage.step}
-                      </span>
-                      <h4 className="text-xl font-black text-slate-900 tracking-tight uppercase">
-                        {activeStage.name}
-                      </h4>
-                    </div>
-                    <p className="mt-3 text-sm text-slate-500 leading-relaxed font-medium">
-                      {activeStage.tagline}
-                    </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {activeStage.specs.map((spec) => (
+                  <div key={spec.label} className="bg-white p-2 sm:p-3 rounded-lg border border-slate-200/80 shadow-2xs">
+                    <span className="text-[8px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                      {spec.label}
+                    </span>
+                    <span className="text-[11px] sm:text-xs font-bold text-slate-800 mt-0.5 block">
+                      {spec.value}
+                    </span>
                   </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto lg:min-w-[500px]">
-                    {activeStage.specs.map((spec) => (
-                      <div
-                        key={spec.label}
-                        className="rounded-xl border border-slate-100 bg-slate-50 px-5 py-4 shadow-xs hover:border-emerald-200 transition-all"
-                      >
-                        <div className="font-mono text-[9px] font-bold uppercase tracking-widest text-slate-400">
-                          {spec.label}
-                        </div>
-                        <div className="mt-1 text-xs font-bold text-slate-800 break-words">
-                          {spec.value}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              </AnimatePresence>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Interactive Document Preview Grid Footer */}
-       
-<motion.div 
-  initial={{ opacity: 0, y: 30 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5, delay: 0.2 }}
-  viewport={{ once: true }}
-  className="lg:col-span-3 bg-white rounded-lg shadow-md border border-slate-100 p-6 sm:p-8 mt-2"
->
-  <h3 className="text-[#1E293B] font-extrabold text-base tracking-wider uppercase mb-8 border-b border-slate-100 pb-3">
-    QUALITY ACCREDITATIONS & CERTIFICATIONS
-  </h3>
+          {/* Quality Equipment */}
+          <div className="lg:col-span-4 bg-white rounded-xl shadow-sm border border-slate-200/80 p-6 md:p-8 flex flex-col justify-between">
+            <div>
+              <h3 className="text-[#031424] font-extrabold text-sm md:text-base tracking-wider uppercase mb-6 border-b border-slate-100 pb-3">
+                QUALITY EQUIPMENT
+              </h3>
 
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-    {certifications.map((cert) => (
-      <div 
-        key={cert.title}
-        className="flex flex-col bg-slate-50 rounded-xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow"
-      >
-        {/* Visual Image Preview Area */}
-        <div className="relative w-full h-56 bg-slate-100 overflow-hidden group select-none">
-          
-          {/* Clean Graphic Image Thumbnail instead of clunky iframe controls */}
-          <img
-            src={cert.previewImg}
-            alt={`Certificate snapshot of ${cert.title}`}
-            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-            loading="lazy"
-          />
-
-          {/* Dark Smooth Gradient Hover Mask */}
-          {/* <div className="absolute inset-0 bg-[#031424]/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4" /> */}
-
-          {/* Floating Center Action Button Trigger */}
-          {/* <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-300 z-10">
-            <a 
-              href={cert.pdfPath}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-bold text-xs tracking-wider uppercase px-5 py-2.5 rounded-md shadow-lg flex items-center gap-2 transition-all cursor-pointer"
-            >
-              <span>View Document</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-              </svg>
-            </a>
-          </div> */}
-        </div>
-
-        {/* Identification Data Label */}
-        <div className="p-4 bg-white border-t border-slate-100 flex flex-col justify-between flex-grow">
-          <div>
-            <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider uppercase block">
-              {cert.authority}
-            </span>
-            <h4 className="text-sm font-black text-slate-800 uppercase mt-0.5 tracking-tight">
-              {cert.title}
-            </h4>
+              <ul className="space-y-3">
+                {qualityAssets.equipments.map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-slate-700 font-semibold text-xs md:text-sm">
+                    <span className="w-2 h-2 rounded-full bg-lime-600 shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
 
-      </div>
-    ))}
-  </div>
-</motion.div>
+          {/* Bottom Row: Certifications */}
+          <div className="lg:col-span-12 bg-white rounded-xl shadow-sm border border-slate-200/80 p-6 md:p-8">
+            <h3 className="text-[#031424] font-extrabold text-sm md:text-base tracking-wider uppercase mb-6 border-b border-slate-100 pb-3">
+              QUALITY ACCREDITATIONS & CERTIFICATIONS
+            </h3>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {qualityAssets.certifications.map((cert) => (
+                <div 
+                  key={cert.title} 
+                  className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-2xs flex flex-col justify-between"
+                >
+                  <div className="h-48 sm:h-56 p-4 flex items-center justify-center bg-slate-50/50">
+                    <img
+                      src={cert.previewImg}
+                      alt={cert.title}
+                      className="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+
+                  <div className="p-4 border-t border-slate-100 bg-white">
+                    <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block">
+                      {cert.authority}
+                    </span>
+                    <h4 className="text-sm font-extrabold text-[#031424] uppercase mt-1">
+                      {cert.title}
+                    </h4>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
         </div>
       </div>
-      
+
     </section>
   );
 }

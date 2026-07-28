@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { root_image } from "../../../image/image";
+import qualityAssets from "../../assets/qualityAssets";
 
 
 const highlights = [
@@ -35,7 +36,7 @@ export default function QualityPreview() {
                 className="group relative rounded-xl overflow-hidden border border-slate-200 bg-[#12161A] shadow-xs w-full flex-1 flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[#4F9B28]/50 hover:shadow-md"
               >
                 <img 
-                  src={root_image.quality_inspection}
+                  src={qualityAssets.quality_inspection_img}
                   alt="Quality Inspection - Technovision Industries" 
                   className="w-full h-full object-contain rounded-lg transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"

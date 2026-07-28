@@ -1,7 +1,7 @@
 const productAssets = [
   {
     id: "charging-station",
-    name: "EV Charging Enclosures",
+    name: "EV CHARGING ENCLOSURES",
 
     description:
       "Precision-manufactured EV charging enclosures built to OEM drawings and specifications, combining structural strength, dimensional accuracy, and production-ready quality.",
@@ -101,7 +101,7 @@ const productAssets = [
 
   {
     id: "console",
-    name: "Control Desks & Consoles",
+    name: "CONTROL DESKS & CONSOLES",
 
     description:
       "Custom-built operator consoles manufactured to exact OEM requirements, combining precision fabrication, ergonomic design, and robust construction for demanding industrial applications.",
@@ -205,7 +205,7 @@ const productAssets = [
 
   {
     id: "data-center-racks",
-    name: "Data Center Infrastructure",
+    name: "DATA CENTER INFRASTRUCTURE",
 
     description:
       "Precision-fabricated racks, frames, doors, and enclosure components built for modern data center infrastructure, combining structural strength, dimensional accuracy, and repeatable OEM quality.",
@@ -309,7 +309,7 @@ const productAssets = [
 
   {
     id: "integrated-cabinets",
-    name: "Integrated Electrical Enclosures",
+    name: "INTEGRATED ELECTRICAL ENCLOSURES",
 
     description:
       "OEM-ready electrical cabinets and enclosure assemblies manufactured to exact drawings for secure component integration, reliable protection, and consistent production quality.",
@@ -411,7 +411,7 @@ const productAssets = [
 
   {
     id: "lab-equipment",
-    name: "Lab Equipment Frames",
+    name: "LAB EQUIPMENT FRAMES",
 
     description:
       "Precision sheet metal frames and equipment housings manufactured for medical, diagnostic, and laboratory applications where dimensional accuracy, clean fabrication, and reliable assembly matter.",
@@ -515,7 +515,7 @@ const productAssets = [
 
   {
     id: "battery-casing",
-    name: "Energy Storage Enclosures",
+    name: "ENERGY STORAGE ENCLOSURES",
 
     description:
       "Precision-fabricated battery housings, trays, covers, and structural enclosures engineered for energy storage and electric mobility applications with strength, protection, and repeatable quality.",
@@ -619,7 +619,7 @@ const productAssets = [
 
   {
     id: "sheet-metal",
-    name: "Custom Sheet Metal Parts",
+    name: "CUSTOM SHEET METAL PARTS",
 
     description:
       "Build-to-print sheet metal components manufactured directly from OEM engineering drawings, from precision-cut parts to formed components and complex fabricated assemblies.",
