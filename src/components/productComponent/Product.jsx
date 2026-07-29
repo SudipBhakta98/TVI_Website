@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import productAssets from "../../assets/productAssets.js";
 
@@ -23,6 +23,11 @@ export default function Product() {
   const [selectedImage, setSelectedImage] = useState(
     imageList.length > 0 ? imageList[0] : ""
   );
+
+  // FIX: Reset selectedImage whenever productId changes
+  useEffect(() => {
+    setSelectedImage(imageList.length > 0 ? imageList[0] : "");
+  }, [productId]);
 
   return (
     <div className="bg-[#F8FAFC] min-h-screen px-4 lg:px-8 w-full ">

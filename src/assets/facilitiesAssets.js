@@ -40,6 +40,15 @@ const facilityAssets = {
 ],
 
 facilitiesData : [
+  {
+  name: "DEDICATED NPD AREA",
+  tagline: "Dedicated new product development area supporting design validation, prototyping, testing, and production readiness.",
+  path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876886/npd-room_gkuu8i.png"
+}, {
+    name: "TOOLING AREA",
+    tagline: "Fully equipped tool room supporting precision tooling, maintenance, and custom manufacturing solutions.",
+    path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876885/tool-room_ksel9n.png"
+  },
  
  
   {
@@ -47,31 +56,33 @@ facilitiesData : [
     tagline: "Well-organized production floor equipped with advanced manufacturing systems for high-quality fabrication.",
     path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876884/shop-flor_t1kezu.png"
   },
-  {
-    name: "TOOL ROOM",
-    tagline: "Fully equipped tool room supporting precision tooling, maintenance, and custom manufacturing solutions.",
-    path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876885/tool-room_ksel9n.png"
-  },
+ 
   {
     name: "INTEGRATED SHOP FLOOR",
     tagline: "Integrated manufacturing facility enabling seamless fabrication, assembly, and production workflow.",
     path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876884/shop-flor2_swnbne.png"
-  },
-  {
-    name: "PRODUCT DEMO ROOM",
-    tagline: "Interactive demonstration area showcasing finished products, innovations, and customer solutions.",
-    path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876884/product-demo-room_newmvk.png"
-  },
-  {
+  }, {
+  name: "POWDER COATING AREA",
+  tagline: "Automated powder coating facility delivering consistent surface finishing, controlled quality, and high-volume production capability.",
+  path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785316580/powder_coating_area_ckyl1l.png"
+},{
+    name: "ASSEMBLY AREA",
+    tagline: "Specialized assembly area ensuring precise integration, functional testing, and final product readiness.",
+    path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876885/quality-room_btkzig.png"
+  },{
     name: "OBEYA ACCELERATED QUALITY AREA",
     tagline: "Collaborative quality management hub where real-time data drives continuous improvement and operational excellence.",
     path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876885/obeya-room_ce2ksj.png"
   },
   {
-    name: "ASSEMBLY ROOM",
-    tagline: "Specialized assembly area ensuring precise integration, functional testing, and final product readiness.",
-    path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876885/quality-room_btkzig.png"
-  }
+    name: "PRODUCT DEMO AREA",
+    tagline: "Interactive demonstration area showcasing finished products, innovations, and customer solutions.",
+    path: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876884/product-demo-room_newmvk.png"
+  },
+  
+  
+ 
+
 ],
 }
 

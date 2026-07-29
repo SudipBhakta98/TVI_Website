@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import axios from 'axios'; // 1. Imported Axios
+import axios from 'axios';
+import { 
+  HiOutlineMail, 
+  HiOutlinePhone, 
+  HiOutlineLocationMarker, 
+  HiOutlineExternalLink, 
+  HiArrowRight 
+} from 'react-icons/hi';
+import { FaWhatsapp, FaLinkedinIn } from 'react-icons/fa';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -23,28 +30,23 @@ export default function ContactPage() {
     setStatus({ loading: true, success: null, error: null });
 
     try {
-      // 2. Sent POST request using Axios
-     const response = await axios.post("/api/contact", formData, {
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+      const response = await axios.post("/api/contact", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      // Axios automatically parses the response body into response.data
       if (response.data && response.data.success) {
         setStatus({ 
           loading: false, 
           success: 'Your message has been sent successfully! A confirmation email has been dispatched to your inbox.', 
           error: null 
         });
-        // Clear out form fields upon successful transmission
         setFormData({ name: '', email: '', company: '', phone: '', subject: '', message: '' });
       } else {
         throw new Error(response.data?.message || 'Failed to send message. Please try again.');
       }
     } catch (err) {
-      // 3. Robust Axios Error Handling
-      // If the backend returned an error JSON, Axios captures it in err.response.data
       const errorMessage = err.response?.data?.message || err.message || 'Something went wrong while dispatching your request.';
       
       setStatus({ 
@@ -60,43 +62,32 @@ export default function ContactPage() {
       
       {/* 1. Hero Cover Section */}
       <div 
-        className="relative w-full bg-[#041629] pt-28 pb-32 md:pt-40 md:pb-44 px-6 md:px-16 overflow-hidden bg-cover bg-center bg-no-repeat"
+        className="relative w-full bg-[#12161A]  pb-32  md:pb-44 px-6 md:px-16 overflow-hidden bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/image/about-bg.png')" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-[#031120] via-[#031120]/80 to-transparent z-0" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#12161A] via-[#12161A]/85 to-transparent z-0" />
         
-        <div className="relative z-10 max-w-[85rem] mx-auto">
-          <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-[#0252D6] block mb-2">
+        <div className="relative z-10 mt-10 max-w-[85rem] mx-auto">
+          <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-lime-600 block mb-2">
             GET IN TOUCH
           </span>
-          <motion.h1 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-white text-3xl md:text-5xl font-black tracking-wide uppercase leading-tight"
-          >
-            CONTACT OUR TEAM
-          </motion.h1>
-          <div className="w-12 h-[2px] bg-[#0252D6] mt-4 mb-3" />
-          <p className="text-gray-300 font-medium text-xs md:text-sm tracking-wide max-w-xl leading-relaxed normal-case">
+          <h1 className="text-white text-3xl md:text-5xl font-black tracking-wide uppercase leading-tight transition-all duration-500 transform translate-y-0 opacity-100">
+            CONTACT WITH OUR TEAM
+          </h1>
+          <div className="w-16 h-[4px] bg-lime-600 mt-4 mb-3 rounded-full" />
+          <p className="text-slate-300 font-medium text-xs md:text-sm tracking-wide max-w-xl leading-relaxed normal-case">
             Partner with Technovision Industries for high-precision engineering and contract manufacturing infrastructure.
           </p>
         </div>
       </div>
 
       {/* Main Split Layout Container */}
-      <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-16 pb-24 -mt-12 md:-mt-16 relative z-20">
+      <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-16 pb-24 -mt-20 md:-mt-30 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
           {/* 2. Interactive API Mail Form (Left Side - White Card Container) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7 bg-white rounded-xl shadow-xl border border-slate-100 p-6 sm:p-10"
-          >
-            <h2 className="text-[#1E3A8A] font-black text-lg tracking-wider uppercase mb-6">
+          <div className="lg:col-span-7 bg-white rounded-xl shadow-xl border border-slate-200/80 p-6 sm:p-10 transition-all duration-500 ease-in-out">
+            <h2 className="text-[#12161A] font-black text-lg tracking-wider uppercase mb-6 flex items-center gap-2">
               SEND US A MESSAGE
             </h2>
 
@@ -106,7 +97,7 @@ export default function ContactPage() {
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Full Name *</label>
                   <input 
                     type="text" name="name" required value={formData.name} onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0252D6] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
+                    className="w-full bg-[#F8FAFC] border border-slate-200 focus:border-[#4F9B28] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
                     placeholder="John Doe"
                   />
                 </div>
@@ -114,7 +105,7 @@ export default function ContactPage() {
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Corporate Email *</label>
                   <input 
                     type="email" name="email" required value={formData.email} onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0252D6] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
+                    className="w-full bg-[#F8FAFC] border border-slate-200 focus:border-[#4F9B28] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
                     placeholder="name@company.com"
                   />
                 </div>
@@ -125,7 +116,7 @@ export default function ContactPage() {
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Company Name</label>
                   <input 
                     type="text" name="company" value={formData.company} onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0252D6] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
+                    className="w-full bg-[#F8FAFC] border border-slate-200 focus:border-[#4F9B28] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
                     placeholder="e.g. Global Tech Ltd"
                   />
                 </div>
@@ -133,7 +124,7 @@ export default function ContactPage() {
                   <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Phone Number</label>
                   <input 
                     type="tel" name="phone" value={formData.phone} onChange={handleChange}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#0252D6] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
+                    className="w-full bg-[#F8FAFC] border border-slate-200 focus:border-[#4F9B28] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
                     placeholder="+91 XXXXX XXXXX"
                   />
                 </div>
@@ -143,7 +134,7 @@ export default function ContactPage() {
                 <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Subject *</label>
                 <input 
                   type="text" name="subject" required value={formData.subject} onChange={handleChange}
-                  className="w-full bg-slate-50 border border-slate-200 focus:border-[#0252D6] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
+                  className="w-full bg-[#F8FAFC] border border-slate-200 focus:border-[#4F9B28] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all"
                   placeholder="Manufacturing RFP / General Inquiry"
                 />
               </div>
@@ -152,7 +143,7 @@ export default function ContactPage() {
                 <label className="block text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-1.5">Message / Requirements *</label>
                 <textarea 
                   name="message" required rows="5" value={formData.message} onChange={handleChange}
-                  className="w-full bg-slate-50 border border-slate-200 focus:border-[#0252D6] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all resize-none"
+                  className="w-full bg-[#F8FAFC] border border-slate-200 focus:border-[#4F9B28] focus:bg-white text-slate-900 placeholder-slate-400 font-medium text-xs rounded-md p-3 outline-none transition-all resize-none"
                   placeholder="Detail your component specs or questions here..."
                 />
               </div>
@@ -173,60 +164,53 @@ export default function ContactPage() {
                 <button 
                   type="submit" 
                   disabled={status.loading}
-                  className="w-full bg-[#0B57D0] hover:bg-blue-700 disabled:bg-slate-400 text-white font-bold text-xs tracking-wider uppercase py-3.5 px-6 rounded-md shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 group cursor-pointer"
+                  className="w-full bg-[#12161A] hover:bg-[#3B781D] disabled:bg-slate-400 text-white font-bold text-xs tracking-wider uppercase py-3.5 px-6 rounded-md shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer"
                 >
                   {status.loading ? 'Processing Transmission...' : 'Transmit Message'} 
-                  {!status.loading && <span className="group-hover:translate-x-1 transition-transform">→</span>}
+                  {!status.loading && <HiArrowRight className="text-base group-hover:translate-x-1 transition-transform" />}
                 </button>
               </div>
             </form>
-          </motion.div>
+          </div>
 
           {/* 3. Physical HQ & Network Directory (Right Side - Info Panel Card) */}
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="lg:col-span-5 bg-white rounded-xl shadow-xl border border-slate-100 p-6 sm:p-8 flex flex-col justify-between"
-          >
+          <div className="lg:col-span-5 bg-white rounded-xl shadow-xl border border-slate-200/80 p-6 sm:p-8 flex flex-col justify-between transition-all duration-500 ease-in-out">
             <div className="space-y-6">
               <div>
-                <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-[#0B57D0] block mb-1">
+                <span className="text-[10px] font-mono font-black uppercase tracking-[0.2em] text-[#3B781D] block mb-1">
                   HEADQUARTERS
                 </span>
-                <h2 className="text-[#1E3A8A] font-black text-lg tracking-wider uppercase mb-4">
+                <h2 className="text-[#12161A] font-black text-lg tracking-wider uppercase mb-4">
                   OFFICE &amp; FACTORY
                 </h2>
-                <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed normal-case">
-                  SY.NO 261/3 &amp; SY 261/4 Haragadde Village,<br />
-                  Jigani Hobli Taluk, Bengaluru,<br />
-                  Karnataka 560105
-                </p>
+                <div className="flex items-start gap-3 text-slate-600 text-xs sm:text-sm font-medium leading-relaxed normal-case">
+                  <HiOutlineLocationMarker className="text-xl text-[#4F9B28] shrink-0 mt-0.5" />
+                  <p>
+                    SY.NO 261/3 &amp; SY 261/4 Haragadde Village,<br />
+                    Jigani Hobli Taluk, Bengaluru,<br />
+                    Karnataka 560105
+                  </p>
+                </div>
               </div>
 
               <div className="border-t border-slate-100 pt-5 space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-slate-50 rounded-md border border-slate-100 text-blue-600">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                    </svg>
+                  <div className="p-2.5 bg-[#F8FAFC] rounded-md border border-slate-200/60 text-[#4F9B28]">
+                    <HiOutlineMail className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Email Communication</h4>
-                    <p className="text-xs font-bold text-slate-800">narpvvl@technovisionindustries.in</p>
+                    <p className="text-xs font-bold text-[#12161A]">narpvvl@technovisionindustries.in</p>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-slate-50 rounded-md border border-slate-100 text-blue-600">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-1.514 2.022a14.99 14.99 0 01-5.905-5.905l2.022-1.514c.362-.272.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                    </svg>
+                  <div className="p-2.5 bg-[#F8FAFC] rounded-md border border-slate-200/60 text-[#4F9B28]">
+                    <HiOutlinePhone className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Commercial Desk</h4>
-                    <p className="text-xs font-bold text-slate-800">+91 9342163575</p>
+                    <p className="text-xs font-bold text-[#12161A]">+91 9342163575</p>
                   </div>
                 </div>
               </div>
@@ -245,9 +229,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3 px-4 rounded-md font-bold text-[11px] uppercase tracking-wide transition-colors shadow-xs"
                 >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.993L2 22l5.233-1.371a9.936 9.936 0 004.777 1.217h.004c5.505 0 9.99-4.478 9.99-9.986 0-2.67-1.037-5.178-2.922-7.062A9.925 9.925 0 0012.012 2zm5.835 14.165c-.24.674-1.398 1.284-1.922 1.347-.465.056-.933.088-1.545-.119-3.602-1.222-5.926-4.9-6.105-5.141-.178-.241-1.443-1.922-1.443-3.666 0-1.744.892-2.597 1.21-2.943.268-.291.67-.424 1.097-.424.138 0 .26.007.369.012.32.015.48.034.69.539.262.633.896 2.19.973 2.346.077.157.129.339.024.549-.105.21-.157.339-.314.524-.157.185-.329.412-.47.553-.153.153-.314.32-.133.629.18.31.8 1.309 1.71 2.122 1.173 1.047 2.16 1.37 2.48 1.528.32.157.507.13.693-.085.186-.215.797-.927 1.01-1.244.214-.316.427-.264.719-.157.292.106 1.854.874 2.174 1.034.32.16.533.238.613.376.08.137.08.797-.16 1.471z"/>
-                  </svg>
+                  <FaWhatsapp className="w-4 h-4" />
                   WhatsApp
                 </a>
 
@@ -258,36 +240,29 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 bg-[#0077B5] hover:bg-[#006297] text-white py-3 px-4 rounded-md font-bold text-[11px] uppercase tracking-wide transition-colors shadow-xs"
                 >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                  </svg>
+                  <FaLinkedinIn className="w-4 h-4" />
                   LinkedIn
                 </a>
               </div>
             </div>
-          </motion.div>
+          </div>
 
         </div>
 
         {/* 4. Full-Width Structural Embedded Google Map Block */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden mt-12"
-        >
-          <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/60">
-            <span className="text-[10px] font-bold  text-[#0A1118] uppercase">
+        <div className="bg-white rounded-xl shadow-xl border border-slate-200/80 overflow-hidden mt-12 transition-all duration-500">
+          <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-[#F8FAFC]">
+            <span className="text-[10px] font-black text-[#12161A] uppercase tracking-wider">
               OUR CORPORATE OFFICE LOCATION
             </span>
             <a 
               href="https://maps.google.com/?q=12.768059655900453,77.64674574174775"
               target="_blank" 
               rel="noopener noreferrer" 
-              className="text-[10px] font-black text-[#0252D6] uppercase tracking-wide hover:underline"
+              className="text-[10px] font-black text-[#4F9B28] hover:text-[#E31B23] uppercase tracking-wide transition-colors flex items-center gap-1"
             >
-              Open In Maps Application ↗
+              <span>Open In Maps Application</span>
+              <HiOutlineExternalLink className="text-xs" />
             </a>
           </div>
           <div className="w-full h-[400px] relative bg-slate-100">
@@ -300,7 +275,7 @@ export default function ContactPage() {
               title="Technovision Industries Factory Map Navigation"
             />
           </div>
-        </motion.div>
+        </div>
 
       </div>
     </div>
