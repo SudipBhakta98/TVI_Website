@@ -76,16 +76,32 @@ export default function About() {
       id="about"
       className="w-full bg-[#F8FAFC] text-slate-800 font-sans overflow-x-hidden"
     >
+      {/* Fast Zoom-Out Keyframe Style */}
+      <style>{`
+        @keyframes fastZoomOut {
+          from {
+            transform: scale(1.25);
+          }
+          to {
+            transform: scale(1);
+          }
+        }
+
+        .animate-zoom-out-fast {
+          animation: fastZoomOut 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+      `}</style>
+
       {/* 1. HERO COVER SECTION */}
       <div
         ref={heroRef}
         className="relative w-full bg-[#F8FAFC] min-h-[420px] lg:min-h-[500px] overflow-hidden flex items-center pt-8 pb-20 lg:py-0"
       >
         {/* Right Side Background Image Container */}
-        <div className="absolute top-0 right-0 w-full lg:w-[60%] h-full z-0 pointer-events-none">
-          {/* Desktop Angled Clip Path Layer */}
+        <div className="absolute top-0 right-0 w-full lg:w-[60%] h-full z-0 pointer-events-none overflow-hidden">
+          {/* Desktop Angled Clip Path Layer with Zoom Animation */}
           <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat relative hidden lg:block"
+            className="w-full h-full bg-cover bg-center bg-no-repeat relative hidden lg:block animate-zoom-out-fast origin-center"
             style={{
               backgroundImage: `url(${aboutPhotos.heroBg})`,
               clipPath: "polygon(18% 0, 100% 0, 100% 100%, 0% 100%)",
@@ -95,9 +111,9 @@ export default function About() {
             <div className="absolute inset-0 bg-slate-900/10" />
           </div>
 
-          {/* Mobile Background Fallback: Positioned right without masking */}
+          {/* Mobile Background Fallback with Zoom Animation */}
           <div
-            className="absolute top-0 right-0 w-full sm:w-2/5 h-full bg-cover bg-right bg-no-repeat opacity-20 lg:hidden"
+            className="absolute top-0 right-0 w-full sm:w-2/5 h-full bg-cover bg-right bg-no-repeat opacity-20 lg:hidden animate-zoom-out-fast origin-center"
             style={{ backgroundImage: `url(${aboutPhotos.heroBg})` }}
           />
         </div>

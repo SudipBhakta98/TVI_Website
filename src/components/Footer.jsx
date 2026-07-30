@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
+import { FaLinkedinIn, FaWhatsapp } from "react-icons/fa6";
 import { root_image } from "../../image/image";
 
 const footerNavItems = [
@@ -58,12 +59,10 @@ export default function Footer() {
                 href="https://in.linkedin.com/company/technovision-industries-bengaluru?trk=public_post_follow-view-profile"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 bg-slate-800/70 hover:bg-[#0077B5] hover:text-white text-slate-300 rounded transition-all shadow-xs"
+                className="p-2.5 bg-slate-800/70 hover:bg-[#0077B5] hover:text-white text-slate-300 rounded transition-all shadow-xs flex items-center justify-center"
                 aria-label="LinkedIn Profile"
               >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                </svg>
+                <FaLinkedinIn className="w-4 h-4" />
               </a>
 
               {/* WhatsApp */}
@@ -71,12 +70,10 @@ export default function Footer() {
                 href="https://wa.me/9342163575"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 bg-slate-800/70 hover:bg-[#25D366] hover:text-white text-slate-300 rounded transition-all shadow-xs"
+                className="p-2.5 bg-slate-800/70 hover:bg-[#25D366] hover:text-white text-slate-300 rounded transition-all shadow-xs flex items-center justify-center"
                 aria-label="WhatsApp Communication Chat"
               >
-                <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.993L2 22l5.233-1.371a9.936 9.936 0 004.777 1.217h.004c5.505 0 9.99-4.478 9.99-9.986 0-2.67-1.037-5.178-2.922-7.062A9.925 9.925 0 0012.012 2zm5.835 14.165c-.24.674-1.398 1.284-1.922 1.347-.465.056-.933.088-1.545-.119-3.602-1.222-5.926-4.9-6.105-5.141-.178-.241-1.443-1.922-1.443-3.666 0-1.744.892-2.597 1.21-2.943.268-.291.67-.424 1.097-.424.138 0 .26.007.369.012.32.015.48.034.69.539.262.633.896 2.19.973 2.346.077.157.129.339.024.549-.105.21-.157.339-.314.524-.157.185-.329.412-.47.553-.153.153-.314.32-.133.629.18.31.8 1.309 1.71 2.122 1.173 1.047 2.16 1.37 2.48 1.528.32.157.507.13.693-.085.186-.215.797-.927 1.01-1.244.214-.316.427-.264.719-.157.292.106 1.854.874 2.174 1.034.32.16.533.238.613.376.08.137.08.797-.16 1.471z" />
-                </svg>
+                <FaWhatsapp className="w-4 h-4" />
               </a>
 
               {/* Connect Button */}

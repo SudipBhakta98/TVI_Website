@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { 
+  HiChevronDown, 
+  HiBars3, 
+  HiXMark 
+} from "react-icons/hi2";
 import { root_image } from "../../image/image"; 
 import industriesAssets from "../assets/industriesAssets.js";
 import productAssets from "../assets/productAssets.js";
@@ -49,15 +54,7 @@ function NavDropdown({ item, isMobile, onClose }) {
         >
           <span>{item.name}</span>
           {!isMobile && (
-            <svg 
-              className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-slate-500 group-hover:text-[#4F9B28]" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2.5" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
+            <HiChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-slate-500 group-hover:text-[#4F9B28]" />
           )}
         </Link>
 
@@ -67,15 +64,7 @@ function NavDropdown({ item, isMobile, onClose }) {
             className="p-1 text-slate-400 hover:text-white transition-colors" 
             aria-label="Toggle Dropdown"
           >
-            <svg 
-              className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2.5" 
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-            </svg>
+            <HiChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
           </button>
         )}
       </div>
@@ -174,15 +163,7 @@ export default function Navbar() {
             className="xl:hidden text-slate-800 hover:text-[#4F9B28] p-2 focus:outline-none transition-colors" 
             aria-label="Toggle Menu"
           >
-            {open ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-              </svg>
-            )}
+            {open ? <HiXMark className="w-6 h-6" /> : <HiBars3 className="w-6 h-6" />}
           </button>
         </div>
       </nav>
@@ -197,12 +178,17 @@ export default function Navbar() {
       
       {/* Mobile Drawer */}
       <div
-        className={`fixed top-0 right-0 w-80 max-w-[85vw] h-screen bg-[#12161A] z-50 border-l border-slate-800 pt-20 px-6 pb-10 transition-transform duration-300 xl:hidden flex flex-col justify-between overflow-y-auto ${
+        className={`fixed top-0 right-0 w-80 max-w-[85vw] h-dvh bg-[#12161A] z-50 border-l border-slate-800 transition-transform duration-300 xl:hidden flex flex-col ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col gap-1">{renderNavLinks(true)}</div>
-        <div className="pt-6 border-t border-slate-800 mt-4">
+        {/* Scrollable Links Section */}
+        <div className="flex-1 overflow-y-auto pt-20 px-6 pb-4 flex flex-col gap-1">
+          {renderNavLinks(true)}
+        </div>
+
+        {/* Sticky Bottom Contact Us Button Section */}
+        <div className="p-6 border-t border-slate-800/80 bg-[#12161A] sticky bottom-0">
           <Link to="/contact" onClick={() => setOpen(false)}>
             <button className="w-full bg-[#E31B23] hover:bg-lime-600 py-3 rounded-lg text-white font-extrabold text-xs uppercase shadow-md transition-all cursor-pointer">
               CONTACT US
