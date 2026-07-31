@@ -8,6 +8,7 @@ import {
 import { root_image } from "../../image/image"; 
 import industriesAssets from "../assets/industriesAssets.js";
 import productAssets from "../assets/productAssets.js";
+import { capabilitiesGrid } from "../assets/capabilitiesAssets.js";
 
 // Nav items configuration
 const navItems = [
@@ -18,7 +19,12 @@ const navItems = [
     dropdown: industriesAssets, 
     basePath: "/serviceIndustries" 
   },
-  { name: "CAPABILITIES", to: "/capabilities" },
+  { 
+    name: "CAPABILITIES", 
+    to: "/capabilities", 
+    dropdown: capabilitiesGrid, 
+    basePath: "/capabilities" 
+  },
   { 
     name: "PRODUCTS", 
     to: "/products", 
@@ -35,10 +41,10 @@ function NavDropdown({ item, isMobile, onClose }) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // Normalize dropdown items into an array of { id, name }
+  // Normalize dropdown items into an array of { id, name } supporting both name & title props
   const dropdownList = Array.isArray(item.dropdown)
-    ? item.dropdown.map((prod) => ({ id: prod.id, name: prod.name }))
-    : Object.entries(item.dropdown).map(([key, val]) => ({ id: key, name: val.name }));
+    ? item.dropdown.map((prod) => ({ id: prod.id, name: prod.name || prod.title }))
+    : Object.entries(item.dropdown).map(([key, val]) => ({ id: key, name: val.name || val.title }));
 
   const isParentActive = location.pathname.startsWith(item.basePath);
 

@@ -15,6 +15,7 @@ import FacilitiesPreview from "../components/homeComponents/FacilitiesPreview.js
 import AboutPreview from "../components/homeComponents/AboutPreview.jsx";
 import QualityPreview from "../components/homeComponents/QualityPreview.jsx";
 import ContactUsPreview from "../components/homeComponents/ContactPreview.jsx";
+import CapabilitiesPreview from "../components/homeComponents/CapabilitiesPreview.jsx";
 
 const statsData = [
   {
@@ -213,6 +214,7 @@ export default function Home() {
       {/* Child Previews */}
       <AboutPreview />
       <ProductsPreview />
+      <CapabilitiesPreview/>
       <ServiceIndustriesPreview />
       <FacilitiesPreview />
       <QualityPreview />

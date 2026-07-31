@@ -11,6 +11,7 @@ import ServiceIndustries from "./pages/ServiceIndustriesPage";
 import IndustryDetail from "./components/industriesComponents/Industry.jsx"; // Update path if needed
 import Quality from "./pages/QualityPage";
 import Product from "./components/productComponent/Product.jsx";
+import CapabilityDetail from "./components/capabilitiesComponent/CapabilityDetail.jsx";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<About />} />
         <Route path="/capabilities" element={<Capabilities />} />
+        <Route path="/capabilities/:capabilityId" element={<CapabilityDetail/>} />
         <Route path="/Facilities" element={<Facilities />} />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/serviceIndustries" element={<ServiceIndustries />} />

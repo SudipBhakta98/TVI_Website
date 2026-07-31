@@ -31,7 +31,7 @@ export const processSteps = [
   {
     step: "01",
     id: "npd",
-    title: "New Product Development & Engineering",
+    title: "New Product Design & Development",
     video: capabilitiesAssets.npd,
     tagline: "3D CAD Modeling, DFM Optimization & Nesting Design",
     description: "Every part begins in our NPD division where engineers evaluate customer blueprints. We run Design for Manufacturability (DFM) analyses to optimize raw sheet metal yield, minimize scrap, and establish control plans for production.",
@@ -121,7 +121,7 @@ export const processSteps = [
   {
     step: "11",
     id: "dispatch",
-    title: "Packaging & Global Logistics",
+    title: "Packaging & Logistics",
     video: capabilitiesAssets.dispatch,
     tagline: "Custom Export-Grade Crating & Traceable Logistics",
     description: "Finished products are protected with anti-rust VCI film, custom foam inserts, and wooden pallets before being shipped via ocean, air, or land with full batch tracking.",
@@ -181,7 +181,7 @@ export const capabilitiesGrid = [
   },
   {
     id: "bending",
-    title: "BENDING & FORMING",
+    title: "BENDING",
     shortDesc: "AMADA & TRUMPF press brakes with capacities from 40T to 200T.",
     image: capabilities_image.bending,
     fullDesc: "Multi-axis CNC press brakes execute high-precision bending with laser-guided angle verification. Automated back gauges accommodate complex geometries with multi-bend sequences.",
