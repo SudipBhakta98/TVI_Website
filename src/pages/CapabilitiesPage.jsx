@@ -1,541 +1,419 @@
-import React, { useState, useEffect, useRef, Fragment } from "react";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  FiCompass,
-  FiCpu,
-  FiZap,
-  FiScissors,
-  FiLayers,
-  FiCheckCircle,
-  FiTruck,
+import { 
+  FiPlayCircle, 
+  FiPauseCircle,
+  FiPlay,
+  FiPause,
+  FiCheckCircle, 
+  FiChevronLeft, 
+  FiChevronRight,
+  FiActivity,
+  FiSliders
 } from "react-icons/fi";
-import { GiAnvil, GiSpray, GiSpanner } from "react-icons/gi";
-import { capabilities_image} from "../../image/image.js";
 
+import { processSteps, capabilitiesGrid } from "../assets/capabilitiesAssets.js";
 
-// 1. Data Structures
-const capabilities = [
-  {
-    title: "DESIGN & DEVELOPMENT",
-    desc: "End-to-end product design, CAD modeling, engineering, prototyping, and manufacturing support.",
-    image: capabilities_image.design_development
-  },
-  {
-    title: "IN HOUSE TOOLING FACILITY",
-    desc: "In-house tool room with advanced CNC & EDM capabilities.",
-    image: capabilities_image.tooling
-  },
-  {
-    title: "LASER CUTTING",
-    desc: "TRUMPF 3kW & 6kW Lasers for high precision cutting.",
-    image: capabilities_image.laser_cuting
-  },
-  {
-    title: "TURRET PUNCHING",
-    desc: "LVD & TRUMPF punching machines for high speed accuracy.",
-    image: capabilities_image.punching
-  },
-  {
-    title: "BENDING",
-    desc: "AMADA & TRUMPF press brakes from 40T to 200T.",
-    image: capabilities_image.bending
-  },
-  {
-    title: "STAMPING",
-    desc: "30+ presses from 32 to 300 Tons.",
-    image: capabilities_image.stamping
-  },
-  {
-    title: "FABRICATION",
-    desc: "Spot, TIG, MIG, ARC & LASER welding with expert workmanship.",
-    image: capabilities_image.welding
-  },
-  {
-    title: "POWDER COATING",
-    desc: "Fully automated SCADA controlled powder coating plant.",
-    image: capabilities_image.powder_coating
-  },
-  {
-    title: "ASSEMBLY",
-    desc: "Mechanical, Electro-Mechanical & Electrical Assembly.",
-    image: capabilities_image.assembly
-  },
-];
-
-const stages = [
-  {
-    step: "01",
-    name: "Design",
-    icon: FiCompass,
-    tagline: "CAD/CAM modeling & DFM review",
-    specs: [
-      { label: "Software", value: "SolidWorks / AutoCAD / Creo" },
-      { label: "Output", value: "3D models & nesting layout" },
-      { label: "Turnaround", value: "24–48 hrs" },
-    ],
-  },
-  {
-    step: "02",
-    name: "Tool Room",
-    icon: FiCpu,
-    tagline: "Custom die & fixture fabrication",
-    specs: [
-      { label: "Precision", value: "± 0.02 mm" },
-      { label: "Material", value: "Tool-grade steel" },
-      { label: "Capability", value: "Fully in-house tooling" },
-    ],
-  },
-  {
-    step: "03",
-    name: "Laser Cutting",
-    icon: FiZap,
-    tagline: "CNC fiber laser sheet cutting",
-    specs: [
-      { label: "Machines", value: "Trumpf / Bystronic fiber" },
-      { label: "Thickness", value: "0.5 – 25 mm" },
-      { label: "Tolerance", value: "± 0.1 mm" },
-    ],
-  },
-  {
-    step: "04",
-    name: "Punching",
-    icon: FiScissors,
-    tagline: "Turret punching for holes & cutouts",
-    specs: [
-      { label: "Speed", value: "Up to 80 hits/min" },
-      { label: "Tonnage", value: "Up to 20T" },
-      { label: "Tooling", value: "200+ stations" },
-    ],
-  },
-  {
-    step: "05",
-    name: "Bending",
-    icon: GiAnvil,
-    tagline: "Press-brake forming to spec",
-    specs: [
-      { label: "Press force", value: "40 Ton To 200 Ton" },
-      { label: "Angle accuracy", value: "± 0.5°" },
-      { label: "Max length", value: "3,000 mm" },
-    ],
-  },
-  {
-    step: "06",
-    name: "Fabrication",
-    icon: GiSpanner,
-    tagline: "Welding & structural assembly",
-    specs: [
-      { label: "Processes", value: "MIG / TIG / Spot / Laser" },
-      { label: "Standard", value: "AWS D1.1 certified" },
-      { label: "Materials", value: "MS / SS / Aluminium" },
-    ],
-  },
-  {
-    step: "07",
-    name: "Powder Coating",
-    icon: GiSpray,
-    tagline: "Electrostatic finish application",
-    specs: [
-      { label: "Line", value: "SCADA-controlled booth" },
-      { label: "Finish", value: "As RAL colour range" },
-      { label: "Cure temp", value: "110 – 200°C" },
-    ],
-  },
-  {
-    step: "08",
-    name: "Assembly",
-    icon: FiLayers,
-    tagline: "Mechanical & electrical integration",
-    specs: [
-      { label: "Stations", value: "Modular assembly lines" },
-      { label: "Testing", value: "Functional & fit checks" },
-      { label: "Traceability", value: "Batch-level logging" },
-    ],
-  },
-  {
-    step: "09",
-    name: "Quality Check",
-    icon: FiCheckCircle,
-    tagline: "Dimensional & functional inspection",
-    specs: [
-      { label: "Equipment", value: "VMS · 3D scanner · height master" },
-      { label: "Standard", value: "Zero Defect Zero Effect" },
-      { label: "Certification", value: "ISO 9001:2015" },
-    ],
-  },
-  {
-    step: "10",
-    name: "Dispatch",
-    icon: FiTruck,
-    tagline: "Packaging & logistics",
-    specs: [
-      { label: "Packaging", value: "Custom export-grade crating" },
-      { label: "Delivery", value: "Pan-India + export" },
-      { label: "Docs", value: "Full shipment traceability" },
-    ],
-  },
-];
-
-const DESKTOP_GRID_COLS = "xl:grid-cols-[1fr_0.55fr_1fr_0.55fr_1fr_0.55fr_1fr_0.55fr_1fr]";
-
-// 2. Micro-Link Components for Pipeline Map
-function HorizontalLink({ lit, reverse = false }) {
-  return (
-    <div className="relative hidden xl:flex items-center justify-center w-full">
-      <div className="h-[2px] w-full bg-slate-200" />
-      <div
-        className={`absolute h-[2px] w-full transition-all duration-500 ${
-          reverse ? "origin-right bg-gradient-to-l" : "origin-left bg-gradient-to-r"
-        } from-[#0082FB] to-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.5)] ${
-          lit ? "scale-x-100" : "scale-x-0"
-        }`}
-      />
-    </div>
-  );
-}
-
-function VerticalLink({ lit }) {
-  return (
-    <div className="hidden xl:flex col-start-9 items-center justify-center h-16">
-      <div className="relative h-full w-[2px] bg-slate-200">
-        <div
-          className={`absolute inset-x-0 top-0 w-[2px] origin-top bg-gradient-to-b from-[#0082FB] to-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.5)] transition-all duration-500 ${
-            lit ? "h-full scale-y-100" : "h-0 scale-y-0"
-          }`}
-        />
-      </div>
-    </div>
-  );
-}
-
-function MobileVerticalLink({ lit }) {
-  return (
-    <div className="xl:hidden flex justify-center items-center h-8 w-full">
-      <div className="relative h-full w-[2px] bg-slate-200">
-        <div
-          className={`absolute inset-x-0 top-0 w-[2px] origin-top bg-gradient-to-b from-[#0082FB] to-amber-400 transition-all duration-500 ${
-            lit ? "h-full scale-y-100" : "h-0 scale-y-0"
-          }`}
-        />
-      </div>
-    </div>
-  );
-}
-
-function Node({ stage, index, active, onSelect }) {
-  const isActive = active === index;
-  const Icon = stage.icon;
-  
-  return (
-    <motion.button
-      onClick={() => onSelect(index)}
-      whileHover={{ scale: 1.05 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="group relative flex flex-col items-center gap-3 focus:outline-none cursor-pointer w-20 sm:w-24"
-    >
-      <div className="relative h-20 w-20 sm:h-24 sm:w-24">
-        {isActive && (
-          <motion.div
-            layoutId="nodeGlow"
-            transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="absolute -inset-2.5 sm:-inset-3.5"
-          >
-            <span className="absolute left-0 top-0 h-3 w-3 sm:h-4 w-4 border-l-2 border-t-2 border-amber-400 animate-pulse" />
-            <span className="absolute right-0 top-0 h-3 w-3 sm:h-4 w-4 border-r-2 border-t-2 border-amber-400 animate-pulse" />
-            <span className="absolute bottom-0 left-0 h-3 w-3 sm:h-4 w-4 border-b-2 border-l-2 border-amber-400 animate-pulse" />
-            <span className="absolute bottom-0 right-0 h-3 w-3 sm:h-4 w-4 border-b-2 border-r-2 border-amber-400 animate-pulse" />
-          </motion.div>
-        )}
-        <div
-          className={`flex h-20 w-20 sm:h-24 sm:w-24 flex-col items-center justify-center rounded-lg border transition-all duration-300 ${
-            isActive
-              ? "border-amber-400 bg-[#1e1b10] shadow-[0_0_25px_rgba(245,158,11,0.25)]"
-              : "border-slate-200 bg-[#0F1626] group-hover:border-slate-400"
-          }`}
-        >
-          <span
-            className={`absolute left-2 top-2 font-mono text-[9px] sm:text-[11px] font-bold transition-colors ${
-              isActive ? "text-amber-400" : "text-slate-500"
-            }`}
-          >
-            {stage.step}
-          </span>
-          <Icon
-            className={`h-7 w-7 sm:h-9 sm:w-9 transition-all duration-300 ${
-              isActive
-                ? "text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.7)]"
-                : "text-slate-400 group-hover:text-slate-200"
-          }`}
-          />
-        </div>
-      </div>
-
-      <span
-        className={`text-[10px] sm:text-xs font-black uppercase tracking-wider text-center transition-colors ${
-          isActive ? "text-amber-500" : "text-slate-400 group-hover:text-slate-950"
-        }`}
-      >
-        {stage.name}
-      </span>
-    </motion.button>
-  );
-}
-
-// 3. Main Master Export Component
 export default function Capabilities() {
-  // Matrix Grid Framer Variants
-  const gridVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 },
-    },
+  // Process Video Active Index
+  const [activeProcess, setActiveProcess] = useState(0);
+  
+  // Controls playback and auto-advancing
+  const [isPlaying, setIsPlaying] = useState(true);
+
+  // Selected Capability for Modal View
+  const [selectedCap, setSelectedCap] = useState(null);
+
+  const videoRef = useRef(null);
+
+  const currentStep = processSteps[activeProcess];
+
+  // Advance to next video/stage automatically when current video ends
+  const handleVideoEnded = () => {
+    if (isPlaying) {
+      setActiveProcess((prevIndex) => (prevIndex + 1) % processSteps.length);
+    }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4, ease: "easeOut" },
-    },
+  // Toggle video Play/Pause state
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
   };
 
-  // Pipeline Flow Controls State logic
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const resumeTimer = useRef(null);
-  const activeStage = stages[active];
-
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => {
-      setActive((prev) => (prev + 1) % stages.length);
-    }, 2500);
-    return () => clearInterval(id);
-  }, [paused]);
-
-  const handleSelect = (index) => {
-    setActive(index);
-    setPaused(true);
-    if (resumeTimer.current) clearTimeout(resumeTimer.current);
-    resumeTimer.current = setTimeout(() => setPaused(false), 5000);
+  const handleNext = () => {
+    setActiveProcess((prevIndex) => (prevIndex + 1) % processSteps.length);
+    setIsPlaying(true);
   };
 
-  useEffect(() => {
-    return () => {
-      if (resumeTimer.current) clearTimeout(resumeTimer.current);
-    };
-  }, []);
+  const handlePrev = () => {
+    setActiveProcess((prevIndex) => (prevIndex - 1 + processSteps.length) % processSteps.length);
+    setIsPlaying(true);
+  };
+
+  const handleStepSelect = (index) => {
+    setActiveProcess(index);
+    setIsPlaying(true);
+  };
 
   return (
-    <section id="capabilities" className="w-full bg-white font-sans antialiased">
+    <section className="w-full bg-[#0B0F19] text-slate-100 font-sans antialiased overflow-hidden">
       
-      {/* ==================== MODULE A: CAPABILITIES MATRIX ==================== */}
-      <div className="pt-20 pb-4 px-4 lg:px-8 max-w-[90rem] mx-auto flex flex-col items-center border-b border-gray-100">
+      {/* =========================================================================
+          SECTION 1: RAW SHEET METAL TO DISPATCH (PROCESS VIDEO PIPELINE)
+         ========================================================================= */}
+      <div className="py-20 px-4 sm:px-6 lg:px-12 max-w-[90rem] mx-auto border-b border-slate-800">
+        
         {/* Section Header */}
-        <div className="flex flex-col items-center mb-10 text-center">
-          <h2 className="text-2xl md:text-3xl font-black text-[#031424] tracking-wider uppercase">
-            OUR MANUFACTURING CAPABILITIES
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-blue-400">
+            End-to-End Workflow
+          </span>
+          <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+            Raw Sheet to Dispatch Process
           </h2>
-          <div className="w-16 h-[3px] bg-[#0082FB] mt-3" />
+          <p className="mt-4 text-slate-400 text-sm sm:text-base">
+            Watch how raw metal sheets transform into precision-engineered products through our 11 integrated manufacturing stages.
+          </p>
         </div>
 
-        {/* Capabilities Responsive Matrix Grid */}
-        <motion.div
-          variants={gridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full"
-        >
-          {capabilities.map((cap, idx) => (
-            <motion.div
-              key={idx}
-              variants={itemVariants}
-              whileHover={{ scale: 1.02 }}
-              className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
-            >
-              {/* Image Frame Wrapper */}
-              <div className="w-full h-44 overflow-hidden rounded-lg mb-5">
-                <img
-                  src={cap.image}
-                  alt={cap.title}
-                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Descriptions Block */}
-              <div className="px-6 pb-6">
-                <h3 className="text-[#031424] text-xl font-bold uppercase mb-2">
-                  {cap.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-6">
-                  {cap.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* ==================== MODULE B: WORKFLOW PIPELINE ==================== */}
-      <div className="relative overflow-hidden bg-[#0B0F19] px-4 sm:px-6 lg:px-12 p-8  border-b border-slate-900">
-        {/* Engineering Mesh Grid Background overlays */}
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,#1E293B_1px,transparent_1px),linear-gradient(to_bottom,#1E293B_1px,transparent_1px)] bg-[size:5rem_5rem] opacity-20" />
-        <div className="pointer-events-none absolute left-1/2 top-0 h-[500px] w-full max-w-[900px] -translate-x-1/2 rounded-full bg-[#0082FB]/10 blur-[140px]" />
-
-        <div className="relative z-10 mx-auto max-w-[80rem]">
+        {/* Process Interactive Split Layout */}
+        <div className="grid lg:grid-cols-12 gap-8 items-stretch">
           
-          {/* Pipeline Section Header */}
-          <div className=" mb-6 text-center">
-            <span className="font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-[0.25em] text-[#0082FB]">
-              End-to-End Workflow
-            </span>
-            <h2 className="mt-4 text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
-              From Raw Sheet to Dispatched
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base text-slate-400 px-2">
-              Ten integrated stages under one roof — every handoff tracked, every tolerance held.
-            </p>
-            
-            {/* Automatic Top Progress Interaction Bar */}
-            <div className="mx-auto mt-6 flex max-w-sm items-center justify-center gap-2 px-4">
-              {stages.map((s, i) => (
-                <div
-                  key={s.step}
-                  className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-800"
-                >
-                  <div
-                    className={`h-full rounded-full bg-gradient-to-r from-[#0082FB] to-amber-400 transition-all`}
-                    style={{
-                      width: i < active ? "100%" : i === active ? "100%" : "0%",
-                      animation: i === active && !paused ? "pipelineFill 2.5s linear" : "none",
-                      transformOrigin: "left"
-                    }}
-                  />
+          {/* Left Column: Video Screen Display */}
+          <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col justify-between">
+            {/* Video Frame */}
+            <div 
+              className="relative aspect-video bg-black shrink-0 cursor-pointer group"
+              onClick={togglePlayPause}
+            >
+              <video
+                ref={videoRef}
+                key={currentStep.video}
+                src={currentStep.video}
+                autoPlay={isPlaying}
+                muted
+                playsInline
+                onEnded={handleVideoEnded}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60 pointer-events-none" />
+              
+              {/* Stage Counter Badge */}
+              <div className="absolute top-4 left-4 bg-blue-600/90 backdrop-blur-md text-white font-mono text-xs font-bold px-3 py-1.5 rounded-full border border-blue-400/30 flex items-center gap-2">
+                {isPlaying ? (
+                  <FiPlayCircle className="w-4 h-4 animate-pulse" />
+                ) : (
+                  <FiPauseCircle className="w-4 h-4 text-amber-400" />
+                )}
+                STAGE {currentStep.step} / {processSteps.length}
+              </div>
+
+              {/* Status Badge */}
+              <div className="absolute top-4 right-4 bg-slate-950/70 backdrop-blur-md text-xs font-mono font-medium px-3 py-1.5 rounded-full border border-slate-700/60 flex items-center gap-1.5">
+                <span className={`w-2 h-2 rounded-full ${isPlaying ? "bg-emerald-400 animate-ping" : "bg-amber-400"}`} />
+                <span className={isPlaying ? "text-emerald-400" : "text-amber-400"}>
+                  {isPlaying ? "PLAYING" : "PAUSED"}
+                </span>
+              </div>
+
+              {/* Overlay Play/Pause Icon on Hover */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20">
+                <div className="p-4 rounded-full bg-slate-950/80 text-white backdrop-blur-md border border-slate-700">
+                  {isPlaying ? <FiPause className="w-8 h-8" /> : <FiPlay className="w-8 h-8 translate-x-0.5" />}
                 </div>
-              ))}
+              </div>
             </div>
-            <style>{`
-              @keyframes pipelineFill {
-                from { transform: scaleX(0); }
-                to { transform: scaleX(1); }
-              }
-            `}</style>
-          </div>
 
-          {/* Graphical Map Dashboard Card Container */}
-          <div className="relative border border-slate-200 bg-white  p-2 backdrop-blur-md rounded-2xl shadow-2xl mb-8">
-            <span className="absolute -left-px -top-px h-8 w-8 border-l-2 border-t-2 border-[#0082FB]/40" />
-            <span className="absolute -right-px -top-px h-8 w-8 border-r-2 border-t-2 border-[#0082FB]/40" />
-            <span className="absolute -bottom-px -left-px h-8 w-8 border-b-2 border-l-2 border-[#0082FB]/40" />
-            <span className="absolute -bottom-px -right-px h-8 w-8 border-b-2 border-r-2 border-[#0082FB]/40" />
+            {/* Stage Quick Controls */}
+            <div className="p-4 bg-slate-950/60 border-t border-slate-800/80 flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2">
+                {/* Prev Button */}
+                <button
+                  onClick={handlePrev}
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+                  title="Previous Stage"
+                >
+                  <FiChevronLeft className="w-5 h-5" />
+                </button>
 
-            {/* Matrix View Map for Large Displays */}
-            <div className="hidden xl:flex flex-col gap-4">
-              {/* Row A: Operations 1 through 5 */}
-              <div className={`grid ${DESKTOP_GRID_COLS} items-center`}>
-                {stages.slice(0, 5).map((stage, i) => (
-                  <Fragment key={stage.step}>
-                    <div className="flex justify-center">
-                      <Node stage={stage} index={i} active={active} onSelect={handleSelect} />
-                    </div>
-                    {i < 4 && <HorizontalLink lit={active > i} reverse={false} />}
-                  </Fragment>
+                {/* Main Play/Pause Button */}
+                <button
+                  onClick={togglePlayPause}
+                  className={`px-4 py-2 rounded-lg font-mono text-xs font-bold flex items-center gap-2 transition-all ${
+                    isPlaying 
+                      ? "bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-400/30" 
+                      : "bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20"
+                  }`}
+                >
+                  {isPlaying ? (
+                    <>
+                      <FiPause className="w-4 h-4" />
+                      <span>PAUSE</span>
+                    </>
+                  ) : (
+                    <>
+                      <FiPlay className="w-4 h-4 fill-current" />
+                      <span>PLAY</span>
+                    </>
+                  )}
+                </button>
+
+                {/* Next Button */}
+                <button
+                  onClick={handleNext}
+                  className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors"
+                  title="Next Stage"
+                >
+                  <FiChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Interactive Stage Indicator Indicator Dots */}
+              <div className="flex items-center gap-1.5 overflow-x-auto py-1">
+                {processSteps.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleStepSelect(idx)}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      idx === activeProcess 
+                        ? "w-6 bg-blue-500" 
+                        : "w-2 bg-slate-700 hover:bg-slate-500"
+                    }`}
+                    title={`Jump to Stage ${idx + 1}`}
+                  />
                 ))}
               </div>
-
-              {/* Vertical Row Transition Element */}
-              <div className={`grid ${DESKTOP_GRID_COLS}`}>
-                <VerticalLink lit={active >= 5} />
-              </div>
-
-              {/* Row B: Operations 6 through 10 (Snake layout alignment flow) */}
-              <div className={`grid ${DESKTOP_GRID_COLS} items-center`}>
-                {[9, 8, 7, 6, 5].map((globalIdx, positionIndex) => {
-                  const stage = stages[globalIdx];
-                  return (
-                    <Fragment key={stage.step}>
-                      <div className="flex justify-center">
-                        <Node stage={stage} index={globalIdx} active={active} onSelect={handleSelect} />
-                      </div>
-                      {positionIndex < 4 && (
-                        <HorizontalLink lit={active >= globalIdx} reverse={true} />
-                      )}
-                    </Fragment>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Vertical Responsive System for Small Viewports */}
-            <div className="xl:hidden flex flex-col items-center max-w-xs mx-auto">
-              {stages.map((stage, idx) => (
-                <div key={stage.step} className="w-full flex flex-col items-center">
-                  <Node stage={stage} index={idx} active={active} onSelect={handleSelect} />
-                  {idx < stages.length - 1 && <MobileVerticalLink lit={active > idx} />}
-                </div>
-              ))}
             </div>
           </div>
 
-          {/* Bottom Specifications Breakdown Display panel */}
-          <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 lg:p-12 shadow-xl before:absolute before:left-0 before:top-0 before:h-full before:w-[5px] before:bg-[#0082FB]/80 before:blur-[2px]">
+          {/* Right Column: Detailed Description Panel */}
+          <div className="lg:col-span-6 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.div
-                key={active}
-                initial={{ opacity: 0, y: 10 }}
+                key={currentStep.id}
+                initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.2 }}
-                className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between"
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+                className="space-y-6"
               >
-                <div className="max-w-xl pl-2">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-bold bg-blue-50 text-[#0082FB] px-2.5 py-1 rounded-md">
-                      {activeStage.step}
-                    </span>
-                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                      {activeStage.name}
-                    </h3>
+                {/* Header Badge & Title */}
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-mono font-bold uppercase tracking-wider mb-3">
+                    <FiActivity className="w-3.5 h-3.5" />
+                    Stage {currentStep.step} Detail Specifications
                   </div>
-                  <p className="mt-3 text-sm sm:text-base text-slate-500 leading-relaxed">
-                    {activeStage.tagline}
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    {currentStep.title}
+                  </h3>
+                  <p className="text-sm font-semibold text-blue-400 mt-1">
+                    {currentStep.tagline}
                   </p>
                 </div>
 
-                {/* Sub-Metric Parameter Specs Sheets */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto lg:min-w-[500px]">
-                  {activeStage.specs.map((spec) => (
-                    <div
-                      key={spec.label}
-                      className="relative rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 shadow-sm overflow-hidden before:absolute before:left-0 before:top-0 before:h-full before:w-[3px] before:bg-blue-400/40 before:blur-[1px]"
-                    >
-                      <div className="font-mono text-[9px] font-bold uppercase tracking-widest text-slate-400 pl-1">
-                        {spec.label}
+                {/* Primary Narrative Description */}
+                <div className="prose prose-invert max-w-none">
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    {currentStep.description}
+                  </p>
+                </div>
+
+                {/* Key Process Highlights & Features */}
+                <div className="pt-4 border-t border-slate-800">
+                  <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <FiSliders className="text-blue-400" /> Key Engineering Features
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {currentStep.highlights.map((item, i) => (
+                      <div 
+                        key={i} 
+                        className="flex items-center gap-3 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 text-xs sm:text-sm text-slate-200"
+                      >
+                        <FiCheckCircle className="text-blue-400 shrink-0 w-4 h-4" />
+                        <span>{item}</span>
                       </div>
-                      <div className="mt-1 text-xs sm:text-sm font-bold text-slate-800 break-words pl-1">
-                        {spec.value}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            {/* Quality Standard Badges Footer strip */}
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-slate-150 pt-6 sm:pt-8 text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400">
-              <span>ISO 9001:2015</span>
-              <span className="hidden sm:inline h-1.5 w-1.5 rounded-full bg-slate-300" />
-              <span>ISO 14001:2015</span>
-              <span className="hidden sm:inline h-1.5 w-1.5 rounded-full bg-slate-300" />
-              <span>Zero Defect Zero Effect</span>
+            {/* Bottom Progress Tracker */}
+            <div className="mt-8 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-500 font-mono">
+              <span>WORKFLOW PIPELINE</span>
+              <span className="text-blue-400 font-bold">{Math.round(((activeProcess + 1) / processSteps.length) * 100)}% COMPLETED</span>
             </div>
           </div>
 
         </div>
       </div>
+
+      {/* =========================================================================
+          SECTION 2: MANUFACTURING CAPABILITIES (2-COLUMN GRID WITH DETAIL MODAL)
+         ========================================================================= */}
+      <div className="py-20 px-4 sm:px-6 lg:px-12 max-w-[90rem] mx-auto">
+        
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-slate-800 pb-6">
+          <div>
+            <span className="font-mono text-xs font-semibold uppercase tracking-[0.25em] text-blue-400">
+              Technical Excellence
+            </span>
+            <h2 className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Our Capabilities
+            </h2>
+          </div>
+          <p className="mt-4 md:mt-0 text-slate-400 text-sm max-w-md">
+            Click on any capability card to view complete machinery specifications, capacity limits, and material tolerances.
+          </p>
+        </div>
+
+        {/* 2-Column Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {capabilitiesGrid.map((cap) => (
+            <motion.div
+              key={cap.id}
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setSelectedCap(cap)}
+              className="group bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-blue-500/50 hover:shadow-2xl transition-all duration-300 cursor-pointer flex flex-col sm:flex-row"
+            >
+              {/* Left Photo Frame */}
+              <div className="sm:w-1/2 aspect-video sm:aspect-auto relative overflow-hidden bg-slate-950">
+                <img
+                  src={cap.image}
+                  alt={cap.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-slate-950/20 group-hover:opacity-0 transition-opacity" />
+              </div>
+
+              {/* Right Content Frame */}
+              <div className="sm:w-1/2 p-6 flex flex-col justify-between space-y-4">
+                <div>
+                  <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors uppercase tracking-wide">
+                    {cap.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm mt-2 leading-relaxed">
+                    {cap.shortDesc}
+                  </p>
+                </div>
+
+                <div className="flex items-center text-xs font-bold text-blue-400 gap-2 group-hover:translate-x-1 transition-transform">
+                  <span>VIEW SPECIFICATIONS</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
+
+      {/* =========================================================================
+          SLIDE-OVER / POP-UP MODAL (INDIVIDUAL CAPABILITY DETAILS)
+         ========================================================================= */}
+      <AnimatePresence>
+        {selectedCap && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 lg:p-8">
+            {/* Dark Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedCap(null)}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+            />
+
+            {/* Modal Dialog Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ type: "spring", duration: 0.5 }}
+              className="relative w-full max-w-3xl bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl z-10 max-h-[90vh] flex flex-col"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedCap(null)}
+                className="absolute top-4 right-4 z-20 bg-slate-950/70 hover:bg-slate-800 text-slate-300 p-2 rounded-full border border-slate-700 transition-colors"
+              >
+                ✕
+              </button>
+
+              {/* Modal Banner Image */}
+              <div className="relative h-56 sm:h-64 bg-slate-950 shrink-0">
+                <img
+                  src={selectedCap.image}
+                  alt={selectedCap.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+                <div className="absolute bottom-4 left-6 right-6">
+                  <span className="text-xs font-mono text-blue-400 font-bold uppercase tracking-widest">
+                    Technical Specification
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+                    {selectedCap.title}
+                  </h3>
+                </div>
+              </div>
+
+              {/* Modal Body (Scrollable) */}
+              <div className="p-6 sm:p-8 overflow-y-auto space-y-6">
+                <div>
+                  <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-2">
+                    Overview
+                  </h4>
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    {selectedCap.fullDesc}
+                  </p>
+                </div>
+
+                {/* Technical Specifications Grid */}
+                <div>
+                  <h4 className="text-xs font-mono text-slate-400 uppercase tracking-wider mb-3">
+                    Key Performance Metrics
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {selectedCap.specs.map((spec, i) => (
+                      <div
+                        key={i}
+                        className="bg-slate-950/60 border border-slate-800 p-4 rounded-xl"
+                      >
+                        <div className="text-[10px] font-mono text-blue-400 uppercase font-bold">
+                          {spec.label}
+                        </div>
+                        <div className="text-xs sm:text-sm font-semibold text-white mt-1">
+                          {spec.value}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Footer Modal Action */}
+                <div className="pt-4 border-t border-slate-800 flex justify-end">
+                  <button
+                    onClick={() => setSelectedCap(null)}
+                    className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold uppercase tracking-wider px-6 py-2.5 rounded-lg transition-colors"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </section>
   );

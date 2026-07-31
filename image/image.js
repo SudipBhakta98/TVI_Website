@@ -7,7 +7,7 @@ export const root_image = {
 }
 
 export const capabilities_image = {
-  welding: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876893/WELDING_kpnh55.png",
+  febrication: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876893/WELDING_kpnh55.png",
   powder_coating: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876892/POWDER_COATING_ubyeom.png",
   assembly: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876891/ASSEMBLY_mcrpkx.png",
   punching: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876890/TURRET_PUNCHING_tbtd71.png",

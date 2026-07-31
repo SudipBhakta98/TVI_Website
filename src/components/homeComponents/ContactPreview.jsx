@@ -14,11 +14,23 @@ import { contactDetails } from "../../assets/contactAssets.js";
 
 export default function HomeContactSection() {
   const pillars = [
-    { label: "PRECISION ENGINEERING", icon: <FaGear className="w-4 h-4 text-[#65A30D] group-hover:rotate-45 transition-transform duration-300" /> },
-    { label: "QUALITY ASSURED", icon: <FaShieldHalved className="w-4 h-4 text-[#65A30D] group-hover:scale-110 transition-transform duration-300" /> },
-    { label: "CUSTOMER FOCUSED", icon: <FaUsers className="w-4 h-4 text-[#65A30D] group-hover:scale-110 transition-transform duration-300" /> },
-    { label: "SUSTAINABLE SOLUTIONS", icon: <FaLeaf className="w-4 h-4 text-[#65A30D] group-hover:scale-110 transition-transform duration-300" /> },
-  ];
+  { 
+    label: "PRECISION ENGINEERING", 
+    icon: <FaGear className="w-6 h-6 text-[#65A30D] group-hover:rotate-45 transition-transform duration-300" /> 
+  },
+  { 
+    label: "QUALITY ASSURED", 
+    icon: <FaShieldHalved className="w-6 h-6 text-[#65A30D] group-hover:scale-110 transition-transform duration-300" /> 
+  },
+  { 
+    label: "CUSTOMER FOCUSED", 
+    icon: <FaUsers className="w-6 h-6 text-[#65A30D] group-hover:scale-110 transition-transform duration-300" /> 
+  },
+  { 
+    label: "SUSTAINABLE SOLUTIONS", 
+    icon: <FaLeaf className="w-6 h-6 text-[#65A30D] group-hover:scale-110 transition-transform duration-300" /> 
+  },
+];
 
   return (
     <section className="w-full bg-[#F8FAFC] pb-10 px-4 sm:px-6 lg:px-12 font-sans text-slate-800">
@@ -102,7 +114,7 @@ export default function HomeContactSection() {
             {pillars.map((pillar, i) => (
               <div
                 key={i}
-                className={`flex items-center justify-center gap-2 group cursor-default ${
+                className={`flex items-center justify-center gap-2 group cursor-default text-5xl ${
                   i !== 0 ? "pt-2 md:pt-0" : ""
                 }`}
               >
