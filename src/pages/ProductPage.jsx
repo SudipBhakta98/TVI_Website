@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SEO from "../components/SEO.jsx";
 import productAssets from "../assets/productAssets.js";
 
 export default function ProductsPage() {
@@ -8,14 +9,19 @@ export default function ProductsPage() {
   const activeCategory = productAssets.find(cat => cat.id === activeTab);
 
   return (
+    <><SEO
+  title="Products | Sheet Metal Enclosures & Racks | Technovision Industries"
+  description="Browse Technovision Industries' engineered sheet metal products — electrical enclosures, data center racks, and custom build-to-print components for OEMs."
+  path="/products"
+/>
     <div id="products" className="w-full bg-[#F8FAFC] py-8 px-6 text-slate-800 font-sans">
       <div className="max-w-[85rem] mx-auto">
         
         {/* Header Section Title */}
         <div className="mb-12 text-center lg:text-left">
-          <h2 className="text-slate-900 font-black text-3xl md:text-4xl tracking-wider uppercase">
+          <h1 className="text-slate-900 font-black text-3xl md:text-4xl tracking-wider uppercase">
             OUR ENGINEERED MANUFACTURING SOLUTIONS
-          </h2>
+          </h1>
           <div className="inline-block px-3 py-1 bg-lime-600/10 text-lime-700 rounded text-[11px] font-bold tracking-widest uppercase mb-3">
             End-to-End Contract Manufacturing Solutions
           </div>
@@ -151,6 +157,6 @@ export default function ProductsPage() {
         </div>
 
       </div>
-    </div>
+    </div></>
   );
 }

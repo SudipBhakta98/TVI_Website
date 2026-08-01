@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
+import SEO from "../components/SEO";
 import { 
   HiCalendar, 
   HiBuildingOffice2, 
@@ -56,6 +57,11 @@ const taglines = [
 export default function Home() {
   return (
     <>
+    <SEO
+  title="Technovision Industries | Precision Sheet Metal Manufacturer in India"
+  description="Technovision Industries is a leading sheet metal manufacturer specializing in electrical enclosures, data center racks, laser cutting, CNC bending, welding, and powder coating."
+  path="/"
+/>
       {/* Custom Keyframe Styles */}
       <style>{`
         @keyframes fadeSlideUp {
@@ -119,15 +125,17 @@ export default function Home() {
               
               {/* Main Animated Headline */}
               <div className="flex flex-col gap-0.5 select-none font-extrabold tracking-wide uppercase text-base xs:text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem]">
-                <h1 className="text-white leading-tight whitespace-nowrap opacity-0 animate-fade-slide-up">
-                  Precision Sheet Metal
-                </h1>
-                <h1 className="text-white leading-tight opacity-0 animate-fade-slide-up animation-delay-100">
-                  Manufacturing For
-                </h1>
-                <span className="text-lime-500 leading-tight inline-block opacity-0 animate-fade-slide-up animation-delay-200 transition-all duration-300 hover:brightness-125">
-                  Global OEMs
-                </span>
+                <h1 className="leading-tight">
+  <span className="text-white block whitespace-nowrap opacity-0 animate-fade-slide-up">
+    Precision Sheet Metal
+  </span>
+  <span className="text-white block opacity-0 animate-fade-slide-up animation-delay-100">
+    Manufacturing For
+  </span>
+  <span className="text-lime-500 block opacity-0 animate-fade-slide-up animation-delay-200 transition-all duration-300 hover:brightness-125">
+    Global OEMs
+  </span>
+</h1>
               </div>
 
               {/* Taglines with Staggered Entrance */}

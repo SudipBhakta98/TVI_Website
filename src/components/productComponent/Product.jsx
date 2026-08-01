@@ -1,6 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import productAssets from "../../assets/productAssets.js";
+import SEO from "../SEO.jsx";
+
+
+const productSeo = {
+  "data-center-racks": {
+    title: "Data Center Rack Manufacturer | Server Enclosures | Technovision",
+    description: "Precision-manufactured data center racks and server enclosures, build-to-print for OEM infrastructure requirements.",
+  },
+  "charging-station": {
+    title: "EV Charging Enclosure Manufacturer | Technovision",
+    description: "Precision-manufactured EV charging enclosures built to OEM drawings, combining structural strength and dimensional accuracy.",
+  },
+  console: {
+    title: "Control Desk & Console Manufacturer | Technovision",
+    description: "Custom control desks and consoles manufactured to OEM specifications for industrial and automation applications.",
+  },
+  "integrated-cabinets": {
+    title: "Integrated Electrical Enclosure Manufacturer | Technovision",
+    description: "Integrated electrical enclosures and cabinets built to print for power and control system OEMs.",
+  },
+  "lab-equipment": {
+    title: "Lab Equipment Frame Manufacturer | Technovision",
+    description: "Precision laboratory and diagnostic equipment frames manufactured to strict dimensional and finish standards.",
+  },
+  "battery-casing": {
+    title: "Battery Enclosure Manufacturer | Energy Storage | Technovision",
+    description: "Battery enclosures and energy storage casings manufactured for EV and industrial power applications.",
+  },
+  "sheet-metal": {
+    title: "Custom Sheet Metal Parts Manufacturer | Technovision",
+    description: "Custom build-to-print sheet metal parts and assemblies manufactured to OEM CAD models and drawings.",
+  },
+};
 
 export default function Product() {
  
@@ -10,7 +43,7 @@ export default function Product() {
   const product = productId
     ? productAssets.find((item) => item.id === productId)
     : null;
-
+const seo = productSeo[productId];
   // 3. Redirect to main page if product is not found
   if (!product) {
     return <Navigate to="/products" replace />;
@@ -30,6 +63,12 @@ export default function Product() {
   }, [productId]);
 
   return (
+
+    <><SEO
+        title={seo?.title || `${product.name} | Technovision Industries`}
+        description={seo?.description || product.description}
+        path={`/products/${productId}`}
+      />
     <div className="bg-[#F8FAFC] min-h-screen px-4 lg:px-8 w-full ">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 py-6 bg-white rounded-xl shadow-sm border border-slate-200/80 mb-8">
         
@@ -286,6 +325,6 @@ export default function Product() {
           &larr; Back to Previous Page
         </Link>
       </div>
-    </div>
+    </div></>
   );
 }

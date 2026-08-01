@@ -12,12 +12,13 @@ import IndustryDetail from "./components/industriesComponents/Industry.jsx"; // 
 import Quality from "./pages/QualityPage";
 import Product from "./components/productComponent/Product.jsx";
 import CapabilityDetail from "./components/capabilitiesComponent/CapabilityDetail.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 const App = () => {
   return (
     <Routes>
       <Route element={<Layout />}>    
-        <Route path="/*" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<About />} />
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/serviceIndustries/:industriesKey" element={<IndustryDetail />} />
          <Route path="/products/:productId" element={<Product />} />
         <Route path="/quality" element={<Quality />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>
   );

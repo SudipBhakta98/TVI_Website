@@ -1,19 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 import industriesAssets from "../assets/industriesAssets.js";
 
 const industryKeys = Object.keys(industriesAssets);
 
 export default function ServiceIndustries() {
   return (
+    <><SEO
+  title="Industries We Serve | Data Center, Defence, Automotive & More | Technovision Industries"
+  description="Technovision Industries delivers precision sheet metal manufacturing for data centers, defence, medical, and automotive OEMs."
+  path="/serviceIndustries"
+/>
     <section id="industries" className="bg-[#F8FAFC] py-8 px-4 lg:px-8 w-full relative">
       <div className="max-w-[95rem] mx-auto flex flex-col items-center">
         
         {/* Section Header */}
         <div className="flex flex-col items-center mb-10 text-center">
-          <h2 className="text-2xl md:text-3xl font-black text-[#12161A] tracking-wider uppercase">
+          <h1 className="text-2xl md:text-3xl font-black text-[#12161A] tracking-wider uppercase">
             INDUSTRIES WE SERVE
-          </h2>
+          </h1>
           <div className="w-16 h-[4px] bg-[#4F9B28] mt-3 rounded-full" />
         </div>
 
@@ -118,6 +124,6 @@ export default function ServiceIndustries() {
         </div>
 
       </div>
-    </section>
+    </section></>
   );
 }

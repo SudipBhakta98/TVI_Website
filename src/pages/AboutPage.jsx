@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import SEO from "../components/SEO";
 import {
   FaCalendarCheck,
   FaIndustry,
@@ -72,6 +73,13 @@ export default function About() {
   const [officeRef, officeInView] = useInView();
 
   return (
+    <>
+  <SEO
+  title="About Technovision Industries | 20+ Years of Precision Manufacturing"
+  description="Learn about Technovision Industries — 6 manufacturing units, ISO-certified quality, and two decades of precision sheet metal engineering since 2003."
+  path="/about"
+/>
+   
     <div
       id="about"
       className="w-full bg-[#F8FAFC] text-slate-800 font-sans overflow-x-hidden"
@@ -521,6 +529,6 @@ export default function About() {
           </div>
         </div>
       </div>
-    </div>
+    </div> </>
   );
 }

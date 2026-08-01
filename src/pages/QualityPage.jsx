@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, Fragment } from "react";
+import SEO from "../components/SEO.jsx";
 import qualityAssets from "../assets/qualityAssets.js";
 
 // Keep SVG icons mapped local to component
@@ -82,6 +83,11 @@ export default function Quality() {
   }, []);
 
   return (
+    <><SEO
+  title="Quality Assurance | ISO 9001 & 14001 Certified | Technovision Industries"
+  description="Technovision Industries follows a zero-defect quality process backed by ISO 9001:2015, ISO 14001:2015, and ZED Silver certification."
+  path="/quality"
+/>
     <section id="quality" className="relative w-full bg-[#F8FAFC]">
       
       {/* 1. Hero Section */}
@@ -236,6 +242,6 @@ export default function Quality() {
         </div>
       </div>
 
-    </section>
+    </section></>
   );
 }

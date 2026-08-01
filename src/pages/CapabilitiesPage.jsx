@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO.jsx";
 import { 
   FiPlayCircle, 
   FiPauseCircle, 
@@ -67,6 +68,11 @@ export default function Capabilities() {
   }, [activeProcess, isPlaying]);
 
   return (
+    <><SEO
+  title="Manufacturing Capabilities | Technovision Industries"
+  description="Explore Technovision Industries' end-to-end manufacturing capabilities — laser cutting, CNC bending, welding, powder coating, and electro-mechanical assembly."
+  path="/capabilities"
+/>
     <section className="w-full bg-[#F8FAFC] text-slate-800 font-sans antialiased">
       
       {/* =========================================================================
@@ -332,6 +338,6 @@ export default function Capabilities() {
 
       </div>
 
-    </section>
+    </section></>
   );
 }

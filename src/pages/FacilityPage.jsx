@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SEO from "../components/SEO";
 import facilityAssets from "../assets/facilitiesAssets";
 
 const unitsData = facilityAssets.unitsData || [];
@@ -16,15 +17,19 @@ export default function Facilities() {
     setActiveModalFacility(null);
   };
 
-  return (
+  return (<><SEO
+  title="Our Facilities | Manufacturing Units | Technovision Industries"
+  description="Tour Technovision Industries' manufacturing units — tool room, laser cutting, powder coating, and assembly facilities spanning 15,000+ sq. meters."
+  path="/facilities"
+/>
     <section id="facility" className="bg-[#F8FAFC] py-8 px-4 lg:px-8 w-full relative">
       <div className="max-w-[95rem] mx-auto flex flex-col items-center">
         
         {/* Section Header */}
         <div className="flex flex-col items-center mb-10 text-center">
-          <h2 className="text-2xl md:text-3xl font-black text-[#12161A] tracking-wider uppercase">
-            OUR FACILITIES
-          </h2>
+          <h1 className="text-2xl md:text-3xl font-black text-[#12161A] tracking-wider uppercase">
+  OUR FACILITIES
+</h1>
           <div className="w-16 h-[4px] bg-[#4F9B28] mt-3 rounded-full" />
           <p className="text-slate-600 text-xs sm:text-sm max-w-2xl leading-relaxed font-medium mt-3">
             State-of-the-art infrastructure for superior manufacturing.
@@ -282,6 +287,6 @@ export default function Facilities() {
         </div>
       )}
 
-    </section>
+    </section></>
   );
 }

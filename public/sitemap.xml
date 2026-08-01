@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.tviblr.org/</loc><priority>1.0</priority></url>
+  <url><loc>https://www.tviblr.org/about</loc><priority>0.8</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities</loc><priority>0.8</priority></url>
+  <url><loc>https://www.tviblr.org/products</loc><priority>0.8</priority></url>
+  <url><loc>https://www.tviblr.org/serviceIndustries</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/facilities</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/quality</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/contact</loc><priority>0.6</priority></url>
+
+  <!-- Industries -->
+  <url><loc>https://www.tviblr.org/serviceIndustries/data_centers</loc><priority>0.9</priority></url>
+  <url><loc>https://www.tviblr.org/serviceIndustries/telecommunications</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/serviceIndustries/automotive</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/serviceIndustries/defence</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/serviceIndustries/electrical</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/serviceIndustries/industrial_automation</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/serviceIndustries/aviation</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/serviceIndustries/medical</loc><priority>0.7</priority></url>
+
+  <!-- Products -->
+  <url><loc>https://www.tviblr.org/products/data-center-racks</loc><priority>0.9</priority></url>
+  <url><loc>https://www.tviblr.org/products/charging-station</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/products/console</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/products/integrated-cabinets</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/products/lab-equipment</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/products/battery-casing</loc><priority>0.7</priority></url>
+  <url><loc>https://www.tviblr.org/products/sheet-metal</loc><priority>0.7</priority></url>
+
+  <!-- Capabilities (verify these ids match what CapabilityDetail.jsx actually reads —
+       see note at end of Step 7) -->
+  <url><loc>https://www.tviblr.org/capabilities/design_development</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/tooling</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/laser_cutting</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/punching</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/bending</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/stamping</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/fabrication</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/powder_coating</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/assembly</loc><priority>0.6</priority></url>
+  <url><loc>https://www.tviblr.org/capabilities/dispatch</loc><priority>0.6</priority></url>
+</urlset>

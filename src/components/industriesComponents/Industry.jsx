@@ -1,6 +1,42 @@
 import React from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import industriesAssets from "../../assets/industriesAssets.js";
+import SEO from "../SEO.jsx";
+
+const industrySeo = {
+  data_centers: {
+    title: "Data Center Rack Manufacturer | Server Enclosures | Technovision",
+    description: "Precision server rack frames, data center enclosures & cable management structures, build-to-print manufactured in Bengaluru for global OEMs.",
+  },
+  telecommunications: {
+    title: "Telecom Enclosure Manufacturer | Equipment Housings | Technovision",
+    description: "Rugged telecommunication cabinets, router chassis & outdoor equipment enclosures manufactured to OEM drawings.",
+  },
+  automotive: {
+    title: "Automotive Sheet Metal & Battery Enclosure Manufacturer | Technovision",
+    description: "Precision automotive brackets, battery enclosures & trays for EV and conventional mobility OEMs.",
+  },
+  defence: {
+    title: "Defence Equipment Enclosure Manufacturer | Technovision",
+    description: "Rugged defence enclosures, operator consoles & structural frames built to mission-critical specifications.",
+  },
+  electrical: {
+    title: "Electrical Cabinet & Panel Manufacturer | Technovision",
+    description: "Electrical cabinets, power distribution enclosures & control panels manufactured build-to-print.",
+  },
+  industrial_automation: {
+    title: "Industrial Automation Enclosure Manufacturer | Technovision",
+    description: "Machine enclosures, operator consoles & control cabinets for smart manufacturing systems.",
+  },
+  aviation: {
+    title: "Aerospace Sheet Metal Component Manufacturer | Technovision",
+    description: "Precision aerospace brackets, instrument enclosures & structural sub-assemblies.",
+  },
+  medical: {
+    title: "Medical Equipment Housing Manufacturer | Technovision",
+    description: "Medical & laboratory equipment housings, diagnostic chassis & stainless steel structures.",
+  },
+};
 
 export default function Industry() {
   // 1. Catch the dynamic route parameter defined in App.jsx (e.g., /industries/:industriesKey)
@@ -8,6 +44,7 @@ export default function Industry() {
 
   // 2. Check if the caught key exists in your industriesAssets object
   const industry = industriesKey ? industriesAssets[industriesKey] : null;
+  const seo = industrySeo[industriesKey];
 
   // 3. If the key doesn't match any object key, redirect back to "/serviceIndustries"
   if (!industry) {
@@ -16,6 +53,12 @@ export default function Industry() {
 
   // 4. Render the dynamic industry page with complete data coverage
   return (
+
+    <> <SEO
+        title={seo?.title || `${industry.name} Manufacturing | Technovision Industries`}
+        description={seo?.description || industry.overview}
+        path={`/serviceIndustries/${industriesKey}`}
+      />
     <div className="bg-[#F8FAFC] min-h-screen px-4 lg:px-8 w-full">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 py-6 bg-white rounded-xl shadow-sm border border-slate-200/80 mb-8">
         
@@ -145,6 +188,6 @@ export default function Industry() {
           &larr; Back to Previous Page
         </Link>
       </div>
-    </div>
+    </div></>
   );
 }

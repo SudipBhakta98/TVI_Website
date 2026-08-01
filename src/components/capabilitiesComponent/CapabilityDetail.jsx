@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Navigate, Link } from "react-router-dom";
 import { capabilitiesGrid } from "../../assets/capabilitiesAssets.js";
+import SEO from "../SEO.jsx"
 
 export default function CapabilityDetail() {
   // 1. Catch dynamic route parameter (e.g., /capabilities/:capabilityId)
@@ -16,6 +17,12 @@ export default function CapabilityDetail() {
 
   // 4. Render dynamic capability detail page matching Industry.jsx format
   return (
+
+    <><SEO
+        title={`${cap.title} Services | Technovision Industries`}
+        description={capability.shortDesc}
+        path={`/capabilities/${capabilityId}`}
+      />
     <div className="bg-[#F8FAFC] min-h-screen px-4 lg:px-8 w-full">
       <article className="max-w-4xl mx-auto px-4 sm:px-6 py-6 bg-white rounded-xl shadow-sm border border-slate-200/80 mb-8">
         
@@ -132,6 +139,6 @@ export default function CapabilityDetail() {
           &larr; Back to Capabilities
         </Link>
       </div>
-    </div>
+    </div></>
   );
 }

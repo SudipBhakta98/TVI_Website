@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import SEO from "../components/SEO";
 import {
   FaLocationDot,
   FaPhone,
@@ -88,6 +89,11 @@ export default function ContactUs() {
   };
 
   return (
+    <><SEO
+  title="Contact Us | Technovision Industries"
+  description="Get in touch with Technovision Industries for custom sheet metal manufacturing quotes, facility tours, and OEM partnership inquiries."
+  path="/contact"
+/>
     <div
       id="contact"
       className="w-full bg-[#F8FAFC] font-sans text-slate-800 overflow-x-hidden min-h-screen"
@@ -515,6 +521,6 @@ export default function ContactUs() {
           </div>
         </div>
       </div>
-    </div>
+    </div></>
   );
 }
