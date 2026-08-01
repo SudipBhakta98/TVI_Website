@@ -30,12 +30,14 @@ export default function CapabilityDetail() {
         </div>
 
         {/* Hero Image */}
-        <div className="w-full h-[280px] sm:h-[380px] rounded-lg overflow-hidden mb-8 shadow-md border border-slate-200">
+        <div className="w-full h-[280px] sm:h-[380px] rounded-lg overflow-hidden mb-8 shadow-md border border-slate-200 bg-slate-100">
           <img 
+            key={cap.id} 
             src={cap.image} 
             alt={cap.title} 
             className="w-full h-full object-cover"
             loading="lazy"
+            decoding="async"
           />
         </div>
 

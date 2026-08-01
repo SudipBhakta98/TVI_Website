@@ -1,29 +1,30 @@
 // 1. Process Video Assets
 export const capabilitiesAssets = {
-  npd: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785488698/NPD_1_rsous6.mp4",
-  tooling: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785488693/Tooling_1_cfxqn4.mp4",
-  laser_cutting: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785488684/Laser_Cutting_1_x8xvsx.mp4",
-  punching: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785488691/Punching_1_xowyqi.mp4",
-  bending: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785488691/Bending_1_cjfzzx.mp4",
-  stamping: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785489400/Stamping_1_rs5p7n.mp4",
-  fabrication: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785488695/Febrication_1_xpbtoz.mp4",
-  powder_coating: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785488706/Powder_Coating_adeofw.mp4",
-  assembly: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785489392/Assembly_1_blac4e.mp4",
-  quality: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785489390/Quality_1_xicc05.mp4",
-  dispatch: "https://res.cloudinary.com/eaubwmsx/video/upload/v1785489444/Dispatch_1_cprsqr.mp4",
+  npd: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785488698/NPD_1_rsous6.mp4",
+  tooling: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785488693/Tooling_1_cfxqn4.mp4",
+  laser_cutting: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785488684/Laser_Cutting_1_x8xvsx.mp4",
+  punching: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785488691/Punching_1_xowyqi.mp4",
+  bending: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785488691/Bending_1_cjfzzx.mp4",
+  stamping: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785489400/Stamping_1_rs5p7n.mp4",
+  fabrication: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785488695/Febrication_1_xpbtoz.mp4",
+  powder_coating: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785488706/Powder_Coating_adeofw.mp4",
+  assembly: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785489392/Assembly_1_blac4e.mp4",
+  quality: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785489390/Quality_1_xicc05.mp4",
+  dispatch: "https://res.cloudinary.com/eaubwmsx/video/upload/q_auto,f_auto/v1785489444/Dispatch_1_cprsqr.mp4",
 };
 
 // 2. Capabilities Image Assets
 export const capabilities_image = {
-  febrication: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876893/WELDING_kpnh55.png",
-  powder_coating: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876892/POWDER_COATING_ubyeom.png",
-  assembly: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876891/ASSEMBLY_mcrpkx.png",
-  punching: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876890/TURRET_PUNCHING_tbtd71.png",
-  design_development: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876890/DESIGN_DEVELOPMENT_vnar6m.png",
-  tooling: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876889/IN_HOUSE_TOOLING_FACILITY_c4grqj.png",
-  laser_cuting: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876888/LASER_CUTTING_rsuuha.png",
-  stamping: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876887/STAMPING_pvczmy.png",
-  bending: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876887/BENDING_ekeunw.png"
+  design_development: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561908/design_and_devlope_tvkwvx.png",
+  tooling: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561911/tooling_ttk0za.png",
+  laser_cuting: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561909/laser_cutting_vx0xsc.png",
+  punching: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561910/punching_ewxp6l.png",
+  bending: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561908/bending_lvnxce.png",
+  stamping: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561910/stamping_vovqmb.png",
+  febrication: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561908/fabrication_foyxox.png",
+  powder_coating: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561909/powder_coating_pvpqzo.png",
+  assembly: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561907/assembly_oaaomc.png",
+  dispatch: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561910/logistics_knbvjg.png" 
 };
 
 // 3. Process Section Data (Raw Sheet to Dispatch - Step by Step with Videos)
@@ -237,6 +238,18 @@ export const capabilitiesGrid = [
       { label: "Services", value: "PEM Stud Insertion, Wire Harnessing, Box-Build" },
       { label: "Testing", value: "Electrical Continuity & Functional Fit Inspection" },
       { label: "Packaging", value: "Kitting & Custom Retail Packaging" }
+    ]
+  },
+  {
+    id: "dispatch",
+    title: "PACKAGING & LOGISTICS",
+    shortDesc: "Export-grade VCI anti-rust wrapping, custom pallets, and global freight dispatch.",
+    image: capabilities_image.dispatch,
+    fullDesc: "We ensure every precision part reaches destination pristine. Custom-built crates, anti-corrosion VCI vacuum bags, and foam inserts guard against shipping transit stress for domestic and international logistics.",
+    specs: [
+      { label: "Protection", value: "VCI Anti-Corrosion Wrap & Moisture Control" },
+      { label: "Crating", value: "ISPM-15 Certified Wooden Pallets & Crates" },
+      { label: "Logistics", value: "Barcoded Tracking for Sea, Air & Road Freight" }
     ]
   }
 ];
