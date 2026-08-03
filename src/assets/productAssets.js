@@ -92,10 +92,11 @@ const productAssets = [
       "Have a drawing or specification for your EV charging enclosure? Share your requirements with our team and let us turn your design into a precision-manufactured product.",
 
     images: {
-      charging_station_01:
-        "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876902/charging_station_01_msr5l6.png",
-      charging_station_02:
+       charging_station_01:
         "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876901/charging_station_02_pic5pe.png",
+      charging_station_02:
+        "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876902/charging_station_01_msr5l6.png",
+     
     },
   },
 
@@ -297,11 +298,12 @@ const productAssets = [
 
     images: {
       data_center_rack_01:
-        "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876903/data_center_rack_01_ww1xeg.png",
+        "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876902/data_center_rack_03_modjup.png",
+      
       data_center_rack_02:
         "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876903/data_center_rack_02_jmobim.png",
-      data_center_rack_03:
-        "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876902/data_center_rack_03_modjup.png",
+    data_center_rack_03:
+        "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876903/data_center_rack_01_ww1xeg.png",
       data_center_rack_04:
         "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876903/data_center_rack_04_cufhfj.png",
     },
@@ -401,9 +403,9 @@ const productAssets = [
 
     images: {
       electrical_cabinat_01:
-        "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876905/electrical_cabinets_01_ukcfuj.png",
-      electrical_cabinat_02:
         "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876904/electrical_cabinets_02_lbgafj.png",
+      electrical_cabinat_02:
+        "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876905/electrical_cabinets_01_ukcfuj.png",
       electrical_cabinat_03:
         "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1784876905/electrical_cabinets_03_svrl8w.png",
     },

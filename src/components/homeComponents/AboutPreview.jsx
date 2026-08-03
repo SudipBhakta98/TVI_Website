@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { root_image } from "../../../image/image.js";
+import { aboutPhotos } from "../../assets/aboutAssetc";
 
 const metrics = [
   { value: "2003", label: "Year Founded" },
@@ -33,7 +33,7 @@ export default function AboutPreview() {
                 className="group relative rounded-lg overflow-hidden border border-slate-200 bg-slate-50/50 p-4 shadow-md w-full flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-[#4F9B28]/50 hover:shadow-lg"
               >
                 <img 
-                  src={root_image.twenty_years_of_excellence} 
+                  src={aboutPhotos.heroBg} 
                   alt="20 Years of Excellence - Technovision Industries" 
                   className="w-full h-auto max-h-[300px] object-contain rounded transition-transform duration-500 group-hover:scale-105"
                 />

@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom';
 import productAssets from "../../assets/productAssets.js";
 
 // Extract image items directly from productAssets
-const railItems = productAssets.flatMap((category) =>
-  Object.values(category.images || {}).map((img, idx) => ({
-    id: `${category.id}-${idx}`,
-    name: category.name,
-    description: category.description,
-    image: img,
-  }))
-);
+const railItems = productAssets
+  .map((category) => {
+    const images = Object.values(category.images || {});
+    return {
+      id: `${category.id}-0`,
+      name: category.name,
+      description: category.description,
+      image: images[0],
+    };
+  })
+  .filter((item) => item.image);
 
 // Duplicate array for seamless infinite scroll
 const marqueeCards = [...railItems, ...railItems];
@@ -29,10 +32,19 @@ export default function ProductsPreview() {
           display: flex;
           width: max-content;
           will-change: transform;
-          animation: marqueeSmooth 70s linear infinite;
+          animation: marqueeSmooth 50s linear infinite;
         }
         .animate-marquee-smooth:hover { 
           animation-play-state: paused; 
+        }
+
+        /* Hide Scrollbars Across Browsers */
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
         }
       `}</style>
 
@@ -54,8 +66,8 @@ export default function ProductsPreview() {
         </Link>
       </div>
 
-      {/* Touch-Friendly Infinite Marquee Rail Container */}
-      <div className="w-full overflow-x-auto no-scrollbar py-3 cursor-grab active:cursor-grabbing">
+      {/* Marquee Rail Container (Changed overflow-x-auto to overflow-hidden) */}
+      <div className="w-full overflow-hidden py-3">
         <div className="animate-marquee-smooth gap-5 pr-5">
           {marqueeCards.map((item, index) => (
             <Link
@@ -72,7 +84,6 @@ export default function ProductsPreview() {
                   loading="lazy"
                 />
 
-                {/* CUSTOM OEM SOLUTIONS BADGE */}
                 <div className="absolute top-2.5 right-2.5 bg-red-600 backdrop-blur-md text-white text-[9px] font-black px-2 py-1 rounded border border-[#4F9B28]/30 uppercase tracking-wider shadow-sm">
                   Custom OEM Solutions
                 </div>
@@ -92,7 +103,6 @@ export default function ProductsPreview() {
                   <span className="text-[13px] font-black text-[#3b781d] uppercase tracking-wider">
                     View Details<span className="text-xs text-[#3b781d] font-bold transition-transform group-hover:translate-x-1 duration-200">&rarr;</span>
                   </span>
-                  
                 </div>
               </div>
             </Link>
