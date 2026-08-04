@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { aboutPhotos } from "../../assets/aboutAssetc";
+import { aboutPhotos } from "../../assets/aboutAssets";
 
 const metrics = [
   { value: "2003", label: "Year Founded" },

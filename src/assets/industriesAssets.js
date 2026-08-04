@@ -296,3 +296,14 @@ const industriesAssets = {
 };
 
 export default industriesAssets;
+
+export const industryProductMapping = {
+  data_centers: ["data-center-racks", "integrated-cabinets", "console"],
+  telecommunications: ["integrated-cabinets", "data-center-racks", "console"],
+  automotive: ["charging-station", "console"],
+  defence: ["console", "integrated-cabinets", "data-center-racks"],
+  electrical: ["integrated-cabinets", "console", "charging-station"],
+  industrial_automation: ["console", "integrated-cabinets", "lab-equipment"],
+  aviation: ["console", "integrated-cabinets", "lab-equipment"],
+  medical: ["lab-equipment", "integrated-cabinets"],
+};
