@@ -16,15 +16,15 @@ export const capabilitiesAssets = {
 // 2. Capabilities Image Assets
 export const capabilities_image = {
   design_development: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561908/design_and_devlope_tvkwvx.png",
-  tooling: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561911/tooling_ttk0za.png",
-  laser_cuting: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561909/laser_cutting_vx0xsc.png",
-  punching: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561910/punching_ewxp6l.png",
-  bending: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561908/bending_lvnxce.png",
-  stamping: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561910/stamping_vovqmb.png",
-  febrication: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561908/fabrication_foyxox.png",
-  powder_coating: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561909/powder_coating_pvpqzo.png",
-  assembly: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561907/assembly_oaaomc.png",
-  dispatch: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785561910/logistics_knbvjg.png" 
+  tooling: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785998008/Gemini_Generated_Image_jh72yrjh72yrjh72_ek7xq1.png",
+  laser_cuting: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785994104/ChatGPT_Image_Aug_6_2026_10_57_38_AM_dwzd98.png",
+  punching: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785993486/ChatGPT_Image_Aug_6_2026_10_45_57_AM_kclaxe.png",
+  bending: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785993486/ChatGPT_Image_Aug_6_2026_10_46_03_AM_sf51su.png",
+  stamping: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785994401/ChatGPT_Image_Aug_6_2026_11_02_56_AM_twur1h.png",
+  febrication: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1786001179/Gemini_Generated_Image_98u85h98u85h98u8_tzzqd4.png",
+  powder_coating: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785997538/Gemini_Generated_Image_m5r3dlm5r3dlm5r3_efzld4.png",
+  assembly: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785999625/Gemini_Generated_Image_rduldgrduldgrdul_1_ilaubt.png",
+  dispatch: "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1785994804/ChatGPT_Image_Aug_6_2026_11_09_40_AM_otwabs.png" 
 };
 
 // 3. Process Section Data (Raw Sheet to Dispatch - Step by Step with Videos)

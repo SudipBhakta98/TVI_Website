@@ -47,11 +47,11 @@ export default function DetailJourney({ isOpen, onClose, onOpenTrigger }) {
         createPortal(
           <div className="fixed inset-0 z-[9999] bg-slate-50 text-slate-900 flex flex-col w-full h-full min-h-screen overflow-hidden animate-fadeIn">
             {/* Navigation Bar */}
-            <div className="w-full px-6 sm:px-12 py-5 bg-white text-slate-900 flex items-center justify-between border-b border-slate-200 shadow-xs flex-shrink-0 z-20">
+            <div className="w-full px-6 sm:px-12 py-3 bg-white text-slate-900 flex items-center justify-between border-b border-slate-200 shadow-xs flex-shrink-0 z-20">
               <div className="flex items-center gap-4">
                 <button
                   onClick={onClose}
-                  className="flex items-center gap-2 bg-slate-100 hover:bg-lime-600 text-slate-700 hover:text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 rounded-lg transition-all"
+                  className="flex items-center gap-2 bg-red-600 hover:bg-lime-600 text-white text-xs font-bold uppercase tracking-wider px-3.5 py-2 rounded-lg transition-all"
                 >
                   <FaArrowLeft className="w-3.5 h-3.5" />
                   <span>Back</span>
@@ -85,7 +85,7 @@ export default function DetailJourney({ isOpen, onClose, onOpenTrigger }) {
             </div>
 
             {/* Scrollable Timeline */}
-            <div className="flex-1 w-full overflow-y-auto bg-slate-50 p-6 sm:p-16">
+            <div className="flex-1 w-full overflow-y-auto bg-slate-50 p-5">
               <div className="relative max-w-5xl mx-auto py-8">
                 {/* Central Spine */}
                 <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-slate-300 -translate-x-1/2 z-0" />

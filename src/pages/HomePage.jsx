@@ -46,14 +46,6 @@ const statsData = [
   },
 ];
 
-const taglines = [
-  "End-to-End Manufacturing",
-  "Tooling",
-  "Fabrication",
-  "Powder Coating",
-  "Assembly",
-];
-
 export default function Home() {
   return (
     <>
@@ -127,32 +119,23 @@ export default function Home() {
               <div className="flex flex-col gap-0.5 select-none font-extrabold tracking-wide uppercase text-base xs:text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[3.25rem]">
                 <h1 className="leading-tight">
   <span className="text-white block whitespace-nowrap opacity-0 animate-fade-slide-up">
-    Precision Sheet Metal
+    Engineering Precision
   </span>
   <span className="text-white block opacity-0 animate-fade-slide-up animation-delay-100">
-    Manufacturing For
+    Delivering Reliability
   </span>
-  <span className="text-lime-500 block opacity-0 animate-fade-slide-up animation-delay-200 transition-all duration-300 hover:brightness-125">
-    Global OEMs
-  </span>
+  
 </h1>
               </div>
 
               {/* Taglines with Staggered Entrance */}
               <div className="flex flex-wrap items-center gap-x-1.5 sm:gap-x-3 gap-y-0.5 text-gray-200 font-medium text-[9px] xs:text-[11px] sm:text-sm tracking-wide max-w-2xl opacity-0 animate-fade-slide-up animation-delay-300">
-                {taglines.map((item, index) => (
-                  <span
-                    key={index}
-                    className="flex items-center gap-1.5 sm:gap-3 group transition-colors duration-200 hover:text-white"
-                  >
-                    <span className="whitespace-nowrap group-hover:text-lime-400 transition-colors">
-                      {item}
-                    </span>
-                    {index < taglines.length - 1 && (
-                      <span className="text-lime-600 font-black">|</span>
-                    )}
-                  </span>
-                ))}
+                <span className="text-lime-500 block opacity-0 animate-fade-slide-up animation-delay-200 transition-all duration-300 hover:brightness-125">
+    We manufacture precision tooling, engineered metal components, and integrated
+electromechanical assemblies for global OEMs through a single, end-to-end
+manufacturing ecosystem.
+  </span>
+              
               </div>
 
               {/* Call to Actions */}
