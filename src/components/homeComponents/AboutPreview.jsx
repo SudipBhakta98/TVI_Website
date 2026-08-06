@@ -61,7 +61,7 @@ export default function AboutPreview() {
 
               {/* Paragraph Body */}
               <p className="text-slate-600 text-sm md:text-base leading-relaxed font-normal animate-fade-in-up [animation-delay:300ms]">
-                Founded in 2003, Technovision Industries has evolved into a premier contract manufacturer operating across 6 integrated units. We specialize in precision sheet metal fabrication, complex tool room operations, and full electro-mechanical assemblies for global leaders.
+                Founded in 2003, Technovision Industries has evolved into a premier contract manufacturer operating across 5 integrated units. We specialize in precision sheet metal fabrication, complex tool room operations, and full electro-mechanical assemblies for global leaders.
               </p>
 
               {/* Core Feature Bullet Points */}
