@@ -122,25 +122,8 @@ export const milestones = [
 
 
 export const leadershipData = [
-  {
-    title: "HEAD OF OPERATION",
-    name: "Bhopal P",
-    designation: "Operation Head — Technovision Industries",
-    image:
-      "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1786939559/ChatGPT_Image_Aug_17_2026_09_23_06_AM_tktzap.png",
-    quote:
-      "At Technovision Industries, operational excellence is built through disciplined processes, efficient execution, and a continuous commitment to improvement. Our focus is on ensuring that every operation is carried out with precision, reliability, and consistency while creating value for our customers and strengthening our long-term partnerships.",
-  },
-
-  {
-    title: "HEAD OF QUALITY",
-    name: "Suresh P",
-    designation: "Head of Quality — Technovision Industries",
-    image:
-      "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1786939568/ChatGPT_Image_Aug_17_2026_09_23_01_AM_jfutjd.png",
-    quote:
-      "To me, quality means doing the right thing the first time, every time. It is a mindset of prevention rather than correction, where every process, every product, and every person is committed to customer satisfaction and continuous improvement.",
-  },
+ 
+  
 
   {
     title: "HEAD OF NPD",
@@ -150,5 +133,23 @@ export const leadershipData = [
       "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1786939553/ChatGPT_Image_Aug_17_2026_09_33_36_AM_wxq69r.png",
     quote:
       "At Technovision Industries, new product development is driven by innovation, engineering excellence, and a clear understanding of customer requirements. Our focus is on transforming ideas into reliable, scalable, and high-quality products while continuously exploring new technologies and improving our capabilities.",
+  },
+   {
+    title: "HEAD OF OPERATION",
+    name: "Bhopal P",
+    designation: "Operation Head — Technovision Industries",
+    image:
+      "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1786939559/ChatGPT_Image_Aug_17_2026_09_23_06_AM_tktzap.png",
+    quote:
+      "At Technovision Industries, operational excellence is built through disciplined processes, efficient execution, and a continuous commitment to improvement. Our focus is on ensuring that every operation is carried out with precision, reliability, and consistency while creating value for our customers and strengthening our long-term partnerships.",
+  },
+{
+    title: "HEAD OF QUALITY",
+    name: "Suresh P",
+    designation: "Head of Quality — Technovision Industries",
+    image:
+      "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1786939568/ChatGPT_Image_Aug_17_2026_09_23_01_AM_jfutjd.png",
+    quote:
+      "To me, quality means doing the right thing the first time, every time. It is a mindset of prevention rather than correction, where every process, every product, and every person is committed to customer satisfaction and continuous improvement.",
   },
 ];
