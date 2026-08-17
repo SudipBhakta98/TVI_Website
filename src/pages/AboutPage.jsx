@@ -24,6 +24,7 @@ import {
   metricsData,
   valuesData,
   milestones,
+  leadershipData
 } from "../assets/aboutAssets.js";
 
 /* ------------------------------------------------------------------ */
@@ -46,7 +47,7 @@ function useInView() {
           observer.unobserve(el); // only animate once
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     observer.observe(el);
@@ -168,7 +169,6 @@ export default function About() {
         {/* ========================= MAIN CONTENT ========================== */}
         <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-16 pb-24 space-y-16">
           <div className="w-full -mt-10 lg:-mt-20 relative z-20 space-y-16">
-
             {/* 1. MILESTONES / JOURNEY TIMELINE */}
             <Reveal
               direction="left"
@@ -287,7 +287,10 @@ export default function About() {
             </Reveal>
 
             {/* 3. VISION & MISSION */}
-            <Reveal direction="up" className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <Reveal
+              direction="up"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            >
               <div className="bg-white p-8 rounded-xl shadow-md border border-slate-100">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-3 bg-lime-100 text-lime-700 rounded-lg">
@@ -318,16 +321,14 @@ export default function About() {
             </Reveal>
 
             {/* 4. MANAGING DIRECTOR'S DESK */}
-       <Reveal className="bg-white rounded-2xl shadow-xl overflow-hidden group">
-  <div className="grid lg:grid-cols-2">
-
-    {/* Left - Image */}
-    <div className="relative overflow-hidden min-h-[450px]">
-
-      <img
-        src={aboutPhotos.mdPhoto}
-        alt={aboutContent.mdDesk.name}
-        className="
+            <Reveal className="bg-white rounded-2xl shadow-xl overflow-hidden group">
+              <div className="grid lg:grid-cols-2">
+                {/* Left - Image */}
+                <div className="relative overflow-hidden min-h-[450px]">
+                  <img
+                    src={aboutPhotos.mdPhoto}
+                    alt={aboutContent.mdDesk.name}
+                    className="
           w-full
           h-full
           object-cover
@@ -339,50 +340,111 @@ export default function About() {
           contrast-110
           saturate-110
         "
-      />
+                  />
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
-      {/* Leadership Badge */}
-      <div className="absolute top-6 left-6">
-        <span className="bg-lime-600 text-white px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase shadow-lg">
-          Leadership & Vision
-        </span>
-      </div>
+                  {/* Leadership Badge */}
+                  <div className="absolute top-6 left-6">
+                    <span className="bg-lime-600 text-white px-4 py-2 rounded-full text-xs font-semibold tracking-widest uppercase shadow-lg">
+                      Leadership & Vision
+                    </span>
+                  </div>
+                </div>
 
-    </div>
+                {/* Right */}
+                <div className="flex flex-col justify-center p-8 lg:p-12">
+                  <FaQuoteLeft className="text-5xl text-lime-600 mb-6" />
 
-    {/* Right */}
-    <div className="flex flex-col justify-center p-8 lg:p-12">
+                  <h2 className="text-3xl font-bold text-slate-900 mb-6">
+                    {aboutContent.mdDesk.title}
+                  </h2>
 
-      <FaQuoteLeft className="text-5xl text-lime-600 mb-6" />
+                  <p className="text-gray-600 italic leading-8 text-lg">
+                    "{aboutContent.mdDesk.quote}"
+                  </p>
 
-      <h2 className="text-3xl font-bold text-slate-900 mb-6">
-        {aboutContent.mdDesk.title}
-      </h2>
+                  {/* Divider */}
+                  <div className="w-20 h-1 bg-lime-600 rounded-full my-8" />
 
-      <p className="text-gray-600 italic leading-8 text-lg">
-        "{aboutContent.mdDesk.quote}"
+                  {/* MD Details */}
+                  <div>
+                    <h3 className="text-2xl font-bold text-slate-900">
+                      {aboutContent.mdDesk.name}
+                    </h3>
+
+                    <p className="text-lime-600 font-semibold uppercase tracking-wider mt-1">
+                      {aboutContent.mdDesk.designation}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+
+           {/* 4. LEADERSHIP */}
+<Reveal direction="up">
+  <section className="py-08">
+    {/* Section Heading */}
+    <div className="text-center max-w-2xl mx-auto mb-12">
+      <span className="text-[#65A30D] text-xs font-black uppercase tracking-[0.2em]">
+        OUR LEADERSHIP
+      </span>
+
+      <h3 className="text-3xl sm:text-4xl font-black text-slate-900 uppercase mt-2">
+        Driven by Experience
+      </h3>
+
+      <p className="text-slate-500 text-sm sm:text-base mt-4 leading-relaxed">
+        Our leadership team brings together expertise in operations, quality,
+        and new product development to drive Technovision Industries toward
+        continuous excellence.
       </p>
-
-      {/* Divider */}
-      <div className="w-20 h-1 bg-lime-600 rounded-full my-8" />
-
-      {/* MD Details */}
-      <div>
-        <h3 className="text-2xl font-bold text-slate-900">
-          {aboutContent.mdDesk.name}
-        </h3>
-
-        <p className="text-lime-600 font-semibold uppercase tracking-wider mt-1">
-          {aboutContent.mdDesk.designation}
-        </p>
-      </div>
-
     </div>
 
-  </div>
+    {/* Leadership Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto">
+      {leadershipData.map((leader) => (
+        <div
+          key={leader.name}
+          className="group bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+        >
+          {/* Image */}
+          <div className="relative overflow-hidden bg-slate-100">
+            <img
+              src={leader.image}
+              alt={`${leader.name} - ${leader.title}`}
+              className="w-full aspect-[4/5] object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+            />
+
+            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/70 to-transparent" />
+          </div>
+
+          {/* Content */}
+          <div className="p-6">
+            <span className="text-[#65A30D] text-[10px] font-black uppercase tracking-[0.18em]">
+              {leader.title}
+            </span>
+
+            <h4 className="text-xl font-black text-slate-900 mt-1">
+              {leader.name}
+            </h4>
+
+            <p className="text-sm font-semibold text-slate-500 mt-1">
+              {leader.designation}
+            </p>
+
+            <div className="w-10 h-1 bg-[#65A30D] rounded-full my-5" />
+
+            <p className="text-sm text-slate-600 leading-relaxed">
+              {leader.quote}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
 </Reveal>
 
             {/* 5. VALUES */}
@@ -439,9 +501,11 @@ export default function About() {
                     <div className="flex items-start gap-3 text-slate-700 text-sm font-medium">
                       <FaLocationDot className="w-5 h-5 text-lime-600 flex-shrink-0 mt-0.5" />
                       <div>
-                        {aboutContent.corporateOffice.addressLines.map((line, i) => (
-                          <p key={i}>{line}</p>
-                        ))}
+                        {aboutContent.corporateOffice.addressLines.map(
+                          (line, i) => (
+                            <p key={i}>{line}</p>
+                          ),
+                        )}
                       </div>
                     </div>
                   </div>
@@ -453,7 +517,8 @@ export default function About() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-slate-900 text-white text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-lg hover:bg-lime-600 transition-colors w-fit"
                 >
-                  View on Google Maps <FaArrowUpRightFromSquare className="w-3.5 h-3.5" />
+                  View on Google Maps{" "}
+                  <FaArrowUpRightFromSquare className="w-3.5 h-3.5" />
                 </a>
               </div>
 
