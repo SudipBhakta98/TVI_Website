@@ -46,8 +46,6 @@ function NavDropdown({ item, isMobile, onClose }) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // Normalize dropdown items into an array of { id, name }
-  // Supports both name & title props
   const dropdownList = Array.isArray(item.dropdown)
     ? item.dropdown.map((prod) => ({
         id: prod.id,
@@ -58,37 +56,53 @@ function NavDropdown({ item, isMobile, onClose }) {
         name: val.name || val.title,
       }));
 
-  const isParentActive = location.pathname.startsWith(item.basePath);
+  const isParentActive =
+    location.pathname === item.to ||
+    (item.basePath && location.pathname.startsWith(item.basePath + "/"));
+
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    onClose();
+  };
 
   return (
     <div
       className={
         isMobile
-          ? "border-b border-slate-800/80"
-          : "relative group py-5"
+          ? `border-b border-slate-800/80 ${isParentActive ? "bg-slate-800/50" : ""}`
+          : "relative group py-2 my-auto"
       }
     >
       {/* Parent Link */}
       <div
         className={`flex items-center justify-between ${
-          isMobile ? "py-3" : ""
+          isMobile ? "py-3 px-3" : "px-3"
         }`}
       >
         <Link
           to={item.to}
-          onClick={onClose}
-          className={`text-xs font-bold tracking-wider transition-colors inline-flex items-center gap-1 ${
+          onClick={handleLinkClick}
+          className={`text-xs font-bold tracking-wider transition-colors inline-flex items-center gap-1 w-full relative pb-1 ${
             isParentActive
-              ? "text-[#4F9B28]"
+              ? "text-lime-600 font-extrabold"
               : isMobile
-              ? "text-slate-200 hover:text-[#4F9B28]"
-              : "text-slate-800 group-hover:text-[#4F9B28]"
+              ? "text-slate-200 hover:text-lime-600"
+              : "text-slate-800 group-hover:text-lime-600"
           }`}
         >
           <span>{item.name}</span>
 
           {!isMobile && (
-            <HiChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-slate-500 group-hover:text-[#4F9B28]" />
+            <HiChevronDown
+              className={`w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 ml-auto ${
+                isParentActive ? "text-lime-600" : "text-slate-500 group-hover:text-lime-600"
+              }`}
+            />
+          )}
+
+          {/* Desktop Bottom Green Line */}
+          {!isMobile && isParentActive && (
+            <span className="absolute bottom-[-8px] left-0 right-0 h-1 bg-lime-600 rounded-full" />
           )}
         </Link>
 
@@ -96,7 +110,9 @@ function NavDropdown({ item, isMobile, onClose }) {
         {isMobile && (
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-1 text-slate-400 hover:text-white transition-colors"
+            className={`p-1 transition-colors ml-2 ${
+              isParentActive ? "text-lime-600" : "text-slate-400 hover:text-white"
+            }`}
             aria-label="Toggle Dropdown"
           >
             <HiChevronDown
@@ -114,7 +130,7 @@ function NavDropdown({ item, isMobile, onClose }) {
           isMobile
             ? `${
                 isOpen ? "block" : "hidden"
-              } pl-3 pb-2 flex flex-col border-l border-slate-700/80 my-1`
+              } pl-6 pb-2 flex flex-col border-l border-slate-700/80 my-1`
             : "absolute top-full left-0 w-64 bg-white border border-slate-200 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 max-h-[70vh] overflow-y-auto"
         }
       >
@@ -126,15 +142,15 @@ function NavDropdown({ item, isMobile, onClose }) {
             <Link
               key={dropItem.id}
               to={targetUrl}
-              onClick={onClose}
+              onClick={handleLinkClick}
               className={`block px-4 py-2.5 text-[11px] font-bold tracking-wider transition-colors ${
                 isMobile
                   ? isActive
-                    ? "border-b border-slate-800/60 last:border-none text-[#4F9B28] bg-slate-800/80 font-extrabold"
+                    ? "border-b border-slate-800/60 last:border-none text-lime-600 bg-slate-800/80 font-extrabold"
                     : "border-b border-slate-800/60 last:border-none text-slate-300 hover:text-white hover:bg-slate-800/60"
                   : isActive
-                  ? "border-b border-slate-300 last:border-none text-[#4F9B28] bg-lime-50/80"
-                  : "border-b border-slate-300 last:border-none text-slate-700 hover:text-[#4F9B28] hover:bg-slate-50"
+                  ? "border-b border-slate-300 last:border-none text-lime-600 bg-lime-50/80"
+                  : "border-b border-slate-300 last:border-none text-slate-700 hover:text-lime-600 hover:bg-slate-50"
               }`}
             >
               {dropItem.name}
@@ -150,7 +166,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
 
-  // Prevent background scrolling when mobile menu is open
+  const isContactActive = location.pathname === "/contact";
+
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "unset";
 
@@ -159,10 +176,16 @@ export default function Navbar() {
     };
   }, [open]);
 
-  // Unified link renderer
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setOpen(false);
+  };
+
   const renderNavLinks = (isMobile = false) =>
-    navItems.map((item) =>
-      item.dropdown ? (
+    navItems.map((item) => {
+      const isExactActive = location.pathname === item.to;
+
+      return item.dropdown ? (
         <NavDropdown
           key={item.name}
           item={item}
@@ -170,28 +193,41 @@ export default function Navbar() {
           onClose={() => setOpen(false)}
         />
       ) : (
-        <Link
+        <div
           key={item.name}
-          to={item.to}
-          onClick={() => setOpen(false)}
-          className={`text-xs font-bold tracking-wider transition-colors ${
+          className={
             isMobile
-              ? "py-3 border-b border-slate-800/80 flex items-center justify-between text-slate-200 hover:text-[#4F9B28]"
-              : "relative py-2 text-slate-800 hover:text-[#4F9B28]"
-          } ${
-            location.pathname === item.to
-              ? "text-[#4F9B28]"
-              : ""
-          }`}
+              ? `border-b border-slate-800/80 ${isExactActive ? "bg-slate-800/50" : ""}`
+              : "py-2 my-auto px-3"
+          }
         >
-          <span>{item.name}</span>
+          <Link
+            to={item.to}
+            onClick={handleLinkClick}
+            className={`text-xs font-bold tracking-wider transition-colors inline-flex items-center w-full relative pb-1 ${
+              isMobile ? "py-3 px-3 flex items-center justify-between" : ""
+            } ${
+              isExactActive
+                ? "text-lime-600 font-extrabold"
+                : isMobile
+                ? "text-slate-200 hover:text-lime-600"
+                : "text-slate-800 hover:text-lime-600"
+            }`}
+          >
+            <span>{item.name}</span>
 
-          {isMobile && location.pathname === item.to && (
-            <span className="w-1.5 h-1.5 rounded-full bg-[#4F9B28]" />
-          )}
-        </Link>
-      )
-    );
+            {isMobile && isExactActive && (
+              <span className="w-1.5 h-1.5 rounded-full bg-lime-600 ml-2" />
+            )}
+
+            {/* Desktop Bottom Green Line */}
+            {!isMobile && isExactActive && (
+              <span className="absolute bottom-[-8px] left-0 right-0 h-1 bg-lime-600 rounded-full" />
+            )}
+          </Link>
+        </div>
+      );
+    });
 
   return (
     <>
@@ -201,7 +237,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             to="/"
-            onClick={() => setOpen(false)}
+            onClick={handleLinkClick}
             className="flex items-center gap-3"
           >
             <img
@@ -222,22 +258,34 @@ export default function Navbar() {
           </Link>
 
           {/* ================= DESKTOP NAVIGATION ================= */}
-          <div className="hidden xl:flex items-center gap-8">
-            <div className="flex items-center gap-6">
+          <div className="hidden xl:flex items-center gap-4">
+            <div className="flex items-center gap-1">
               {renderNavLinks(false)}
             </div>
 
-            <Link to="/contact">
-              <button className="px-5 py-2.5 rounded-lg text-white font-extrabold text-xs uppercase bg-[#E31B23] hover:bg-lime-600 transition-all cursor-pointer shadow-sm">
-                CONTACT US
-              </button>
-            </Link>
+            <div className="relative py-2">
+              <Link to="/contact" onClick={handleLinkClick}>
+                <button
+                  className={`px-5 py-2.5 rounded-lg text-white font-extrabold text-xs uppercase transition-all cursor-pointer shadow-sm ${
+                    isContactActive
+                      ? "bg-lime-600 hover:bg-lime-700"
+                      : "bg-[#E31B23] hover:bg-red-700"
+                  }`}
+                >
+                  CONTACT US
+                </button>
+              </Link>
+              {/* Green Line Below Contact Button */}
+              {isContactActive && (
+                <span className="absolute bottom-[-6px] left-0 right-0 h-1 bg-lime-600 rounded-full" />
+              )}
+            </div>
           </div>
 
           {/* ================= MOBILE TOGGLE ================= */}
           <button
             onClick={() => setOpen(!open)}
-            className="xl:hidden text-slate-800 hover:text-[#4F9B28] p-2 focus:outline-none transition-colors"
+            className="xl:hidden text-slate-800 hover:text-lime-600 p-2 focus:outline-none transition-colors"
             aria-label="Toggle Menu"
           >
             {open ? (
@@ -269,15 +317,24 @@ export default function Navbar() {
         </div>
 
         {/* Sticky Bottom Contact Us */}
-        <div className="p-6 border-t border-slate-800/80 bg-[#12161A] sticky bottom-0">
+        <div className="p-6 border-t border-slate-800/80 bg-[#12161A] sticky bottom-0 relative">
           <Link
             to="/contact"
-            onClick={() => setOpen(false)}
+            onClick={handleLinkClick}
           >
-            <button className="w-full bg-[#E31B23] hover:bg-lime-600 py-3 rounded-lg text-white font-extrabold text-xs uppercase shadow-md transition-all cursor-pointer">
+            <button
+              className={`w-full py-3 rounded-lg text-white font-extrabold text-xs uppercase shadow-md transition-all cursor-pointer ${
+                isContactActive
+                  ? "bg-lime-600 hover:bg-lime-700"
+                  : "bg-[#E31B23] hover:bg-red-700"
+              }`}
+            >
               CONTACT US
             </button>
           </Link>
+          {isContactActive && (
+            <span className="absolute bottom-2 left-6 right-6 h-1 bg-lime-600 rounded-full" />
+          )}
         </div>
       </div>
     </>
