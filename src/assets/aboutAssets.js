@@ -128,7 +128,7 @@ export const leadershipData = [
   {
     title: "HEAD OF DESIGN & DEVELOPMENT",
     name: "D. Satyanarayana Murthy",
-    designation: "Head of NPD — Technovision Industries",
+    designation: "Head of Design & Development — Technovision Industries",
     image:
       "https://res.cloudinary.com/eaubwmsx/image/upload/q_auto,f_auto/v1786939553/ChatGPT_Image_Aug_17_2026_09_33_36_AM_wxq69r.png",
     quote:
