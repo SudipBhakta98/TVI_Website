@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 
-const SITE_URL = "https://www.tviblr.org";
+const SITE_URL = "https://www.tvi.co.in";
 
 export default function SEO({ title, description, path }) {
   const url = `${SITE_URL}${path}`;

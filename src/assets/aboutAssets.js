@@ -46,10 +46,10 @@ export const aboutContent = {
 };
 
 export const metricsData = [
-  { value: "2003", label: "Year Founded" },
-  { value: "6", label: "Manufacturing Units" },
-  { value: "11,000+", label: "Sq. Meters Built-up Area" },
-  { value: "180+", label: "Employees" },
+  { value: "2003", label: "Start Of Our Journey" },
+  { value: "4", label: "Manufacturing Units" },
+  { value: "15,000+", label: "Sq. Meters Built-up Area" },
+  { value: "250+", label: "Employees" },
 ];
 
 export const valuesData = [

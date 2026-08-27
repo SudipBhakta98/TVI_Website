@@ -25,7 +25,7 @@ const statsData = [
     icon: <HiCalendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-lime-500 transition-transform duration-300 group-hover:scale-110" />,
   },
   {
-    value: "5",
+    value: "4",
     label: "Mfg. Units",
     icon: <HiBuildingOffice2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 text-lime-500 transition-transform duration-300 group-hover:scale-110" />,
   },

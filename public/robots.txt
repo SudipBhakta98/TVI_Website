@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.tviblr.org/sitemap.xml
+Sitemap: https://www.tvi.co.in/sitemap.xml

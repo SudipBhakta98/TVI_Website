@@ -145,7 +145,7 @@ const transporter = nodemailer.createTransport({
             <strong>Technovision Industries</strong><br>
             Bengaluru, Karnataka<br>
             📧 info@technovisionindustries.com<br>
-            🌐 https://www.technovisionindustries.com
+            🌐 https://www.tvi.co.in
           </p>
 
         </div>

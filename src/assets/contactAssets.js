@@ -28,8 +28,8 @@ export const contactDetails = {
   },
   website: {
     title: "WEBSITE",
-    url: "https://www.tviblr.org",
-    displayUrl: "www.tviblr.org",
+    url: "https://www.tvi.co.in",
+    displayUrl: "www.tvi.co.in",
   },
 };
 
