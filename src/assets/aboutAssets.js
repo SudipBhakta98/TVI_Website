@@ -126,7 +126,7 @@ export const leadershipData = [
   
 
   {
-    title: "HEAD OF NPD",
+    title: "HEAD OF DESIGN & DEVELOPMENT",
     name: "D. Satyanarayana Murthy",
     designation: "Head of NPD — Technovision Industries",
     image:
