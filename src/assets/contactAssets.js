@@ -24,7 +24,7 @@ export const contactDetails = {
   },
   email: {
     title: "EMAIL",
-    addresses: ["narpvvl@technovisionindustries.in"],
+    addresses: ["narpvvl@tvi.co.in"],
   },
   website: {
     title: "WEBSITE",

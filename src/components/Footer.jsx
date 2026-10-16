@@ -136,7 +136,7 @@ export default function Footer() {
               </p>
               <p>
                 <strong className="text-white font-bold">Email:</strong>{" "}
-                narpvvl@technovisionindustries.in
+                narpvvl@tvi.co.in
               </p>
               <p>
                 <strong className="text-white font-bold">Phone:</strong> +91 9342163575
